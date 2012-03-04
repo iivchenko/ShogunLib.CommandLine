@@ -21,7 +21,7 @@ namespace CommandLineInterpreterFramework
         /// <summary>
         /// Initializes a new instance of the Command class
         /// </summary>
-        /// <param name="name">Command name</param>
+        /// <param name="name">Command name.Name shouldn't have white spaces</param>
         /// <param name="description">Command description</param>
         /// <param name="parameters">Command parameters</param>
         /// <param name="action">Specific action  performed by command</param>

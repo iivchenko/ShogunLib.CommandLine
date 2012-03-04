@@ -42,7 +42,7 @@
     <Compile Include="Console\StandardConsole.cs" />
     <Compile Include="IInterpreter.cs" />
     <Compile Include="Interpreter.cs" />
-    <Compile Include="LazyActionArgument.cs" />
+    <Compile Include="ActionArgumentDictionary.cs" />
     <Compile Include="Argument.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="IActionArgument.cs" />

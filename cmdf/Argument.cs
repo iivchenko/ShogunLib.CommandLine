@@ -4,6 +4,9 @@
 // <author>Ivan Ivchenko</author>
 // <email>shogun@ua.fm</email>
 
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
 namespace CommandLineInterpreterFramework
 {
     /// <summary>
@@ -15,11 +18,11 @@ namespace CommandLineInterpreterFramework
         /// Initializes a new instance of the Argument class
         /// </summary>
         /// <param name="name">Argument name</param>
-        /// <param name="value">Argument value</param>
-        public Argument(string name, string value)
+        /// <param name="values">Argument values</param>
+        public Argument(string name, IList<string> values)
         {
             Name = name;
-            Value = value;
+            Values = new ReadOnlyCollection<string>(values);
         }
 
         /// <summary>
@@ -28,8 +31,8 @@ namespace CommandLineInterpreterFramework
         public string Name { get; private set; }
 
         /// <summary>
-        /// Gets argument value
+        /// Gets argument values
         /// </summary>
-        public string Value { get; private set; }
+        public ReadOnlyCollection<string> Values { get; private set; }
     }
 }

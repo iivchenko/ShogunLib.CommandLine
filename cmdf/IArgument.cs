@@ -4,6 +4,8 @@
 // <author>Ivan Ivchenko</author>
 // <email>shogun@ua.fm</email>
 
+using System.Collections.ObjectModel;
+
 namespace CommandLineInterpreterFramework
 {
     /// <summary>
@@ -17,8 +19,8 @@ namespace CommandLineInterpreterFramework
         string Name { get; }
 
         /// <summary>
-        /// Gets argment value
+        /// Gets argment values
         /// </summary>
-        string Value { get; }
+        ReadOnlyCollection<string> Values { get; }
     }
 }

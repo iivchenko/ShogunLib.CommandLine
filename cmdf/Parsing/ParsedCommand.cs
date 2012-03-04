@@ -5,6 +5,7 @@
 // <email>shogun@ua.fm</email>
 
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace CommandLineInterpreterFramework.Parsing
 {

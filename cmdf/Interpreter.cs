@@ -11,6 +11,10 @@ using CommandLineInterpreterFramework.Parsing;
 namespace CommandLineInterpreterFramework
 {
     // TODO: Implement
+    // TODO: Create lazy Exit and Help commands
+    // TODO: Create Command, Parameter containers
+    // TODO: Add into interpreter usage of IConsole
+    // TODO: Implement general exception validation policy
 
     /// <summary>
     /// Standard mechanism of the command line interpreter cycle
@@ -29,8 +33,13 @@ namespace CommandLineInterpreterFramework
         /// <param name="commands">Available console commands</param>
         /// <param name="helpCommand">General and command help</param>
         /// <param name="exitCommand">Terminate interpreter cycle</param>
-        public Interpreter(IInputParser<IParsedCommand> inputParser, ICollection<ICommand> commands, ICommand helpCommand, ICommand exitCommand)
+        public Interpreter(
+            IInputParser<IParsedCommand> inputParser,
+            ICollection<ICommand> commands,
+            ICommand helpCommand, 
+            ICommand exitCommand)
         {
+            // TODO: Perform validation of input parameters
             _inputParser = inputParser;
             _commands = commands;
             _helpCommand = helpCommand;
@@ -42,6 +51,13 @@ namespace CommandLineInterpreterFramework
         /// </summary>
         public void Run()
         {
+            // TODO: Finish algorithm
+
+            // - Run while cycle
+                // - Get console input
+                    // - Parse input
+                    // - if parsing fail - write error to console
+                    // - execute specified command
             _commands.ToString();
             _exitCommand.ToString();
             _helpCommand.ToString();

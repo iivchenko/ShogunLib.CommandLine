@@ -26,6 +26,29 @@ namespace CommandLineInterpreterFramework
         /// <param name="argumentValidator">Argument validator</param>
         protected Parameter(string name, string description, IArgumentValidator argumentValidator)
         {
+            // TODO: Write some unit test for this
+            var exceptions = new List<Exception>();
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                exceptions.Add(new ArgumentException("Should not be null, empty or whitespaces", "name"));
+            }
+
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                exceptions.Add(new ArgumentException("Should not be null, empty or whitespaces", "description"));
+            }
+
+            if (argumentValidator == null)
+            {
+                exceptions.Add(new ArgumentNullException("argumentValidator"));
+            }
+
+            if (exceptions.Count > 0)
+            {
+                throw new AggregateException("Parameter initialization fail", exceptions);
+            }
+
             Name = name;
             Description = description;
 
@@ -51,6 +74,14 @@ namespace CommandLineInterpreterFramework
         /// <returns>Validated argument</returns>
         public virtual IArgument Validate(IEnumerable<string> args)
         {
+            // TODO: Don't forget to implement... and unit tests to
+
+            // - Get all items of current parameter type
+            // - Validate limit
+            //      - if wrong limit - throw ParameterLimitException
+            // - Validate argument(s)
+            //      - if validation fails - throw ArgumentValidationException
+            // - Create and return Argument
             throw new NotImplementedException(_argumentValidator.ToString());
         }
     }

@@ -13,7 +13,7 @@ namespace CommandLineInterpreterFramework.Parsing
     public interface IInputParser<out TParsedCommand> where TParsedCommand : class, IParsedCommand
     {
         /// <summary>
-        /// Parses console input
+        /// Parses console input. If input is null, empty string or whitespacese function should return null
         /// </summary>
         /// <param name="input">Console input</param>
         /// <returns>Parsed result</returns>
