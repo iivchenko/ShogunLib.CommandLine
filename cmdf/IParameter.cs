@@ -16,14 +16,9 @@ namespace CommandLineInterpreterFramework
     public interface IParameter
     {
         /// <summary>
-        /// Gets parameter name. Shouldn't have white spaces.
+        /// Gets parameter information
         /// </summary>
-        string Name { get; }
-
-        /// <summary>
-        /// Gets parameter description
-        /// </summary>
-        string Description { get; }
+        ParameterInfo Info { get; }
 
         /// <summary>
         /// Performs validation on the input arguments

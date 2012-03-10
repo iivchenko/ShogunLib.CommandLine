@@ -38,17 +38,20 @@
     <CodeAnalysisRuleSet>..\..\..\Rules\AppAssure Standard Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\ExitCommand.cs" />
+    <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Console\IConsole.cs" />
     <Compile Include="Console\StandardConsole.cs" />
     <Compile Include="IInterpreter.cs" />
     <Compile Include="Interpreter.cs" />
     <Compile Include="ActionArgumentDictionary.cs" />
     <Compile Include="Argument.cs" />
-    <Compile Include="Command.cs" />
     <Compile Include="IActionArgument.cs" />
     <Compile Include="IArgument.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="IParameter.cs" />
+    <Compile Include="ParameterInfo.cs" />
     <Compile Include="ParameterLimitation\IParameterLimiter.cs" />
     <Compile Include="ParameterLimitation\MultipleParameter.cs" />
     <Compile Include="ParameterLimitation\OptionalParameter.cs" />
@@ -70,6 +73,7 @@
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\..\..\ThirdPartyTools\StyleCop\Microsoft.StyleCop.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

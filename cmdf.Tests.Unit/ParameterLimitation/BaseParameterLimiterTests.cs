@@ -16,7 +16,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.ParameterLimitation
 
         protected void IsValid_Valid_ErrorMessageEmpty_Test(uint count)
         {
-            var isValid = ParameterLimiter.IsValid(count);
+            var isValid = ParameterLimiter.Validate(count);
 
             Assert.IsTrue(isValid);
             Assert.IsEmpty(ParameterLimiter.ErrorMessage);
@@ -24,7 +24,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.ParameterLimitation
 
         protected void IsValid_Invalid_ErrorMessageNotEmpty_Test(uint count)
         {
-            var isValid = ParameterLimiter.IsValid(count);
+            var isValid = ParameterLimiter.Validate(count);
 
             Assert.IsFalse(isValid);
             Assert.IsNotEmpty(ParameterLimiter.ErrorMessage);

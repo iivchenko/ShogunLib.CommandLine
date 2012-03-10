@@ -4,6 +4,7 @@
 // <author>Ivan Ivchenko</author>
 // <email>shogun@ua.fm</email>
 
+using System.Linq;
 using CommandLineInterpreterFramework.Parsing;
 using NUnit.Framework;
 
@@ -50,7 +51,6 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Parsing
         [Test]
         public void Parse_ValidInput_ReturnsCorrectParsedCommand()
         {
-            // TODO: Finish This Unit test
             const string Input = "Command \"hello man\" arg1 \"how \\\"are\\\" you\"    \\\"";
 
             const string Name = "Command";
@@ -59,14 +59,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Parsing
             var parsedCommand = _inputParser.Parse(Input);
             
             Assert.AreEqual(Name, parsedCommand.Name);
-
-            ////Assert.IsTrue(Comparer<ICollection<string>>.Default.Compare(args, parsedCommand.Args) == 0);
-            int i = 0;
-            foreach (var arg in parsedCommand.Args)
-            {
-                Assert.AreEqual(args[i], arg);
-                i++;
-            }
+            Assert.IsTrue(args.SequenceEqual(parsedCommand.Args), "Actual set of arguments should be equals to expected set of arguments");
         }
     }
 }

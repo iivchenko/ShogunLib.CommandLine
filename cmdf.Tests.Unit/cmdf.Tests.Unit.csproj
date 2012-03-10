@@ -36,16 +36,22 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\..\..\..\ThirdPartyTools\Moq\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\..\ThirdPartyTools\NUnit\bin\framework\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CommandTests.cs" />
+    <Compile Include="Commands\HelpCommandTests.cs" />
     <Compile Include="ParameterLimitation\BaseParameterLimiterTests.cs" />
     <Compile Include="ParameterLimitation\MultipleParameterTests.cs" />
     <Compile Include="ParameterLimitation\OptionalParameterTests.cs" />
     <Compile Include="ParameterLimitation\SingleParameterTests.cs" />
+    <Compile Include="ParameterTests.cs" />
     <Compile Include="Parsing\InputParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -14,7 +14,7 @@ namespace CommandLineInterpreterFramework
     public interface ICommand
     {
         /// <summary>
-        /// Gets the name of the command. Name shouldn't have white spaces.
+        /// Gets the name of the command
         /// </summary>
         string Name { get; }
         
@@ -24,9 +24,9 @@ namespace CommandLineInterpreterFramework
         string Description { get; }
         
         /// <summary>
-        /// Gets description of the command parameters
+        /// Gets parameters names and descriptions
         /// </summary>
-        ICollection<IParameter> Parameters { get; }
+        ICollection<ParameterInfo> Parameters { get; }
         
         /// <summary>
         /// Performs specific action

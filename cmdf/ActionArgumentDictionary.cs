@@ -17,6 +17,13 @@ namespace CommandLineInterpreterFramework
     public class ActionArgumentDictionary : Dictionary<string, ICollection<string>>, IActionArgument
     {
         /// <summary>
+        /// Initializes a new instance of the ActionArgumentDictionary class
+        /// </summary>
+        public ActionArgumentDictionary()
+        {
+        }
+
+        /// <summary>
         /// Initializes a new instance of the ActionArgumentDictionary class with serialized data
         /// </summary>
         /// <param name="info">A System.Runtime.Serialization.SerializationInfo object containing the information required to serialize the dictionary</param>

@@ -21,6 +21,6 @@ namespace CommandLineInterpreterFramework.ParameterLimitation
         /// </summary>
         /// <param name="count">Number of times when parameter was used</param>
         /// <returns>true - validaion suceeded; false - validation filed</returns>
-        bool IsValid(uint count);
+        bool Validate(uint count);
     }
 }

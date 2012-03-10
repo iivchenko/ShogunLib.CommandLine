@@ -31,7 +31,7 @@ namespace CommandLineInterpreterFramework.ParameterLimitation
         /// </summary>
         /// <param name="count">Number of times when parameter was used</param>
         /// <returns>true - validaion suceeded; false - validation filed</returns>
-        public bool IsValid(uint count)
+        public bool Validate(uint count)
         {
             if (count == 0)
             {

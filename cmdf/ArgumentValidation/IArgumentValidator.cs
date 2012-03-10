@@ -4,6 +4,8 @@
 // <author>Ivan Ivchenko</author>
 // <email>shogun@ua.fm</email>
 
+using System.Collections.Generic;
+
 namespace CommandLineInterpreterFramework.ArgumentValidation
 {
     /// <summary>
@@ -21,6 +23,6 @@ namespace CommandLineInterpreterFramework.ArgumentValidation
         /// </summary>
         /// <param name="arg">Input argument</param>
         /// <returns>true - valid; false- invalid</returns>
-        bool Validate(string arg);
+        bool Validate(IEnumerable<string> arg);
     }
 }

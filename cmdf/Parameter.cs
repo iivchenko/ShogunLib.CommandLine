@@ -6,6 +6,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using CommandLineInterpreterFramework.ArgumentValidation;
 using CommandLineInterpreterFramework.ParameterLimitation;
 
@@ -16,27 +18,28 @@ namespace CommandLineInterpreterFramework
     /// </summary>
     public class Parameter : IParameter
     {
+        private readonly ParameterInfo _parameterInfo;
+        private readonly IParameterLimiter _parameterLimiter;
         private readonly IArgumentValidator _argumentValidator;
 
         /// <summary>
         /// Initializes a new instance of the Parameter class
         /// </summary>
-        /// <param name="name">Parameter name</param>
-        /// <param name="description">Parameter description</param>
+        /// <param name="parameterInfo">Contains paramter name and description</param>
+        /// <param name="parameterLimiter">Validate number of times this parameter was used in command line</param>
         /// <param name="argumentValidator">Argument validator</param>
-        protected Parameter(string name, string description, IArgumentValidator argumentValidator)
+        public Parameter(ParameterInfo parameterInfo, IParameterLimiter parameterLimiter, IArgumentValidator argumentValidator)
         {
-            // TODO: Write some unit test for this
             var exceptions = new List<Exception>();
 
-            if (string.IsNullOrWhiteSpace(name))
+            if (parameterInfo == null)
             {
-                exceptions.Add(new ArgumentException("Should not be null, empty or whitespaces", "name"));
+                exceptions.Add(new ArgumentNullException("parameterInfo"));
             }
 
-            if (string.IsNullOrWhiteSpace(description))
+            if (parameterLimiter == null)
             {
-                exceptions.Add(new ArgumentException("Should not be null, empty or whitespaces", "description"));
+                exceptions.Add(new ArgumentNullException("parameterLimiter"));
             }
 
             if (argumentValidator == null)
@@ -49,21 +52,18 @@ namespace CommandLineInterpreterFramework
                 throw new AggregateException("Parameter initialization fail", exceptions);
             }
 
-            Name = name;
-            Description = description;
-
+            _parameterInfo = parameterInfo;
+            _parameterLimiter = parameterLimiter;
             _argumentValidator = argumentValidator;
         }
 
         /// <summary>
-        /// Gets parameter name. Shouldn't have white spaces.
+        /// Gets parameter information
         /// </summary>
-        public string Name { get; private set; }
-
-        /// <summary>
-        /// Gets parameter description
-        /// </summary>
-        public string Description { get; private set; }
+        public ParameterInfo Info
+        {
+            get { return (ParameterInfo)_parameterInfo.Clone(); }
+        }
 
         /// <summary>
         /// Performs validation on the input arguments
@@ -74,15 +74,39 @@ namespace CommandLineInterpreterFramework
         /// <returns>Validated argument</returns>
         public virtual IArgument Validate(IEnumerable<string> args)
         {
-            // TODO: Don't forget to implement... and unit tests to
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
 
-            // - Get all items of current parameter type
-            // - Validate limit
-            //      - if wrong limit - throw ParameterLimitException
-            // - Validate argument(s)
-            //      - if validation fails - throw ArgumentValidationException
-            // - Create and return Argument
-            throw new NotImplementedException(_argumentValidator.ToString());
+            var parameterArguments = GetParametersArguments(args);
+
+            if (!_parameterLimiter.Validate((uint)parameterArguments.Count()))
+            {
+                throw new ParameterLimitException(_parameterLimiter.ErrorMessage);
+            }
+
+            if (!_argumentValidator.Validate(parameterArguments))
+            {
+                throw new ArgumentValidationException(_argumentValidator.ErrorMessage);
+            }
+
+            return new Argument(_parameterInfo.Name, parameterArguments);
+        }
+
+        // Find among available argumets only those that belongs to the current parameter.
+        // Delete parameter prefix from argumets and returns new collection.
+        private IList<string> GetParametersArguments(IEnumerable<string> args)
+        {
+            var parametersArgumentsWhithParameterPrefix = args.Where(arg => arg.StartsWith(_parameterInfo.Name, StringComparison.OrdinalIgnoreCase)).ToList();
+            var parameterArguments = new List<string>();
+
+            foreach (var parameterArgument in parametersArgumentsWhithParameterPrefix)
+            {
+                parameterArguments.Add(parameterArgument.Substring(_parameterInfo.Name.Length, parameterArgument.Length - _parameterInfo.Name.Length));
+            }
+
+            return new Collection<string>(parameterArguments);
         }
     }
 }
