@@ -42,6 +42,7 @@
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Console\IConsole.cs" />
+    <Compile Include="Console\LazyConsole.cs" />
     <Compile Include="Console\StandardConsole.cs" />
     <Compile Include="IInterpreter.cs" />
     <Compile Include="Interpreter.cs" />

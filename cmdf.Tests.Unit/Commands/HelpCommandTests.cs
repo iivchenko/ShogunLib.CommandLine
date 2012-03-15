@@ -24,12 +24,13 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
             new HelpCommand(null, new Collection<ICommand>());
         }
 
+        [Test]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.HelpCommand", Justification = "Unit test needs it")]
         [ExpectedException(typeof(AggregateException))]
         public void Constructor_NullCommand_Throws()
         {
             var stubConsole = new Mock<IConsole>();
-            new HelpCommand(stubConsole.Object, new Collection<ICommand>());
+            new HelpCommand(stubConsole.Object, null);
         }
 
         [Test]

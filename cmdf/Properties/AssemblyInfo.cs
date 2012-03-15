@@ -44,7 +44,6 @@ using System.Runtime.InteropServices;
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Cmdf")]
 
 // TODO: Implement Unit testing
-// TODO: Implement LazyConsole for IConsole
 // TODO: Don't forget to create sample app
 // TODO: Don't forget to create installatioin project
 // TODO: TeamCity

@@ -4,7 +4,6 @@
 // <author>Ivan Ivchenko</author>
 // <email>shogun@ua.fm</email>
 
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 

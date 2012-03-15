@@ -17,8 +17,8 @@ namespace CommandLineInterpreterFramework
         /// <summary>
         /// Initializes a new instance of the ParameterInfo class
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="description"></param>
+        /// <param name="name">Parameter name</param>
+        /// <param name="description">Parameter description</param>
         public ParameterInfo(string name, string description)
         {
             var exceptions = new List<Exception>();

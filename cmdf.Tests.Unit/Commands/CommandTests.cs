@@ -5,7 +5,6 @@
 // <email>shogun@ua.fm</email>
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -94,7 +93,6 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
             Assert.IsEmpty(command.Parameters);
         }
 
-        // TODO: Fix this unit test
         [Test]
         public void Parameters_CorrectParametersAreUsed_ReturnsCorrectParamentersInfo()
         {
@@ -105,14 +103,14 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
                                          };
 
             var commandParameters = new[]
-                                 {
-                                     CreateParameter("parameter1", "description1"),
-                                     CreateParameter("parameter2", "description2")
-                                 };
+                                        {
+                                            CreateParameter("parameter1", "description1"),
+                                            CreateParameter("parameter2", "description2")
+                                        };
             
             var command = new Command<ActionArgumentDictionary>(Name, Description, commandParameters, ActionTest<IActionArgument>.Hello);
 
-            Assert.IsTrue(expectedParameters.SequenceEqual(command.Parameters), "Actual parameters should be equal to expected parameters");
+            Assert.IsTrue(expectedParameters.SequenceEqual(command.Parameters, new ParameterInfoComparer()), "Actual parameters should be equal to expected parameters");
         }
 
         [Test]
@@ -165,6 +163,19 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         {
             public static void Hello(TActionArgument argument)
             {
+            }
+        }
+
+        private class ParameterInfoComparer : EqualityComparer<ParameterInfo>
+        {
+            public override bool Equals(ParameterInfo x, ParameterInfo y)
+            {
+                return x.Name == y.Name && x.Description == y.Description;
+            }
+
+            public override int GetHashCode(ParameterInfo obj)
+            {
+                return obj.GetHashCode();
             }
         }
     }

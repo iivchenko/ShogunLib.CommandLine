@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="Commands\CommandTests.cs" />
     <Compile Include="Commands\HelpCommandTests.cs" />
+    <Compile Include="Console\LazyConsoleTests.cs" />
+    <Compile Include="ParameterInfoTests.cs" />
     <Compile Include="ParameterLimitation\BaseParameterLimiterTests.cs" />
     <Compile Include="ParameterLimitation\MultipleParameterTests.cs" />
     <Compile Include="ParameterLimitation\OptionalParameterTests.cs" />
@@ -57,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ArgumentValidation\" />
-    <Folder Include="Console\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cmdf\cmdf.csproj">

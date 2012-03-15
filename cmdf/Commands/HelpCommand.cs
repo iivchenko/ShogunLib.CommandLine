@@ -13,10 +13,6 @@ using CommandLineInterpreterFramework.Console;
 
 namespace CommandLineInterpreterFramework.Commands
 {
-    // TODO: Implement other comments
-    // TODO: Implement
-    // TODO: Unit test
-
     /// <summary>
     /// Lazy realization of the help command.
     /// Write to the console information about the available commands.
@@ -87,8 +83,6 @@ namespace CommandLineInterpreterFramework.Commands
                 return descriptions;
             }
         }
-
-        // TODO: Implement
 
         /// <summary> 
         /// Write to the console information about the available commands.
