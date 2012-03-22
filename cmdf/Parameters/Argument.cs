@@ -1,4 +1,4 @@
-﻿// <copyright company="XATA">
+// <copyright company="XATA">
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
@@ -7,7 +7,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace CommandLineInterpreterFramework
+namespace CommandLineInterpreterFramework.Parameters
 {
     /// <summary>
     /// Lazy realization of the console command argument

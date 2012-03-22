@@ -4,25 +4,23 @@
 // <author>Ivan Ivchenko</author>
 // <email>shogun@ua.fm</email>
 
-using System.Collections.ObjectModel;
+using System;
 
-namespace CommandLineInterpreterFramework
+namespace CommandLineInterpreterFramework.Parameters
 {
     /// <summary>
-    /// Represents specific argument for the console command
+    /// Contains parameters data: Name and Description
     /// </summary>
-    public interface IArgument
+    public interface IParameterInfo : ICloneable
     {
         /// <summary>
-        /// Gets argument name
+        /// Gets parameters name
         /// </summary>
         string Name { get; }
 
-        // TODO: Think on the returned type
-
         /// <summary>
-        /// Gets argment values
+        /// Gets parameters description
         /// </summary>
-        ReadOnlyCollection<string> Values { get; }
+        string Description { get; }
     }
 }

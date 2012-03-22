@@ -1,4 +1,4 @@
-﻿// <copyright company="XATA">
+// <copyright company="XATA">
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
@@ -7,12 +7,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace CommandLineInterpreterFramework
+namespace CommandLineInterpreterFramework.Parameters
 {
     /// <summary>
     /// Contains parameters data: Name and Description
     /// </summary>
-    public class ParameterInfo : ICloneable
+    public class ParameterInfo : IParameterInfo
     {
         /// <summary>
         /// Initializes a new instance of the ParameterInfo class

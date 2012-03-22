@@ -1,4 +1,4 @@
-﻿// <copyright company="XATA">
+// <copyright company="XATA">
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace CommandLineInterpreterFramework
+namespace CommandLineInterpreterFramework.Commands
 {
     /// <summary>
     /// Lazy realization that enables to convert console arguments into specific function arguments
@@ -39,6 +39,16 @@ namespace CommandLineInterpreterFramework
         /// <param name="argument">Validated console command argument</param>
         public void Add(IArgument argument)
         {
+            if (argument == null)
+            {
+                throw new ArgumentNullException("argument");
+            }
+
+            if (string.IsNullOrWhiteSpace(argument.Name))
+            {
+                throw new ArgumentException("Argument name should not be a null, empty or whitespaces value", "argument");
+            }
+
             Add(argument.Name, argument.Values);
         }
     }

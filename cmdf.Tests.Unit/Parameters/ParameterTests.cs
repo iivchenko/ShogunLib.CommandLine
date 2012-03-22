@@ -1,4 +1,4 @@
-﻿// <copyright company="XATA">
+// <copyright company="XATA">
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
@@ -8,12 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CommandLineInterpreterFramework.ArgumentValidation;
-using CommandLineInterpreterFramework.ParameterLimitation;
+using CommandLineInterpreterFramework.Parameters;
+using CommandLineInterpreterFramework.Parameters.ArgumentValidation;
+using CommandLineInterpreterFramework.Parameters.ParameterLimitation;
 using Moq;
 using NUnit.Framework;
 
-namespace CommandLineInterpreterFramework.Tests.Unit
+namespace CommandLineInterpreterFramework.Tests.Unit.Parameters
 {
     [TestFixture]
     public class ParameterTests
@@ -30,22 +31,22 @@ namespace CommandLineInterpreterFramework.Tests.Unit
         
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Parameter", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Parameters.Parameter", Justification = "Unit test needs it")]
         public void Constructor_NullLimiter_Throws()
         {
             var stubArgumentValidator = new Mock<IArgumentValidator>();
 
-            new Parameter(new ParameterInfo(Name, Description), null, stubArgumentValidator.Object);
+            new Parameter(CreateParameterInfo(Name, Description), null, stubArgumentValidator.Object);
         }
 
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Parameter", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Parameters.Parameter", Justification = "Unit test needs it")]
         public void Constructor_NullArgumentValidatorLimiter_Throws()
         {
             var stubLimiter = new Mock<IParameterLimiter>();
 
-            new Parameter(new ParameterInfo(Name, Description), stubLimiter.Object, null);
+            new Parameter(CreateParameterInfo(Name, Description), stubLimiter.Object, null);
         }
 
         [Test]
@@ -89,7 +90,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit
             Assert.IsTrue(excpectedArgs.SequenceEqual(argument.Values), "Actual arguments must equals to expected arguments");
         }
 
-        private static IParameter CreateParameter(ParameterInfo parameterInfo, bool limiterResult, bool argumentValidatorResult)
+        private static IParameter CreateParameter(IParameterInfo parameterInfo, bool limiterResult, bool argumentValidatorResult)
         {
             var stubParameterLimiter = new Mock<IParameterLimiter>();
             var stubArgumentValidator = new Mock<IArgumentValidator>();
@@ -104,9 +105,20 @@ namespace CommandLineInterpreterFramework.Tests.Unit
 
         private static IParameter CreateParameter(bool limiterResult, bool argumentValidatorResult)
         {
-            return CreateParameter(new ParameterInfo(Name, Description),
+            return CreateParameter(CreateParameterInfo(Name, Description),
                                    limiterResult,
                                    argumentValidatorResult);
+        }
+
+        // TODO: Refactor to a different class
+        private static IParameterInfo CreateParameterInfo(string name, string description)
+        {
+            var stubParameterInfo = new Mock<IParameterInfo>();
+
+            stubParameterInfo.Setup(parameterInfo => parameterInfo.Name).Returns(name);
+            stubParameterInfo.Setup(parameterInfo => parameterInfo.Description).Returns(description);
+
+            return stubParameterInfo.Object;
         }
     }
 }

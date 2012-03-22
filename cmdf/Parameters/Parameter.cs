@@ -1,4 +1,4 @@
-﻿// <copyright company="XATA">
+// <copyright company="XATA">
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
@@ -8,17 +8,17 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using CommandLineInterpreterFramework.ArgumentValidation;
-using CommandLineInterpreterFramework.ParameterLimitation;
+using CommandLineInterpreterFramework.Parameters.ArgumentValidation;
+using CommandLineInterpreterFramework.Parameters.ParameterLimitation;
 
-namespace CommandLineInterpreterFramework
+namespace CommandLineInterpreterFramework.Parameters
 {
     /// <summary>
     /// Lazy realization of the the console command parameter
     /// </summary>
     public class Parameter : IParameter
     {
-        private readonly ParameterInfo _parameterInfo;
+        private readonly IParameterInfo _parameterInfo;
         private readonly IParameterLimiter _parameterLimiter;
         private readonly IArgumentValidator _argumentValidator;
 
@@ -28,7 +28,7 @@ namespace CommandLineInterpreterFramework
         /// <param name="parameterInfo">Contains paramter name and description</param>
         /// <param name="parameterLimiter">Validate number of times this parameter was used in command line</param>
         /// <param name="argumentValidator">Argument validator</param>
-        public Parameter(ParameterInfo parameterInfo, IParameterLimiter parameterLimiter, IArgumentValidator argumentValidator)
+        public Parameter(IParameterInfo parameterInfo, IParameterLimiter parameterLimiter, IArgumentValidator argumentValidator)
         {
             var exceptions = new List<Exception>();
 
@@ -60,9 +60,9 @@ namespace CommandLineInterpreterFramework
         /// <summary>
         /// Gets parameter information
         /// </summary>
-        public ParameterInfo Info
+        public IParameterInfo Info
         {
-            get { return (ParameterInfo)_parameterInfo.Clone(); }
+            get { return (IParameterInfo)_parameterInfo.Clone(); }
         }
 
         /// <summary>

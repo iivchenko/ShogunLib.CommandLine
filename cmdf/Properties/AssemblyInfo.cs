@@ -43,7 +43,10 @@ using System.Runtime.InteropServices;
 // Global suppreesion list
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Cmdf")]
 
+// TODO: Check all classes on defects
+// TODO: Refactor unit tests to avoid code dublication
 // TODO: Implement Unit testing
 // TODO: Don't forget to create sample app
 // TODO: Don't forget to create installatioin project
 // TODO: TeamCity
+// TODO: Investigation of console split to a string[]

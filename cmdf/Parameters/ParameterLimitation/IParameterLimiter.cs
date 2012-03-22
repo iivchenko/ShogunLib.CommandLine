@@ -1,10 +1,10 @@
-﻿// <copyright company="XATA">
+// <copyright company="XATA">
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
 // <email>shogun@ua.fm</email>
 
-namespace CommandLineInterpreterFramework.ParameterLimitation
+namespace CommandLineInterpreterFramework.Parameters.ParameterLimitation
 {
     /// <summary>
     /// Define usage rules for specified parameter in command line

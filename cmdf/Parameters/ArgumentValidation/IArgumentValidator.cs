@@ -1,4 +1,4 @@
-﻿// <copyright company="XATA">
+// <copyright company="XATA">
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
@@ -6,7 +6,7 @@
 
 using System.Collections.Generic;
 
-namespace CommandLineInterpreterFramework.ArgumentValidation
+namespace CommandLineInterpreterFramework.Parameters.ArgumentValidation
 {
     /// <summary>
     /// Provides functionality for console command argument validation

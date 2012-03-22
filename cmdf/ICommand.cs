@@ -5,6 +5,7 @@
 // <email>shogun@ua.fm</email>
 
 using System.Collections.Generic;
+using CommandLineInterpreterFramework.Parameters;
 
 namespace CommandLineInterpreterFramework
 {
@@ -26,7 +27,7 @@ namespace CommandLineInterpreterFramework
         /// <summary>
         /// Gets parameters names and descriptions
         /// </summary>
-        ICollection<ParameterInfo> Parameters { get; }
+        ICollection<IParameterInfo> Parameters { get; }
         
         /// <summary>
         /// Performs specific action

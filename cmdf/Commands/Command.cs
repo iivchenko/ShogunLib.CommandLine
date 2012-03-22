@@ -7,9 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
-using System.Text;
+using CommandLineInterpreterFramework.Parameters;
 
 namespace CommandLineInterpreterFramework.Commands
 {
@@ -77,11 +75,11 @@ namespace CommandLineInterpreterFramework.Commands
         /// <summary>
         /// Gets description of the command parameters
         /// </summary>
-        public ICollection<ParameterInfo> Parameters
+        public ICollection<IParameterInfo> Parameters
         {
             get
             {
-                var descriptions = new Collection<ParameterInfo>();
+                var descriptions = new Collection<IParameterInfo>();
                 foreach (var parameter in _parameters)
                 {
                     descriptions.Add(parameter.Info);

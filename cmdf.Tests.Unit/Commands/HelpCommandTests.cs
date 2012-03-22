@@ -8,6 +8,7 @@ using System;
 using System.Collections.ObjectModel;
 using CommandLineInterpreterFramework.Commands;
 using CommandLineInterpreterFramework.Console;
+using CommandLineInterpreterFramework.Parameters;
 using Moq;
 using NUnit.Framework;
 
@@ -87,9 +88,9 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
             stubCommand2.Setup(command => command.Name).Returns("Command2");
             stubCommand3.Setup(command => command.Name).Returns("Command3");
 
-            stubCommand1.Setup(command => command.Parameters).Returns(new[] { new ParameterInfo("param1", "descripiton1") });
-            stubCommand2.Setup(command => command.Parameters).Returns(new[] { new ParameterInfo("param2", "descripiton2") });
-            stubCommand3.Setup(command => command.Parameters).Returns(new[] { new ParameterInfo("param3", "descripiton3") });
+            stubCommand1.Setup(command => command.Parameters).Returns(new[] { CreateParameterInfo("param1", "descripiton1") });
+            stubCommand2.Setup(command => command.Parameters).Returns(new[] { CreateParameterInfo("param2", "descripiton2") });
+            stubCommand3.Setup(command => command.Parameters).Returns(new[] { CreateParameterInfo("param3", "descripiton3") });
 
             var commands = new[]
                                {
@@ -99,6 +100,16 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
                                };
 
             return commands;
+        }
+
+        private static IParameterInfo CreateParameterInfo(string name, string description)
+        {
+            var stubParameterInfo = new Mock<IParameterInfo>();
+
+            stubParameterInfo.Setup(parameterInfo => parameterInfo.Name).Returns(name);
+            stubParameterInfo.Setup(parameterInfo => parameterInfo.Description).Returns(description);
+
+            return stubParameterInfo.Object;
         }
     }
 }

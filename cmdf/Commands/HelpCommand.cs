@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using CommandLineInterpreterFramework.Console;
+using CommandLineInterpreterFramework.Parameters;
 
 namespace CommandLineInterpreterFramework.Commands
 {
@@ -70,11 +71,11 @@ namespace CommandLineInterpreterFramework.Commands
         /// <summary>
         /// Gets description of the Help command parameters
         /// </summary>
-        public ICollection<ParameterInfo> Parameters
+        public ICollection<IParameterInfo> Parameters
         {
             get
             {
-                var descriptions = new Collection<ParameterInfo>
+                var descriptions = new Collection<IParameterInfo>
                                        {
                                            new ParameterInfo("No params", "list of available commands"),
                                            new ParameterInfo("Command name", "help for this command will be shown")

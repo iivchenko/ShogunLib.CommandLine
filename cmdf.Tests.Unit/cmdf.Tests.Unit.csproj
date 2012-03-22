@@ -45,20 +45,23 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ActionArgumentDictionaryTests.cs" />
+    <Compile Include="Commands\CommandsDictionaryTests.cs" />
     <Compile Include="Commands\CommandTests.cs" />
     <Compile Include="Commands\HelpCommandTests.cs" />
     <Compile Include="Console\LazyConsoleTests.cs" />
-    <Compile Include="ParameterInfoTests.cs" />
-    <Compile Include="ParameterLimitation\BaseParameterLimiterTests.cs" />
-    <Compile Include="ParameterLimitation\MultipleParameterTests.cs" />
-    <Compile Include="ParameterLimitation\OptionalParameterTests.cs" />
-    <Compile Include="ParameterLimitation\SingleParameterTests.cs" />
-    <Compile Include="ParameterTests.cs" />
+    <Compile Include="Parameters\ParameterInfoTests.cs" />
+    <Compile Include="Parameters\ParameterLimitation\BaseParameterLimiterTests.cs" />
+    <Compile Include="Parameters\ParameterLimitation\MultipleParameterTests.cs" />
+    <Compile Include="Parameters\ParameterLimitation\OptionalParameterTests.cs" />
+    <Compile Include="Parameters\ParameterLimitation\SingleParameterTests.cs" />
+    <Compile Include="Parameters\ParametersDictionaryTests.cs" />
+    <Compile Include="Parameters\ParameterTests.cs" />
     <Compile Include="Parsing\InputParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ArgumentValidation\" />
+    <Folder Include="Parameters\ArgumentValidation\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cmdf\cmdf.csproj">

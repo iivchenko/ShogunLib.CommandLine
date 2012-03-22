@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using CommandLineInterpreterFramework.Parameters;
 
 namespace CommandLineInterpreterFramework.Commands
 {
@@ -35,9 +36,9 @@ namespace CommandLineInterpreterFramework.Commands
         /// <summary>
         /// Gets description of the command parameters (Exit command doesn't have parameters)
         /// </summary>
-        public ICollection<ParameterInfo> Parameters
+        public ICollection<IParameterInfo> Parameters
         {
-            get { return new Collection<ParameterInfo>(); }
+            get { return new Collection<IParameterInfo>(); }
         }
 
         /// <summary>

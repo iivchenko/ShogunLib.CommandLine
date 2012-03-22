@@ -1,13 +1,13 @@
-﻿// <copyright company="XATA">
+// <copyright company="XATA">
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
 // <email>shogun@ua.fm</email>
 
-using CommandLineInterpreterFramework.ParameterLimitation;
+using CommandLineInterpreterFramework.Parameters.ParameterLimitation;
 using NUnit.Framework;
 
-namespace CommandLineInterpreterFramework.Tests.Unit.ParameterLimitation
+namespace CommandLineInterpreterFramework.Tests.Unit.Parameters.ParameterLimitation
 {
     [TestFixture]
     public class OptionalParameterTests : BaseParameterLimiterTests

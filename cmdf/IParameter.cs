@@ -5,8 +5,9 @@
 // <email>shogun@ua.fm</email>
 
 using System.Collections.Generic;
-using CommandLineInterpreterFramework.ArgumentValidation;
-using CommandLineInterpreterFramework.ParameterLimitation;
+using CommandLineInterpreterFramework.Parameters;
+using CommandLineInterpreterFramework.Parameters.ArgumentValidation;
+using CommandLineInterpreterFramework.Parameters.ParameterLimitation;
 
 namespace CommandLineInterpreterFramework
 {
@@ -18,7 +19,7 @@ namespace CommandLineInterpreterFramework
         /// <summary>
         /// Gets parameter information
         /// </summary>
-        ParameterInfo Info { get; }
+        IParameterInfo Info { get; }
 
         /// <summary>
         /// Performs validation on the input arguments

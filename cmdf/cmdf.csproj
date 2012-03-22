@@ -38,7 +38,9 @@
     <CodeAnalysisRuleSet>..\..\..\Rules\AppAssure Standard Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Commands\ActionArgumentDictionary.cs" />
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandsDictionary.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Console\IConsole.cs" />
@@ -46,27 +48,28 @@
     <Compile Include="Console\StandardConsole.cs" />
     <Compile Include="IInterpreter.cs" />
     <Compile Include="Interpreter.cs" />
-    <Compile Include="ActionArgumentDictionary.cs" />
-    <Compile Include="Argument.cs" />
     <Compile Include="IActionArgument.cs" />
     <Compile Include="IArgument.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="IParameter.cs" />
-    <Compile Include="ParameterInfo.cs" />
-    <Compile Include="ParameterLimitation\IParameterLimiter.cs" />
-    <Compile Include="ParameterLimitation\MultipleParameter.cs" />
-    <Compile Include="ParameterLimitation\OptionalParameter.cs" />
-    <Compile Include="ParameterLimitation\ParameterLimitException.cs" />
-    <Compile Include="ParameterLimitation\SingleParameter.cs" />
-    <Compile Include="Parameter.cs" />
+    <Compile Include="Parameters\Argument.cs" />
+    <Compile Include="Parameters\ArgumentValidation\ArgumentValidationException.cs" />
+    <Compile Include="Parameters\ArgumentValidation\IArgumentValidator.cs" />
+    <Compile Include="Parameters\IParameterInfo.cs" />
+    <Compile Include="Parameters\Parameter.cs" />
+    <Compile Include="Parameters\ParameterInfo.cs" />
+    <Compile Include="Parameters\ParameterLimitation\IParameterLimiter.cs" />
+    <Compile Include="Parameters\ParameterLimitation\MultipleParameter.cs" />
+    <Compile Include="Parameters\ParameterLimitation\OptionalParameter.cs" />
+    <Compile Include="Parameters\ParameterLimitation\ParameterLimitException.cs" />
+    <Compile Include="Parameters\ParameterLimitation\SingleParameter.cs" />
+    <Compile Include="Parameters\ParametersDictionary.cs" />
     <Compile Include="Parsing\IInputParser.cs" />
     <Compile Include="Parsing\InputParser.cs" />
     <Compile Include="Parsing\InputParserException.cs" />
     <Compile Include="Parsing\IParsedCommand.cs" />
     <Compile Include="Parsing\ParsedCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ArgumentValidation\IArgumentValidator.cs" />
-    <Compile Include="ArgumentValidation\ArgumentValidationException.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\solutionitems\CodeAnalysisDictionary.xml" />

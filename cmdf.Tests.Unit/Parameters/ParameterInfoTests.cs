@@ -1,13 +1,14 @@
-﻿// <copyright company="XATA">
+// <copyright company="XATA">
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
 // <email>shogun@ua.fm</email>
 
 using System;
+using CommandLineInterpreterFramework.Parameters;
 using NUnit.Framework;
 
-namespace CommandLineInterpreterFramework.Tests.Unit
+namespace CommandLineInterpreterFramework.Tests.Unit.Parameters
 {
     [TestFixture]
     public class ParameterInfoTests
@@ -17,7 +18,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit
 
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.ParameterInfo", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Parameters.ParameterInfo", Justification = "Unit test needs it")]
         public void Constructor_NullName_Throws()
         {
             new ParameterInfo(null, Description);
@@ -25,7 +26,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit
 
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.ParameterInfo", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Parameters.ParameterInfo", Justification = "Unit test needs it")]
         public void Constructor_EmptyName_Throws()
         {
             new ParameterInfo(string.Empty, Description);
@@ -33,7 +34,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit
 
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.ParameterInfo", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Parameters.ParameterInfo", Justification = "Unit test needs it")]
         public void Constructor_WhiteSpacesName_Throws()
         {
             new ParameterInfo("   ", Description);
@@ -41,7 +42,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit
 
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.ParameterInfo", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Parameters.ParameterInfo", Justification = "Unit test needs it")]
         public void Constructor_NullDescription_Throws()
         {
             new ParameterInfo(Name, null);
@@ -49,7 +50,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit
         
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.ParameterInfo", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Parameters.ParameterInfo", Justification = "Unit test needs it")]
         public void Constructor_EmptyDescription_Throws()
         {
             new ParameterInfo(Name, string.Empty);
@@ -57,7 +58,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit
 
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.ParameterInfo", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Parameters.ParameterInfo", Justification = "Unit test needs it")]
         public void Constructor_WhiteSpacesDescription_Throws()
         {
             new ParameterInfo(Name, "   ");

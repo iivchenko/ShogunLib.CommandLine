@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CommandLineInterpreterFramework.Commands;
+using CommandLineInterpreterFramework.Parameters;
 using Moq;
 using NUnit.Framework;
 
@@ -19,11 +20,10 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
     {
         private const string Name = "Command";
         private const string Description = "Command description";
-
-        //protected Command(string name, string description, ICollection<IParameter> parameters, Action<TActionArgument> action)
+        
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.ActionArgumentDictionary>", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.Commands.ActionArgumentDictionary>", Justification = "Unit test needs it")]
         public void Constructor_NullName_Throws()
         {
             new Command<ActionArgumentDictionary>(null, Description, new Collection<IParameter>(), ActionTest<IActionArgument>.Hello);
@@ -31,7 +31,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
 
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.ActionArgumentDictionary>", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.Commands.ActionArgumentDictionary>", Justification = "Unit test needs it")]
         public void Constructor_EmptyName_Throws()
         {
             new Command<ActionArgumentDictionary>(string.Empty, Description, new Collection<IParameter>(), ActionTest<IActionArgument>.Hello);
@@ -39,7 +39,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
 
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.ActionArgumentDictionary>", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.Commands.ActionArgumentDictionary>", Justification = "Unit test needs it")]
         public void Constructor_WhiteSpacesName_Throws()
         {
             new Command<ActionArgumentDictionary>("   ", Description, new Collection<IParameter>(), ActionTest<IActionArgument>.Hello);
@@ -47,7 +47,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
 
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.ActionArgumentDictionary>", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.Commands.ActionArgumentDictionary>", Justification = "Unit test needs it")]
         public void Constructor_NullDescription_Throws()
         {
             new Command<ActionArgumentDictionary>(Name, null, new Collection<IParameter>(), ActionTest<IActionArgument>.Hello);
@@ -55,7 +55,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
 
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.ActionArgumentDictionary>", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.Commands.ActionArgumentDictionary>", Justification = "Unit test needs it")]
         public void Constructor_EmptyDescription_Throws()
         {
             new Command<ActionArgumentDictionary>(Name, string.Empty, new Collection<IParameter>(), ActionTest<IActionArgument>.Hello);
@@ -63,7 +63,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
 
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.ActionArgumentDictionary>", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.Commands.ActionArgumentDictionary>", Justification = "Unit test needs it")]
         public void Constructor_WhiteSpacesDescription_Throws()
         {
             new Command<ActionArgumentDictionary>(Name, "   ", new Collection<IParameter>(), ActionTest<IActionArgument>.Hello);
@@ -71,7 +71,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
 
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.ActionArgumentDictionary>", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.Commands.ActionArgumentDictionary>", Justification = "Unit test needs it")]
         public void Constructor_NullParameters_Throws()
         {
             new Command<ActionArgumentDictionary>(Name, Description, null, ActionTest<IActionArgument>.Hello);
@@ -79,7 +79,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
 
         [Test]
         [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.ActionArgumentDictionary>", Justification = "Unit test needs it")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.Command`1<CommandLineInterpreterFramework.Commands.ActionArgumentDictionary>", Justification = "Unit test needs it")]
         public void Constructor_NullAction_Throws()
         {
             new Command<ActionArgumentDictionary>(Name, Description, new Collection<IParameter>(), null);
@@ -98,8 +98,8 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         {
             var expectedParameters = new[]
                                          {
-                                             new ParameterInfo("parameter1", "description1"),
-                                             new ParameterInfo("parameter2", "description2")
+                                             CreateParameterInfo("parameter1", "description1"),
+                                             CreateParameterInfo("parameter2", "description2")
                                          };
 
             var commandParameters = new[]
@@ -154,9 +154,19 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         {
             var parameter = new Mock<IParameter>();
 
-            parameter.Setup(x => x.Info).Returns(new ParameterInfo(name, description));
+            parameter.Setup(x => x.Info).Returns(CreateParameterInfo(name, description));
 
             return parameter.Object;
+        }
+
+        private static IParameterInfo CreateParameterInfo(string name, string description)
+        {
+            var stubParameterInfo = new Mock<IParameterInfo>();
+            
+            stubParameterInfo.Setup(parameterInfo => parameterInfo.Name).Returns(name);
+            stubParameterInfo.Setup(parameterInfo => parameterInfo.Description).Returns(description);
+
+            return stubParameterInfo.Object;
         }
 
         internal static class ActionTest<TActionArgument> where TActionArgument : IActionArgument
@@ -166,14 +176,14 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
             }
         }
 
-        private class ParameterInfoComparer : EqualityComparer<ParameterInfo>
+        private class ParameterInfoComparer : EqualityComparer<IParameterInfo>
         {
-            public override bool Equals(ParameterInfo x, ParameterInfo y)
+            public override bool Equals(IParameterInfo x, IParameterInfo y)
             {
                 return x.Name == y.Name && x.Description == y.Description;
             }
 
-            public override int GetHashCode(ParameterInfo obj)
+            public override int GetHashCode(IParameterInfo obj)
             {
                 return obj.GetHashCode();
             }
