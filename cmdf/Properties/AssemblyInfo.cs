@@ -37,7 +37,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")] // TODO: Do something with version
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 // Global suppreesion list
@@ -45,6 +45,7 @@ using System.Runtime.InteropServices;
 
 // TODO: Check all classes on defects
 // TODO: Refactor unit tests to avoid code dublication
+// TODO: Refactor unit tests to establish defects
 // TODO: Implement Unit testing
 // TODO: Don't forget to create sample app
 // TODO: Don't forget to create installatioin project

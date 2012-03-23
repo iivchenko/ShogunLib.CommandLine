@@ -8,7 +8,6 @@ using System;
 using System.Collections.ObjectModel;
 using CommandLineInterpreterFramework.Commands;
 using CommandLineInterpreterFramework.Console;
-using CommandLineInterpreterFramework.Parameters;
 using Moq;
 using NUnit.Framework;
 
@@ -31,6 +30,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         public void Constructor_NullCommand_Throws()
         {
             var stubConsole = new Mock<IConsole>();
+
             new HelpCommand(stubConsole.Object, null);
         }
 
@@ -39,9 +39,11 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         {
             var mockConsole = new Mock<IConsole>();
             var commands = CreateCommands();
+
             var help = new HelpCommand(mockConsole.Object, commands);
 
             help.Execute(null);
+
             mockConsole.Verify(console => console.WriteLine(It.IsAny<string>()), Times.Exactly(3));
         }
 
@@ -78,38 +80,21 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
             mockConsole.Verify(console => console.WriteLine(It.IsAny<string>()), Times.AtLeast(1));
         }
 
+        // TODO: Hm... may be refactor?
         private static ICommand[] CreateCommands()
         {
-            var stubCommand1 = new Mock<ICommand>();
-            var stubCommand2 = new Mock<ICommand>();
-            var stubCommand3 = new Mock<ICommand>();
-
-            stubCommand1.Setup(command => command.Name).Returns("Command1");
-            stubCommand2.Setup(command => command.Name).Returns("Command2");
-            stubCommand3.Setup(command => command.Name).Returns("Command3");
-
-            stubCommand1.Setup(command => command.Parameters).Returns(new[] { CreateParameterInfo("param1", "descripiton1") });
-            stubCommand2.Setup(command => command.Parameters).Returns(new[] { CreateParameterInfo("param2", "descripiton2") });
-            stubCommand3.Setup(command => command.Parameters).Returns(new[] { CreateParameterInfo("param3", "descripiton3") });
+            var stubCommand1 = FakeCreator.CreateCommand(FakeCreator.CommandName);
+            var stubCommand2 = FakeCreator.CreateCommand(FakeCreator.CommandName);
+            var stubCommand3 = FakeCreator.CreateCommand(FakeCreator.CommandName);
 
             var commands = new[]
                                {
-                                   stubCommand1.Object, 
-                                   stubCommand2.Object, 
-                                   stubCommand3.Object
+                                   stubCommand1, 
+                                   stubCommand2, 
+                                   stubCommand3
                                };
 
             return commands;
-        }
-
-        private static IParameterInfo CreateParameterInfo(string name, string description)
-        {
-            var stubParameterInfo = new Mock<IParameterInfo>();
-
-            stubParameterInfo.Setup(parameterInfo => parameterInfo.Name).Returns(name);
-            stubParameterInfo.Setup(parameterInfo => parameterInfo.Description).Returns(description);
-
-            return stubParameterInfo.Object;
         }
     }
 }

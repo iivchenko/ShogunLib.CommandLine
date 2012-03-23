@@ -7,16 +7,20 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using CommandLineInterpreterFramework.Parameters;
+using System.Linq;
+using CommandLineInterpreterFramework.Commands.Parameters;
 
 namespace CommandLineInterpreterFramework.Commands
 {
+    // TODO: Add IConsole ussage
+    // TODO: Action should get an IConsole parameter
+
     /// <summary>
     /// Lazy realization for the console command
     /// </summary>
-    public class Command<TActionArgument> : ICommand where TActionArgument : class, IActionArgument, new()
+    public class Command : ICommand
     {
-        private readonly Action<TActionArgument> _action;
+        private readonly Action<IEnumerable<IArgument>> _action;
         private readonly ICollection<IParameter> _parameters;
 
         /// <summary>
@@ -26,7 +30,10 @@ namespace CommandLineInterpreterFramework.Commands
         /// <param name="description">Command description. Shouldn't have white spaces</param>
         /// <param name="parameters">Command parameters. Shouldn't be a null value</param>
         /// <param name="action">Specific action  performed by command. Shouldn't be null</param>
-        public Command(string name, string description, ICollection<IParameter> parameters, Action<TActionArgument> action)
+        public Command(string name, 
+                       string description, 
+                       ICollection<IParameter> parameters, 
+                       Action<IEnumerable<IArgument>> action)
         {
             var exceptions = new List<Exception>();
 
@@ -75,7 +82,7 @@ namespace CommandLineInterpreterFramework.Commands
         /// <summary>
         /// Gets description of the command parameters
         /// </summary>
-        public ICollection<IParameterInfo> Parameters
+        public IEnumerable<IParameterInfo> Parameters
         {
             get
             {
@@ -95,11 +102,6 @@ namespace CommandLineInterpreterFramework.Commands
         /// <param name="args">Command input arguments</param>
         public virtual void Execute(IEnumerable<string> args)
         {
-            if (args == null)
-            {
-                throw new ArgumentNullException("args");
-            }
-
             _action(Validate(args));
         }
 
@@ -108,15 +110,14 @@ namespace CommandLineInterpreterFramework.Commands
         /// </summary>
         /// <param name="args">Input arguments</param>
         /// <returns>Validated set of arguments</returns>
-        protected virtual TActionArgument Validate(IEnumerable<string> args)
+        protected virtual IEnumerable<IArgument> Validate(IEnumerable<string> args)
         {
-            var actionArgument = new TActionArgument();
-            foreach (var parameter in _parameters)
+            if (args == null)
             {
-                actionArgument.Add(parameter.Validate(args));
+                throw new ArgumentNullException("args");
             }
 
-            return actionArgument;
+            return _parameters.Select(parameter => parameter.Validate(args)).ToList();
         }
     }
 }

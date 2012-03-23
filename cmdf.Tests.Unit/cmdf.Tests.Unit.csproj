@@ -45,23 +45,23 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ActionArgumentDictionaryTests.cs" />
     <Compile Include="Commands\CommandsDictionaryTests.cs" />
     <Compile Include="Commands\CommandTests.cs" />
     <Compile Include="Commands\HelpCommandTests.cs" />
+    <Compile Include="Commands\FakeCreator.cs" />
+    <Compile Include="Commands\Parameters\ParameterInfoTests.cs" />
+    <Compile Include="Commands\Parameters\ParameterLimitation\BaseParameterLimiterTests.cs" />
+    <Compile Include="Commands\Parameters\ParameterLimitation\MultipleParameterTests.cs" />
+    <Compile Include="Commands\Parameters\ParameterLimitation\OptionalParameterTests.cs" />
+    <Compile Include="Commands\Parameters\ParameterLimitation\SingleParameterTests.cs" />
+    <Compile Include="Commands\Parameters\ParametersDictionaryTests.cs" />
+    <Compile Include="Commands\Parameters\ParameterTests.cs" />
     <Compile Include="Console\LazyConsoleTests.cs" />
-    <Compile Include="Parameters\ParameterInfoTests.cs" />
-    <Compile Include="Parameters\ParameterLimitation\BaseParameterLimiterTests.cs" />
-    <Compile Include="Parameters\ParameterLimitation\MultipleParameterTests.cs" />
-    <Compile Include="Parameters\ParameterLimitation\OptionalParameterTests.cs" />
-    <Compile Include="Parameters\ParameterLimitation\SingleParameterTests.cs" />
-    <Compile Include="Parameters\ParametersDictionaryTests.cs" />
-    <Compile Include="Parameters\ParameterTests.cs" />
-    <Compile Include="Parsing\InputParserTests.cs" />
+    <Compile Include="Interpretation\Parsing\InputParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Parameters\ArgumentValidation\" />
+    <Folder Include="Commands\Parameters\ArgumentValidation\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cmdf\cmdf.csproj">

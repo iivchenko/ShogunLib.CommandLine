@@ -9,8 +9,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using CommandLineInterpreterFramework.Commands.Parameters;
 using CommandLineInterpreterFramework.Console;
-using CommandLineInterpreterFramework.Parameters;
 
 namespace CommandLineInterpreterFramework.Commands
 {
@@ -57,6 +57,7 @@ namespace CommandLineInterpreterFramework.Commands
         /// </summary>
         public string Name
         {
+            // TODO: hm.. may be I will use factory here... Бред... но может быть комуто такой подход будет крут)))
             get { return "Help"; }
         }
 
@@ -71,12 +72,13 @@ namespace CommandLineInterpreterFramework.Commands
         /// <summary>
         /// Gets description of the Help command parameters
         /// </summary>
-        public ICollection<IParameterInfo> Parameters
+        public IEnumerable<IParameterInfo> Parameters
         {
             get
             {
                 var descriptions = new Collection<IParameterInfo>
                                        {
+                                           // TODO: hm.. may be I will use factory heare
                                            new ParameterInfo("No params", "list of available commands"),
                                            new ParameterInfo("Command name", "help for this command will be shown")
                                        };
@@ -93,7 +95,7 @@ namespace CommandLineInterpreterFramework.Commands
         public void Execute(IEnumerable<string> args)
         {
             // General help
-            if (args == null || args.Count() == 0)
+            if (args == null || !args.Any())
             {
                 foreach (var command in _commands)
                 {
