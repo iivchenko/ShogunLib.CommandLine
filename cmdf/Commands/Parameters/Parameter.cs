@@ -2,7 +2,7 @@
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
-// <email>shogun@ua.fm</email>
+// <email>iivchenko@live.com</email>
 
 using System;
 using System.Collections.Generic;
@@ -93,7 +93,6 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
                 throw new ArgumentValidationException(_argumentValidator.ErrorMessage);
             }
 
-            // TODO: hm.. may be I will use factory heare
             return new Argument(_parameterInfo.Name, parameterArguments);
         }
 
@@ -101,15 +100,21 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
         // Delete parameter prefix from argumets and returns new collection.
         private IList<string> GetParametersArguments(IEnumerable<string> args)
         {
-            var parametersArgumentsWhithParameterPrefix = args.Where(arg => arg.StartsWith(_parameterInfo.Name, StringComparison.OrdinalIgnoreCase)).ToList();
-            var parameterArguments = new List<string>();
+            // arguments whith parameter prefix
+            var parameters = args.Where(arg => arg.StartsWith(_parameterInfo.Name, StringComparison.OrdinalIgnoreCase)).ToList();
 
-            foreach (var parameterArgument in parametersArgumentsWhithParameterPrefix)
+            // arguments whithout parameter prefix
+            var arguments = new List<string>();
+
+            foreach (var parameter in parameters)
             {
-                parameterArguments.Add(parameterArgument.Substring(_parameterInfo.Name.Length, parameterArgument.Length - _parameterInfo.Name.Length));
+                // argument without parameter prefix
+                var argument = parameter.Substring(_parameterInfo.Name.Length, parameter.Length - _parameterInfo.Name.Length);
+
+                arguments.Add(argument);
             }
 
-            return new Collection<string>(parameterArguments);
+            return new Collection<string>(arguments);
         }
     }
 }

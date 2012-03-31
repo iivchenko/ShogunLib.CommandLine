@@ -2,11 +2,10 @@
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
-// <email>shogun@ua.fm</email>
+// <email>iivchenko@live.com</email>
 
 using System;
 using CommandLineInterpreterFramework.Commands;
-using Moq;
 using NUnit.Framework;
 
 namespace CommandLineInterpreterFramework.Tests.Unit.Commands
@@ -33,30 +32,21 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         [ExpectedException(typeof(ArgumentException))]
         public void Add_CommandNullName_Throws()
         {
-            _commandsDictionary.Add(CreateCommand(null));
+            _commandsDictionary.Add(FakeCreator.CreateCommand(null));
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void Add_CommandEmptyName_Throws()
         {
-            _commandsDictionary.Add(CreateCommand(string.Empty));
+            _commandsDictionary.Add(FakeCreator.CreateCommand(string.Empty));
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void Add_CommandWhiteSpacesName_Throws()
         {
-            _commandsDictionary.Add(CreateCommand("   "));
-        }
-
-        private static ICommand CreateCommand(string name)
-        {
-            var stubCommand = new Mock<ICommand>();
-
-            stubCommand.Setup(command => command.Name).Returns(name);
-
-            return stubCommand.Object;
+            _commandsDictionary.Add(FakeCreator.CreateCommand("   "));
         }
     }
 }

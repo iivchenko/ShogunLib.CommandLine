@@ -2,7 +2,7 @@
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
-// <email>shogun@ua.fm</email>
+// <email>iivchenko@live.com</email>
 
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("cmdf")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("XATA")]
 [assembly: AssemblyProduct("cmdf")]
 [assembly: AssemblyCopyright("Copyright © Shogun 2012")]
 [assembly: AssemblyTrademark("")]
@@ -36,18 +36,14 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")] // TODO: Do something with version
+[assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 // Global suppreesion list
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Cmdf")]
 
-// TODO: Check all classes on defects
-// TODO: Refactor unit tests to avoid code dublication
-// TODO: Refactor unit tests to establish defects
 // TODO: Implement Unit testing
 // TODO: Don't forget to create sample app
 // TODO: Don't forget to create installatioin project
-// TODO: TeamCity
-// TODO: Investigation of console split to a string[]
+// TODO: TeamCity 
+// TODO: Next version. Implement factories for string, Argument

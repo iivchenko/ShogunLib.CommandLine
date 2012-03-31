@@ -2,7 +2,7 @@
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
-// <email>shogun@ua.fm</email>
+// <email>iivchenko@live.com</email>
 
 using CommandLineInterpreterFramework.Console;
 using NUnit.Framework;

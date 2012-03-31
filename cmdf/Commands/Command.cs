@@ -2,26 +2,24 @@
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
-// <email>shogun@ua.fm</email>
+// <email>iivchenko@live.com</email>
 
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CommandLineInterpreterFramework.Commands.Parameters;
+using CommandLineInterpreterFramework.Console;
 
 namespace CommandLineInterpreterFramework.Commands
 {
-    // TODO: Add IConsole ussage
-    // TODO: Action should get an IConsole parameter
-
     /// <summary>
     /// Lazy realization for the console command
     /// </summary>
     public class Command : ICommand
     {
-        private readonly Action<IEnumerable<IArgument>> _action;
-        private readonly ICollection<IParameter> _parameters;
+        private readonly Action<IConsole, IEnumerable<IArgument>> _action;
+        private readonly ParametersDictionary _parameters;
 
         /// <summary>
         /// Initializes a new instance of the Command class
@@ -32,8 +30,8 @@ namespace CommandLineInterpreterFramework.Commands
         /// <param name="action">Specific action  performed by command. Shouldn't be null</param>
         public Command(string name, 
                        string description, 
-                       ICollection<IParameter> parameters, 
-                       Action<IEnumerable<IArgument>> action)
+                       ParametersDictionary parameters, 
+                       Action<IConsole, IEnumerable<IArgument>> action)
         {
             var exceptions = new List<Exception>();
 
@@ -86,23 +84,29 @@ namespace CommandLineInterpreterFramework.Commands
         {
             get
             {
-                var descriptions = new Collection<IParameterInfo>();
+                var parameterInfos = new Collection<IParameterInfo>();
                 foreach (var parameter in _parameters)
                 {
-                    descriptions.Add(parameter.Info);
+                    parameterInfos.Add(parameter.Value.Info);
                 }
 
-                return descriptions;
+                return parameterInfos;
             } 
         }
 
         /// <summary>
         /// Performs validation and specific action. Firstly call Validate method
         /// </summary>
+        /// <param name="console">IO device(console user interface)</param>
         /// <param name="args">Command input arguments</param>
-        public virtual void Execute(IEnumerable<string> args)
+        public virtual void Execute(IConsole console, IEnumerable<string> args)
         {
-            _action(Validate(args));
+            if (console == null)
+            {
+                throw new ArgumentNullException("console");
+            }
+
+            _action(console, Validate(args));
         }
 
         /// <summary>
@@ -117,7 +121,7 @@ namespace CommandLineInterpreterFramework.Commands
                 throw new ArgumentNullException("args");
             }
 
-            return _parameters.Select(parameter => parameter.Validate(args)).ToList();
+            return _parameters.Select(parameter => parameter.Value.Validate(args)).ToList();
         }
     }
 }

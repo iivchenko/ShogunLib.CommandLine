@@ -2,7 +2,7 @@
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
-// <email>shogun@ua.fm</email>
+// <email>iivchenko@live.com</email>
 
 using System;
 using System.Collections.ObjectModel;
@@ -17,21 +17,21 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
     public class HelpCommandTests
     {
         [Test]
-        [ExpectedException(typeof(AggregateException))]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.HelpCommand", Justification = "Unit test needs it")]
-        public void Constructor_NullConsole_Throws()
-        {
-            new HelpCommand(null, new Collection<ICommand>());
-        }
-
-        [Test]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Commands.HelpCommand", Justification = "Unit test needs it")]
         [ExpectedException(typeof(AggregateException))]
         public void Constructor_NullCommand_Throws()
         {
-            var stubConsole = new Mock<IConsole>();
+            new HelpCommand(null);
+        }
 
-            new HelpCommand(stubConsole.Object, null);
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Excecute_NullConsole_Throws()
+        {
+            var commands = CreateCommands();
+            var help = new HelpCommand(commands);
+
+            help.Execute(null, null);
         }
 
         [Test]
@@ -40,9 +40,9 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
             var mockConsole = new Mock<IConsole>();
             var commands = CreateCommands();
 
-            var help = new HelpCommand(mockConsole.Object, commands);
+            var help = new HelpCommand(commands);
 
-            help.Execute(null);
+            help.Execute(mockConsole.Object, null);
 
             mockConsole.Verify(console => console.WriteLine(It.IsAny<string>()), Times.Exactly(3));
         }
@@ -52,9 +52,9 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         {
             var mockConsole = new Mock<IConsole>();
             var commands = CreateCommands();
-            var help = new HelpCommand(mockConsole.Object, commands);
+            var help = new HelpCommand(commands);
 
-            help.Execute(new string[0]);
+            help.Execute(mockConsole.Object, new string[0]);
             mockConsole.Verify(console => console.WriteLine(It.IsAny<string>()), Times.Exactly(3));
         }
 
@@ -63,9 +63,9 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         {
             var mockConsole = new Mock<IConsole>();
             var commands = CreateCommands();
-            var help = new HelpCommand(mockConsole.Object, commands);
-            
-            help.Execute(new[] {"unknown"});
+            var help = new HelpCommand(commands);
+
+            help.Execute(mockConsole.Object, new[] { "unknown" });
             mockConsole.Verify(console => console.WriteLine(It.IsAny<string>()), Times.Once());
         }
 
@@ -74,27 +74,60 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         {
             var mockConsole = new Mock<IConsole>();
             var commands = CreateCommands();
-            var help = new HelpCommand(mockConsole.Object, commands);
+            var help = new HelpCommand(commands);
 
-            help.Execute(new[] {commands[0].Name});
+            help.Execute(mockConsole.Object, new[] { commands[0].Name });
             mockConsole.Verify(console => console.WriteLine(It.IsAny<string>()), Times.AtLeast(1));
         }
 
-        // TODO: Hm... may be refactor?
-        private static ICommand[] CreateCommands()
+        [Test]
+        public void Name_Test()
         {
-            var stubCommand1 = FakeCreator.CreateCommand(FakeCreator.CommandName);
-            var stubCommand2 = FakeCreator.CreateCommand(FakeCreator.CommandName);
-            var stubCommand3 = FakeCreator.CreateCommand(FakeCreator.CommandName);
+            const string ExpectedName = "Help";
+            
+            var commands = CreateCommands();
+            var help = new HelpCommand(commands);
 
-            var commands = new[]
-                               {
-                                   stubCommand1, 
-                                   stubCommand2, 
-                                   stubCommand3
-                               };
+            var result = help.Name;
 
-            return commands;
+            Assert.AreEqual(ExpectedName, result);
+        }
+
+        [Test]
+        public void Description_Test()
+        {
+            const string ExpectedDescripiton = "Provides help on available commands";
+
+            var commands = CreateCommands();
+            var help = new HelpCommand(commands);
+
+            var result = help.Description;
+
+            Assert.AreEqual(ExpectedDescripiton, result);
+        }
+
+        [Test]
+        public void Parameters_Tests()
+        {
+            var commands = CreateCommands();
+            var help = new HelpCommand(commands);
+
+            var result = help.Parameters;
+
+            Assert.IsNotEmpty(result);
+        }
+
+        private static Collection<ICommand> CreateCommands()
+        {
+            const int CommandsCount = 3;
+            var commandsList = new Collection<ICommand>();
+
+            for (var i = 0; i < CommandsCount; i++)
+            {
+                commandsList.Add(FakeCreator.CreateCommand(FakeCreator.CommandName + i));
+            }
+
+            return commandsList;
         }
     }
 }

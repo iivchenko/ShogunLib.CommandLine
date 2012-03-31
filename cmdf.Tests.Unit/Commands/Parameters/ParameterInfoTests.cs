@@ -2,7 +2,7 @@
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
-// <email>shogun@ua.fm</email>
+// <email>iivchenko@live.com</email>
 
 using System;
 using CommandLineInterpreterFramework.Commands.Parameters;
@@ -59,6 +59,15 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters
         public void Constructor_WhiteSpacesDescription_Throws()
         {
             new ParameterInfo(FakeCreator.ParameterName, "   ");
+        }
+
+        [Test]
+        public void Constructor_AllConditionsAreMet_ParameterInfoIsCreated()
+        {
+            var parameterInfo = new ParameterInfo(FakeCreator.ParameterName, FakeCreator.ParameterDescription);
+
+            Assert.AreEqual(FakeCreator.ParameterName, parameterInfo.Name);
+            Assert.AreEqual(FakeCreator.ParameterDescription, parameterInfo.Description);
         }
     }
 }

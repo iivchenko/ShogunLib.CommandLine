@@ -2,7 +2,7 @@
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
-// <email>shogun@ua.fm</email>
+// <email>iivchenko@live.com</email>
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +16,7 @@ using Moq;
 namespace CommandLineInterpreterFramework.Tests.Unit.Commands
 {
     /// <summary>
-    /// This helper class should return MOCKs and STUBs only
+    /// This helper class should return MOCKed and STUBed objects
     /// </summary>
     internal static class FakeCreator
     {
@@ -28,51 +28,77 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
 
         #region public Command
 
+        /// <summary>
+        /// Creates fake command with one parameter and default description
+        /// </summary>
         public static ICommand CreateCommand(string name)
         {
-            return CreateCommandInternal(name, CommandDescription, 1, ParameterName, ParameterDescription);
+            return CreateCommandFakeInternal(name, CommandDescription, 1, ParameterName, ParameterDescription).Object;
         }
 
         #endregion
         #region public Parameter
 
+        /// <summary>
+        /// Creates fake parameter with succeeded validation
+        /// </summary>
         public static IParameter CreateParameter(string name, string description)
         {
-            return CreateParameterInternal(name, description, null);
+            return CreateParameterFakeInternal(name, description, null).Object;
+        }
+
+        /// <summary>
+        /// Creates fake with succeeded validation
+        /// </summary>
+        public static Mock<IParameter> CreateParameterFake(string name, string description)
+        {
+            return CreateParameterFakeInternal(name, description, null);
         }
 
         #endregion
         #region public ParameterInfo
 
+        /// <summary>
+        /// Crates fake parameter information with default name and description
+        /// </summary>
         public static IParameterInfo CreateParameterInfo()
         {
-            return CreateParameterInfoInternal(ParameterName, ParameterDescription);
+            return CreateParameterInfoFakeInternal(ParameterName, ParameterDescription).Object;
         }
 
+        /// <summary>
+        /// Creates fake parameter information
+        /// </summary>
         public static IParameterInfo CreateParameterInfo(string name, string description)
         {
-            return CreateParameterInfoInternal(name, description);
+            return CreateParameterInfoFakeInternal(name, description).Object;
         }
 
         #endregion
         #region public ParameterLimiter
         
+        /// <summary>
+        /// Creates fake paramter limiter with specified validation reslult
+        /// </summary>
         public static IParameterLimiter CreateParameterLimiter(bool validationResult)
         {
-            return CreateParameterLimiterInternal(validationResult);
+            return CreateParameterLimiterFakeInternal(validationResult).Object;
         }
 
         #endregion
         #region public ArgumentValidator
 
+        /// <summary>
+        /// Creates fake argument validator with specified validation reslult
+        /// </summary>
         public static IArgumentValidator CreateArgumentValidator(bool validationResult)
         {
-            return CreateArgumentValidatorInternal(validationResult);
+            return CreateArgumentValidatorFakeInternal(validationResult).Object;
         }
 
         #endregion
 
-        private static ICommand CreateCommandInternal(string commandName, string commandDescription, int parametersCount, string parametersTemplateName, string parametersTemplateDescription)
+        private static Mock<ICommand> CreateCommandFakeInternal(string commandName, string commandDescription, int parametersCount, string parametersTemplateName, string parametersTemplateDescription)
         {
             var parameters = new Collection<IParameterInfo>();
 
@@ -80,9 +106,9 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
             {
                 var parameterName = string.Format(CultureInfo.InvariantCulture, "{0}{1}", parametersTemplateName, i);
                 var parameterDescription = string.Format(CultureInfo.InvariantCulture, "{0}{1}", parametersTemplateDescription, i);
-                var parameter = CreateParameterInfoInternal(parameterName, parameterDescription);
+                var parameter = CreateParameterInfoFakeInternal(parameterName, parameterDescription);
 
-                parameters.Add(parameter);
+                parameters.Add(parameter.Object);
             }
 
             var stubCommand = new Mock<ICommand>();
@@ -90,10 +116,10 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
             stubCommand.Setup(command => command.Description).Returns(commandDescription);
             stubCommand.Setup(command => command.Parameters).Returns(parameters);
 
-            return stubCommand.Object;
+            return stubCommand;
         }
 
-        private static IParameter CreateParameterInternal(string name, string description, IArgument validationResult)
+        private static Mock<IParameter> CreateParameterFakeInternal(string name, string description, IArgument validationResult)
         {
             var info = CreateParameterInfo(name, description);
 
@@ -102,34 +128,34 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
             stubParameter.Setup(parameter => parameter.Info).Returns(info);
             stubParameter.Setup(parameter => parameter.Validate(It.IsAny<IEnumerable<string>>())).Returns(validationResult);
 
-            return stubParameter.Object;
+            return stubParameter;
         }
 
-        private static IParameterInfo CreateParameterInfoInternal(string name, string description)
+        private static Mock<IParameterInfo> CreateParameterInfoFakeInternal(string name, string description)
         {
             var stubParameterInfo = new Mock<IParameterInfo>();
 
             stubParameterInfo.Setup(parameterInfo => parameterInfo.Name).Returns(name);
             stubParameterInfo.Setup(parameterInfo => parameterInfo.Description).Returns(description);
 
-            return stubParameterInfo.Object;
+            return stubParameterInfo;
         }
 
-        private static IParameterLimiter CreateParameterLimiterInternal(bool validationResult)
+        private static Mock<IParameterLimiter> CreateParameterLimiterFakeInternal(bool validationResult)
         {
             var stubParameterLimiter = new Mock<IParameterLimiter>();
             stubParameterLimiter.Setup(limiter => limiter.Validate(It.IsAny<uint>())).Returns(validationResult);
 
-            return stubParameterLimiter.Object;
+            return stubParameterLimiter;
         }
 
-        private static IArgumentValidator CreateArgumentValidatorInternal(bool validationResult)
+        private static Mock<IArgumentValidator> CreateArgumentValidatorFakeInternal(bool validationResult)
         {
             var stubArgumentValidator = new Mock<IArgumentValidator>();
 
             stubArgumentValidator.Setup(validator => validator.Validate(It.IsAny<IEnumerable<string>>())).Returns(validationResult);
 
-            return stubArgumentValidator.Object;
+            return stubArgumentValidator;
         }
     }
 }

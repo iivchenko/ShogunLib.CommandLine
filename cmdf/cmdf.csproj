@@ -57,9 +57,14 @@
     <Compile Include="Commands\Parameters\ParameterLimitation\ParameterLimitException.cs" />
     <Compile Include="Commands\Parameters\ParameterLimitation\SingleParameter.cs" />
     <Compile Include="Commands\Parameters\ParametersDictionary.cs" />
+    <Compile Include="Common\Strings\IString.cs" />
+    <Compile Include="Common\Strings\IStringFactory.cs" />
+    <Compile Include="Common\Strings\StringWrapper.cs" />
+    <Compile Include="Common\Strings\StringFactory.cs" />
     <Compile Include="Console\IConsole.cs" />
     <Compile Include="Console\LazyConsole.cs" />
     <Compile Include="Console\StandardConsole.cs" />
+    <Compile Include="Interpretation\DuplicatedCommandException.cs" />
     <Compile Include="Interpretation\IInterpreter.cs" />
     <Compile Include="Interpretation\Interpreter.cs" />
     <Compile Include="Interpretation\Parsing\IInputParser.cs" />

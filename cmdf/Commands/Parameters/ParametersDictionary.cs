@@ -2,7 +2,7 @@
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
-// <email>shogun@ua.fm</email>
+// <email>iivchenko@live.com</email>
 
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Runtime.Serialization;
 namespace CommandLineInterpreterFramework.Commands.Parameters
 {
     /// <summary>
-    /// Parameters container
+    /// Parameters container for the specific command
     /// </summary>
     [Serializable]
     public class ParametersDictionary : Dictionary<string, IParameter>

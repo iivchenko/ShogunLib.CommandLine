@@ -2,7 +2,7 @@
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
-// <email>shogun@ua.fm</email>
+// <email>iivchenko@live.com</email>
 
 using System;
 using System.Collections.ObjectModel;
@@ -82,7 +82,10 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters
         [ExpectedException(typeof(ArgumentValidationException))]
         public void Validate_ErrorArgument_Throws()
         {
-            var args = new[] { FakeCreator.ParameterName + "hello" };
+            var args = new[]
+                           {
+                               FakeCreator.ParameterName + "hello"
+                           };
             
             var info = FakeCreator.CreateParameterInfo();
             var limiter = FakeCreator.CreateParameterLimiter(true);
@@ -96,8 +99,18 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters
         [Test]
         public void Validate_AllConditionsAreMet_RetunrnsArgument()
         {
-            var args = new[] { FakeCreator.ParameterName + "hello", "fake:fakehello", FakeCreator.ParameterName + "hi" };
-            var excpectedArgs = new[] { "hello", "hi" };
+            var args = new[]
+                           {
+                               FakeCreator.ParameterName + "hello", 
+                               "fake:fakehello", 
+                               FakeCreator.ParameterName + "hi"
+                           };
+
+            var excpectedArgs = new[]
+                                    {
+                                        "hello", 
+                                        "hi"
+                                    };
 
             var info = FakeCreator.CreateParameterInfo();
             var limiter = FakeCreator.CreateParameterLimiter(true);
@@ -110,6 +123,18 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters
             Assert.IsNotNull(argument);
             Assert.AreEqual(FakeCreator.ParameterName, argument.Name);
             Assert.IsTrue(excpectedArgs.SequenceEqual(argument.Values), "Actual arguments must equals to expected arguments");
+        }
+
+        [Test]
+        public void Info_Test()
+        {
+            var expectedInfo = FakeCreator.CreateParameterInfo();
+            var limiter = FakeCreator.CreateParameterLimiter(true);
+            var validator = FakeCreator.CreateArgumentValidator(true);
+
+            var parameter = new Parameter(expectedInfo, limiter, validator);
+
+            Assert.AreEqual(expectedInfo, parameter.Info);
         }
     }
 }

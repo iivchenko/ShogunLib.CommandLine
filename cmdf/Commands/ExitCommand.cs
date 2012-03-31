@@ -2,11 +2,12 @@
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
-// <email>shogun@ua.fm</email>
+// <email>iivchenko@live.com</email>
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using CommandLineInterpreterFramework.Commands.Parameters;
+using CommandLineInterpreterFramework.Console;
 
 namespace CommandLineInterpreterFramework.Commands
 {
@@ -44,8 +45,9 @@ namespace CommandLineInterpreterFramework.Commands
         /// <summary>
         /// Performs specific action (Do nothing)
         /// </summary>
+        /// <param name="console">IO device(console user interface)</param>
         /// <param name="args">Command input arguments</param> 
-        public void Execute(IEnumerable<string> args)
+        public void Execute(IConsole console, IEnumerable<string> args)
         {
         }
     }

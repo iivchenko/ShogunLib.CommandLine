@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Commands\CommandsDictionaryTests.cs" />
     <Compile Include="Commands\CommandTests.cs" />
+    <Compile Include="Commands\ExitComandsTests.cs" />
     <Compile Include="Commands\HelpCommandTests.cs" />
     <Compile Include="Commands\FakeCreator.cs" />
     <Compile Include="Commands\Parameters\ParameterInfoTests.cs" />
@@ -56,7 +57,10 @@
     <Compile Include="Commands\Parameters\ParameterLimitation\SingleParameterTests.cs" />
     <Compile Include="Commands\Parameters\ParametersDictionaryTests.cs" />
     <Compile Include="Commands\Parameters\ParameterTests.cs" />
+    <Compile Include="Common\Strings\StringFactoryTests.cs" />
+    <Compile Include="Common\Strings\StringWrapperTests.cs" />
     <Compile Include="Console\LazyConsoleTests.cs" />
+    <Compile Include="Interpretation\InterpreterTests.cs" />
     <Compile Include="Interpretation\Parsing\InputParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

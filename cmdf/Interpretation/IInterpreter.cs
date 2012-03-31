@@ -2,7 +2,7 @@
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
-// <email>shogun@ua.fm</email>
+// <email>iivchenko@live.com</email>
 
 namespace CommandLineInterpreterFramework.Interpretation
 {
@@ -12,7 +12,7 @@ namespace CommandLineInterpreterFramework.Interpretation
     public interface IInterpreter
     {
         /// <summary>
-        /// Starts command line interpreter cycle
+        ///  Starts command line interpreter cycle
         /// </summary>
         void Run();
     }

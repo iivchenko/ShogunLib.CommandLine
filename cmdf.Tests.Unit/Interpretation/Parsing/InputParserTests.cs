@@ -2,7 +2,7 @@
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
-// <email>shogun@ua.fm</email>
+// <email>iivchenko@live.com</email>
 
 using System.Linq;
 using CommandLineInterpreterFramework.Interpretation.Parsing;
@@ -36,6 +36,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation.Parsing
         public void Parse_ValidInput_ReturnsParsedCommand(string input)
         {
             var parsedCommand = _inputParser.Parse(input);
+
             Assert.IsNotNull(parsedCommand);
         }
 
