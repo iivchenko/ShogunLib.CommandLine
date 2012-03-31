@@ -121,6 +121,7 @@ namespace CommandLineInterpreterFramework.Commands
                 throw new ArgumentNullException("args");
             }
 
+            // TODO: Hm... may be better to use dictionary
             return _parameters.Select(parameter => parameter.Value.Validate(args)).ToList();
         }
     }

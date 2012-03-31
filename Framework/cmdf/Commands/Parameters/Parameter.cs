@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
 using CommandLineInterpreterFramework.Commands.Parameters.ParameterLimitation;
@@ -85,14 +86,14 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
 
             if (!_parameterLimiter.Validate((uint)parameterArguments.Count()))
             {
-                throw new ParameterLimitException(_parameterLimiter.ErrorMessage);
+                throw new ParameterLimitException(string.Format(CultureInfo.InvariantCulture, "Limitation error.\nParameter name = {0}\n{1}", _parameterInfo.Name, _parameterLimiter.ErrorMessage));
             }
 
             if (!_argumentValidator.Validate(parameterArguments))
             {
-                throw new ArgumentValidationException(_argumentValidator.ErrorMessage);
+                throw new ArgumentValidationException(string.Format(CultureInfo.InvariantCulture, "Validation error.\nParameter name = {0}\n{1}", _parameterInfo.Name, _argumentValidator.ErrorMessage));
             }
-
+            
             return new Argument(_parameterInfo.Name, parameterArguments);
         }
 

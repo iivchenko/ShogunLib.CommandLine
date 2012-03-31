@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using CommandLineInterpreterFramework.Commands;
+using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
+using CommandLineInterpreterFramework.Commands.Parameters.ParameterLimitation;
 using CommandLineInterpreterFramework.Console;
 using CommandLineInterpreterFramework.Interpretation.Parsing;
 
@@ -19,28 +21,31 @@ namespace CommandLineInterpreterFramework.Interpretation
     public class Interpreter : IInterpreter
     {
         private readonly IConsole _console;
-        private readonly Action<Exception> _exceptionHandling;
+        private readonly Action<IConsole, Exception> _exceptionHandling;
         private readonly IInputParser _inputParser;
         private readonly CommandsDictionary _commands;
         private readonly ICommand _helpCommand;
         private readonly ICommand _exitCommand;
+        private readonly string _prefix;
 
         /// <summary>
         /// Initializes a new instance of the Interpreter class
         /// </summary>
-        /// <param name="console">IO device (console user interface) </param>
+        /// <param name="console">IO device (console user interface). Can't be null</param>
         /// <param name="exceptionHandling">General exception handling policy for interpreter and its commands</param>
-        /// <param name="inputParser">Parser for the command input</param>
-        /// <param name="commands">Available console commands</param>
-        /// <param name="helpCommand">General and command help</param>
-        /// <param name="exitCommand">Interpreter cycle will be terminated after this command finished execution</param>
+        /// <param name="inputParser">Parser for the command input. Can't be null</param>
+        /// <param name="commands">Available console commands. Can't be null</param>
+        /// <param name="helpCommand">General and command help. Can't be null</param>
+        /// <param name="exitCommand">Interpreter cycle will be terminated after this command finished execution. Can't be null</param>
+        /// <param name="prefix">Prefix that will be shown at the begining of the console string. Can't be null </param>
         public Interpreter(
             IConsole console,
-            Action<Exception> exceptionHandling,
+            Action<IConsole, Exception> exceptionHandling,
             IInputParser inputParser,
             CommandsDictionary commands,
             ICommand helpCommand, 
-            ICommand exitCommand)
+            ICommand exitCommand,
+            string prefix)
         {
             var exceptions = new List<Exception>();
 
@@ -69,17 +74,22 @@ namespace CommandLineInterpreterFramework.Interpretation
                 exceptions.Add(new ArgumentNullException("exitCommand"));
             }
 
+            if (prefix == null)
+            {
+                exceptions.Add(new ArgumentNullException("prefix"));
+            }
+
             if (exceptions.Count > 0)
             {
                 throw new AggregateException("Parameter initialization fail", exceptions);
             }
 
-            if (commands.ContainsKey(exitCommand.Name))
+            if (commands.ContainsKey(exitCommand.Name.ToUpperInvariant()))
             {
                 throw new DuplicatedCommandException(string.Format(CultureInfo.InvariantCulture, "Commands parameter contains exit command {0}", exitCommand.Name));
             }
 
-            if (commands.ContainsKey(helpCommand.Name))
+            if (commands.ContainsKey(helpCommand.Name.ToUpperInvariant()))
             {
                 throw new DuplicatedCommandException(string.Format(CultureInfo.InvariantCulture, "Commands parameter contains help command {0}", helpCommand.Name));
             }
@@ -95,6 +105,7 @@ namespace CommandLineInterpreterFramework.Interpretation
             _commands = commands;
             _helpCommand = helpCommand;
             _exitCommand = exitCommand;
+            _prefix = prefix;
         }
 
         /// <summary>
@@ -106,30 +117,45 @@ namespace CommandLineInterpreterFramework.Interpretation
             {
                 try
                 {
+                    _console.Write(_prefix);
+
                     var input = _console.ReadLine();
                     var parsedCommand = _inputParser.Parse(input);
 
-                    if (_exitCommand.Name == parsedCommand.Name)
+                    if (parsedCommand == null)
+                    {
+                        continue;
+                    }
+
+                    if (_exitCommand.Name.ToUpperInvariant() == parsedCommand.Name.ToUpperInvariant())
                     {
                         _exitCommand.Execute(_console, parsedCommand.Args);
                         break;
                     }
 
-                    if (_helpCommand.Name == parsedCommand.Name)
+                    if (_helpCommand.Name.ToUpperInvariant() == parsedCommand.Name.ToUpperInvariant())
                     {
                         _helpCommand.Execute(_console, parsedCommand.Args);
                         continue;
                     }
 
-                    if (_commands.ContainsKey(parsedCommand.Name))
+                    if (_commands.ContainsKey(parsedCommand.Name.ToUpperInvariant()))
                     {
-                        _commands[parsedCommand.Name].Execute(_console, parsedCommand.Args);
+                        _commands[parsedCommand.Name.ToUpperInvariant()].Execute(_console, parsedCommand.Args);
                         continue;
                     }
 
                     _console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Undefined command {0}", parsedCommand.Name));
                 }
                 catch (InputParserException e)
+                {
+                    _console.WriteLine(e.Message);
+                }
+                catch (ParameterLimitException e)
+                {
+                    _console.WriteLine(e.Message);
+                }
+                catch (ArgumentValidationException e)
                 {
                     _console.WriteLine(e.Message);
                 }
@@ -140,7 +166,7 @@ namespace CommandLineInterpreterFramework.Interpretation
                         throw;
                     }
 
-                    _exceptionHandling(e);
+                    _exceptionHandling(_console, e);
                 }
             }
         }

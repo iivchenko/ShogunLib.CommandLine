@@ -35,7 +35,7 @@ namespace CommandLineInterpreterFramework.Interpretation.Parsing
 
             var parameters = CreateParameters(input);
             var name = parameters[0];
-            var args = parameters.Count > 1 ? parameters.GetRange(1, parameters.Count - 1) : null; // Exclude name from parameters list
+            var args = parameters.GetRange(1, parameters.Count - 1); // Exclude name from parameters list
 
             return new ParsedCommand(name, args);
         }

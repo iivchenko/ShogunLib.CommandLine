@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using CommandLineInterpreterFramework.Commands;
+using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
+using CommandLineInterpreterFramework.Commands.Parameters.ParameterLimitation;
 using CommandLineInterpreterFramework.Console;
 using CommandLineInterpreterFramework.Interpretation;
 using CommandLineInterpreterFramework.Interpretation.Parsing;
@@ -32,9 +34,10 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var parser = CreateParser();
             var help = CreateHelpCommand();
             var exit = CreateExitCommand();
+            var prefix = string.Empty;
             var commands = new CommandsDictionary();
 
-            new Interpreter(null, null, parser.Object, commands, help.Object, exit.Object);
+            new Interpreter(null, null, parser.Object, commands, help.Object, exit.Object, prefix);
         }
 
         [Test]
@@ -45,9 +48,10 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var console = new Mock<IConsole>();
             var help = CreateHelpCommand();
             var exit = CreateExitCommand();
+            var prefix = string.Empty;
             var commands = new CommandsDictionary();
 
-            new Interpreter(console.Object, null, null, commands, help.Object, exit.Object);
+            new Interpreter(console.Object, null, null, commands, help.Object, exit.Object, prefix);
         }
 
         [Test]
@@ -59,8 +63,9 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var parser = CreateParser();
             var help = CreateHelpCommand();
             var exit = CreateExitCommand();
+            var prefix = string.Empty;
             
-            new Interpreter(console.Object, null, parser.Object, null, help.Object, exit.Object);
+            new Interpreter(console.Object, null, parser.Object, null, help.Object, exit.Object, prefix);
         }
 
         [Test]
@@ -71,9 +76,10 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var console = new Mock<IConsole>();
             var parser = CreateParser();
             var exit = CreateExitCommand();
+            var prefix = string.Empty;
             var commands = new CommandsDictionary();
 
-            new Interpreter(console.Object, null, parser.Object, commands, null, exit.Object);
+            new Interpreter(console.Object, null, parser.Object, commands, null, exit.Object, prefix);
         }
 
         [Test]
@@ -84,9 +90,24 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var console = new Mock<IConsole>();
             var parser = CreateParser();
             var help = CreateHelpCommand();
+            var prefix = string.Empty;
             var commands = new CommandsDictionary();
             
-            new Interpreter(console.Object, null, parser.Object, commands, help.Object, null);
+            new Interpreter(console.Object, null, parser.Object, commands, help.Object, null, prefix);
+        }
+
+        [Test]
+        [ExpectedException(typeof(AggregateException))]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "CommandLineInterpreterFramework.Interpretation.Interpreter", Justification = "Unit test need it")]
+        public void Constructor_NullPrefixConsole_Throws()
+        {
+            var console = new Mock<IConsole>();
+            var parser = CreateParser();
+            var help = CreateHelpCommand();
+            var exit = CreateExitCommand();
+            var commands = new CommandsDictionary();
+
+            new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object, null);
         }
 
         [Test]
@@ -98,12 +119,13 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var parser = CreateParser();
             var help = CreateHelpCommand();
             var exit = CreateExitCommand();
+            var prefix = string.Empty;
             var commands = new CommandsDictionary
                                {
                                    help.Object
                                };
 
-            new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object);
+            new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object, prefix);
         }
 
         [Test]
@@ -115,12 +137,13 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var parser = CreateParser();
             var help = CreateHelpCommand();
             var exit = CreateExitCommand();
+            var prefix = string.Empty;
             var commands = new CommandsDictionary
                                {
                                    exit.Object
                                };
 
-            new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object);
+            new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object, prefix);
         }
 
         [Test]
@@ -132,9 +155,10 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var console = new Mock<IConsole>();
             var parser = CreateParser();
             var commandHelpExit = FakeCreator.CreateCommand("Duplication");
+            var prefix = string.Empty;
             var commands = new CommandsDictionary();
 
-            new Interpreter(console.Object, null, parser.Object, commands, commandHelpExit, commandHelpExit);
+            new Interpreter(console.Object, null, parser.Object, commands, commandHelpExit, commandHelpExit, prefix);
         }
 
         // Parsing of the console input fails. Parsing error should be written to the console
@@ -145,6 +169,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var parser = CreateParser();
             var help = CreateHelpCommand();
             var exit = CreateExitCommand();
+            var prefix = string.Empty;
             var commands = new CommandsDictionary();
             var console = new Mock<IConsole>();
 
@@ -152,11 +177,33 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
 
             console.Setup(x => x.ReadLine()).Returns(string.Empty).Callback(() => console.Setup(x => x.ReadLine()).Returns(ExitCommandName));
 
-            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object);
+            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object, prefix);
 
             interpreter.Run();
 
             console.Verify(x => x.WriteLine(It.IsAny<string>()), Times.Once());
+        }
+
+        [Test]
+        [Timeout(2000)]
+        public void Run_ParsingReturnsNull_ConsoleReadlineAgain()
+        {
+            var parser = CreateParser();
+            var help = CreateHelpCommand();
+            var exit = CreateExitCommand();
+            var prefix = string.Empty;
+            var commands = new CommandsDictionary();
+            var console = new Mock<IConsole>();
+
+            parser.Setup(x => x.Parse(string.Empty)).Returns((IParsedCommand)null);
+
+            console.Setup(x => x.ReadLine()).Returns(string.Empty).Callback(() => console.Setup(x => x.ReadLine()).Returns(ExitCommandName));
+
+            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object, prefix);
+
+            interpreter.Run();
+
+            console.Verify(x => x.ReadLine(), Times.Exactly(2));
         }
 
         [Test]
@@ -166,12 +213,13 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var parser = CreateParser();
             var help = CreateHelpCommand();
             var exit = CreateExitCommand();
+            var prefix = string.Empty;
             var commands = new CommandsDictionary();
             var console = new Mock<IConsole>();
 
             console.Setup(x => x.ReadLine()).Returns(ExitCommandName);
 
-            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object);
+            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object, prefix);
 
             interpreter.Run();
 
@@ -185,12 +233,13 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var parser = CreateParser();
             var help = CreateHelpCommand();
             var exit = CreateExitCommand();
+            var prefix = string.Empty;
             var commands = new CommandsDictionary();
             var console = new Mock<IConsole>();
 
             console.Setup(x => x.ReadLine()).Returns(HelpCommandName).Callback(() => console.Setup(x => x.ReadLine()).Returns(ExitCommandName));
 
-            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object);
+            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object, prefix);
             
             interpreter.Run();
             
@@ -205,12 +254,13 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var parser = CreateParser();
             var help = CreateHelpCommand();
             var exit = CreateExitCommand();
+            var prefix = string.Empty;
             var commands = new CommandsDictionary();
             var console = new Mock<IConsole>();
             
             console.Setup(x => x.ReadLine()).Returns(ParsedCommandName).Callback(() => console.Setup(x => x.ReadLine()).Returns(ExitCommandName));
 
-            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object);
+            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object, prefix);
 
             interpreter.Run();
             
@@ -225,6 +275,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var parser = CreateParser();
             var help = CreateHelpCommand();
             var exit = CreateExitCommand();
+            var prefix = string.Empty;
             var commands = new CommandsDictionary();
             var console = new Mock<IConsole>();
             var command = new Mock<ICommand>();
@@ -235,7 +286,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
 
             console.Setup(x => x.ReadLine()).Returns(ParsedCommandName).Callback(() => console.Setup(x => x.ReadLine()).Returns(ExitCommandName));
 
-            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object);
+            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object, prefix);
             
             interpreter.Run();
 
@@ -250,6 +301,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var parser = CreateParser();
             var help = CreateHelpCommand();
             var exit = CreateExitCommand();
+            var prefix = string.Empty;
             var commands = new CommandsDictionary();
             var console = new Mock<IConsole>();
             var command = new Mock<ICommand>();
@@ -261,7 +313,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
 
             console.Setup(x => x.ReadLine()).Returns(ParsedCommandName).Callback(() => console.Setup(x => x.ReadLine()).Returns(ExitCommandName));
 
-            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object);
+            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object, prefix);
             
             Assert.Throws(typeof(ArgumentException), interpreter.Run);
         }
@@ -273,23 +325,78 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var parser = CreateParser();
             var help = CreateHelpCommand();
             var exit = CreateExitCommand();
+            var prefix = string.Empty;
             var commands = new CommandsDictionary();
             var console = new Mock<IConsole>();
             var command = new Mock<ICommand>();
             var isExceptionHandlingUsed = false;
 
-            command.Setup(x => x.Name).Returns("Command");
+            command.Setup(x => x.Name).Returns(ParsedCommandName);
             command.Setup(x => x.Execute(It.IsAny<IConsole>(), It.IsAny<IEnumerable<string>>())).Throws(new ArgumentException("Message"));
 
             commands.Add(command.Object);
 
-            console.Setup(x => x.ReadLine()).Returns("Command").Callback(() => console.Setup(x => x.ReadLine()).Returns(ExitCommandName));
+            console.Setup(x => x.ReadLine()).Returns(ParsedCommandName).Callback(() => console.Setup(x => x.ReadLine()).Returns(ExitCommandName));
 
-            var interpreter = new Interpreter(console.Object, e => isExceptionHandlingUsed = true, parser.Object, commands, help.Object, exit.Object);
+            var interpreter = new Interpreter(console.Object, (exceptionConsole, e) => isExceptionHandlingUsed = true, parser.Object, commands, help.Object, exit.Object, prefix);
             
             interpreter.Run();
 
             Assert.IsTrue(isExceptionHandlingUsed);
+            exit.Verify(x => x.Execute(It.IsAny<IConsole>(), It.IsAny<IEnumerable<string>>()), Times.Once());
+        }
+
+        [Test]
+        [Timeout(2000)]
+        public void Run_ParameterLimitExceptionRaised_ConsoleWriteLine()
+        {
+            var parser = CreateParser();
+            var help = CreateHelpCommand();
+            var exit = CreateExitCommand();
+            var prefix = string.Empty;
+            var commands = new CommandsDictionary();
+            var console = new Mock<IConsole>();
+            var command = new Mock<ICommand>();
+
+            command.Setup(x => x.Name).Returns(ParsedCommandName);
+            command.Setup(x => x.Execute(It.IsAny<IConsole>(), It.IsAny<IEnumerable<string>>())).Throws(new ParameterLimitException());
+            
+            commands.Add(command.Object);
+
+            console.Setup(x => x.ReadLine()).Returns(ParsedCommandName).Callback(() => console.Setup(x => x.ReadLine()).Returns(ExitCommandName));
+
+            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object, prefix);
+
+            interpreter.Run();
+
+            console.Verify(x => x.WriteLine(It.IsAny<string>()), Times.Once());
+            exit.Verify(x => x.Execute(It.IsAny<IConsole>(), It.IsAny<IEnumerable<string>>()), Times.Once());
+        }
+
+        [Test]
+        [Timeout(2000)]
+        public void Run_ArgumentValidationExceptionRaised_ConsoleWriteLine()
+        {
+            var parser = CreateParser();
+            var help = CreateHelpCommand();
+            var exit = CreateExitCommand();
+            var prefix = string.Empty;
+            var commands = new CommandsDictionary();
+            var console = new Mock<IConsole>();
+            var command = new Mock<ICommand>();
+
+            command.Setup(x => x.Name).Returns(ParsedCommandName);
+            command.Setup(x => x.Execute(It.IsAny<IConsole>(), It.IsAny<IEnumerable<string>>())).Throws(new ArgumentValidationException());
+
+            commands.Add(command.Object);
+
+            console.Setup(x => x.ReadLine()).Returns(ParsedCommandName).Callback(() => console.Setup(x => x.ReadLine()).Returns(ExitCommandName));
+
+            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object, prefix);
+
+            interpreter.Run();
+
+            console.Verify(x => x.WriteLine(It.IsAny<string>()), Times.Once());
             exit.Verify(x => x.Execute(It.IsAny<IConsole>(), It.IsAny<IEnumerable<string>>()), Times.Once());
         }
 

@@ -49,7 +49,7 @@ namespace CommandLineInterpreterFramework.Commands
                 throw new ArgumentException("Command name should not be a null, empty or whitespaces value", "command");
             }
 
-            Add(command.Name, command);
+            Add(command.Name.ToUpperInvariant(), command);
         }
     }
 }

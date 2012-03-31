@@ -104,7 +104,7 @@ namespace CommandLineInterpreterFramework.Commands
             // Specified command help
             foreach (var command in _commands)
             {
-                if (command.Name == args.First())
+                if (command.Name.ToUpperInvariant() == args.First().ToUpperInvariant())
                 {
                     console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0}\t\t- {1}", command.Name, command.Description));
 
