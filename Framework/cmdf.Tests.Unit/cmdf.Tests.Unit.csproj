@@ -37,10 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Moq">
-      <HintPath>..\..\..\..\ThirdPartyTools\Moq\NET40\Moq.dll</HintPath>
+      <HintPath>..\..\..\..\..\ThirdPartyTools\Moq\NET40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\..\..\..\ThirdPartyTools\NUnit\bin\framework\nunit.framework.dll</HintPath>
+      <HintPath>..\..\..\..\..\ThirdPartyTools\NUnit\bin\framework\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
