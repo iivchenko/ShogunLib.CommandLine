@@ -6,7 +6,6 @@
 
 using System.Collections.Generic;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
-using CommandLineInterpreterFramework.Commands.Parameters.ParameterLimitation;
 
 namespace CommandLineInterpreterFramework.Commands.Parameters
 {
@@ -24,7 +23,6 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
         /// Performs validation on the input arguments
         /// </summary>
         /// <param name="args">Input arguments</param>
-        /// <exception cref="ParameterLimitException"/>
         /// <exception cref="ArgumentValidationException"/>
         /// <returns>Validated argument</returns>
         IArgument Validate(IEnumerable<string> args);

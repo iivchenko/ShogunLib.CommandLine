@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using CommandLineInterpreterFramework.Commands;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
-using CommandLineInterpreterFramework.Commands.Parameters.ParameterLimitation;
 using CommandLineInterpreterFramework.Console;
 using CommandLineInterpreterFramework.Interpretation.Parsing;
 
@@ -148,10 +147,6 @@ namespace CommandLineInterpreterFramework.Interpretation
                     _console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Undefined command {0}", parsedCommand.Name));
                 }
                 catch (InputParserException e)
-                {
-                    _console.WriteLine(e.Message);
-                }
-                catch (ParameterLimitException e)
                 {
                     _console.WriteLine(e.Message);
                 }

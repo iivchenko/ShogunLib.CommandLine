@@ -38,6 +38,10 @@
     <CodeAnalysisRuleSet>..\..\..\..\..\..\..\..\replay-trunk\common\AppAssure Standard Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Builders\ICommandBuilder.cs" />
+    <Compile Include="Builders\IInterpreterBuilder.cs" />
+    <Compile Include="Builders\InterpreterBuilder.cs" />
+    <Compile Include="Builders\IParameterBuilder.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CommandsDictionary.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
@@ -47,17 +51,15 @@
     <Compile Include="Commands\Parameters\ArgumentValidation\ArgumentValidationException.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\CompositeArgumentValidator.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\IArgumentValidator.cs" />
+    <Compile Include="Commands\Parameters\ArgumentValidation\LimitValidation\MultipleParameterValidator.cs" />
+    <Compile Include="Commands\Parameters\ArgumentValidation\LimitValidation\OptionalParameterValidator.cs" />
+    <Compile Include="Commands\Parameters\ArgumentValidation\LimitValidation\SingleParameterValidator.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\TypeValidation\IntTypeValidator.cs" />
     <Compile Include="Commands\Parameters\IArgument.cs" />
     <Compile Include="Commands\Parameters\IParameter.cs" />
     <Compile Include="Commands\Parameters\IParameterInfo.cs" />
     <Compile Include="Commands\Parameters\Parameter.cs" />
     <Compile Include="Commands\Parameters\ParameterInfo.cs" />
-    <Compile Include="Commands\Parameters\ParameterLimitation\IParameterLimiter.cs" />
-    <Compile Include="Commands\Parameters\ParameterLimitation\MultipleParameter.cs" />
-    <Compile Include="Commands\Parameters\ParameterLimitation\OptionalParameter.cs" />
-    <Compile Include="Commands\Parameters\ParameterLimitation\ParameterLimitException.cs" />
-    <Compile Include="Commands\Parameters\ParameterLimitation\SingleParameter.cs" />
     <Compile Include="Commands\Parameters\ParametersDictionary.cs" />
     <Compile Include="Common\Strings\IString.cs" />
     <Compile Include="Common\Strings\IStringFactory.cs" />
@@ -86,6 +88,7 @@
   <ItemGroup>
     <Folder Include="Commands\Parameters\ArgumentValidation\NumberValidation\" />
     <Folder Include="Commands\Parameters\ArgumentValidation\TextValidation\" />
+    <Folder Include="Commands\Parameters\ParameterLimitation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\..\..\..\ThirdPartyTools\StyleCop\Microsoft.StyleCop.targets" />

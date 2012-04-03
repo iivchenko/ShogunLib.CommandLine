@@ -10,7 +10,6 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
-using CommandLineInterpreterFramework.Commands.Parameters.ParameterLimitation;
 
 namespace CommandLineInterpreterFramework.Commands.Parameters
 {
@@ -20,29 +19,20 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
     public class Parameter : IParameter
     {
         private readonly IParameterInfo _parameterInfo;
-        private readonly IParameterLimiter _parameterLimiter;
         private readonly IArgumentValidator _argumentValidator;
 
         /// <summary>
         /// Initializes a new instance of the Parameter class
         /// </summary>
         /// <param name="parameterInfo">Contains paramter name and description</param>
-        /// <param name="parameterLimiter">Validate number of times this parameter was used in command line</param>
         /// <param name="argumentValidator">Argument validator</param>
-        public Parameter(IParameterInfo parameterInfo, 
-                         IParameterLimiter parameterLimiter, 
-                         IArgumentValidator argumentValidator)
+        public Parameter(IParameterInfo parameterInfo, IArgumentValidator argumentValidator)
         {
             var exceptions = new List<Exception>();
 
             if (parameterInfo == null)
             {
                 exceptions.Add(new ArgumentNullException("parameterInfo"));
-            }
-
-            if (parameterLimiter == null)
-            {
-                exceptions.Add(new ArgumentNullException("parameterLimiter"));
             }
 
             if (argumentValidator == null)
@@ -56,7 +46,6 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
             }
 
             _parameterInfo = parameterInfo;
-            _parameterLimiter = parameterLimiter;
             _argumentValidator = argumentValidator;
         }
 
@@ -72,7 +61,6 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
         /// Performs validation on the input arguments
         /// </summary>
         /// <param name="args">Input arguments</param>
-        /// <exception cref="ParameterLimitException"/>
         /// <exception cref="ArgumentValidationException"/>
         /// <returns>Validated argument</returns>
         public virtual IArgument Validate(IEnumerable<string> args)
@@ -83,11 +71,6 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
             }
 
             var parameterArguments = GetParametersArguments(args);
-
-            if (!_parameterLimiter.Validate((uint)parameterArguments.Count()))
-            {
-                throw new ParameterLimitException(string.Format(CultureInfo.InvariantCulture, "Limitation error.\nParameter name = {0}\n{1}", _parameterInfo.Name, _parameterLimiter.ErrorMessage));
-            }
 
             if (!_argumentValidator.Validate(parameterArguments))
             {

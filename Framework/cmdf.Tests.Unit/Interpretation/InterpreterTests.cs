@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using CommandLineInterpreterFramework.Commands;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
-using CommandLineInterpreterFramework.Commands.Parameters.ParameterLimitation;
 using CommandLineInterpreterFramework.Console;
 using CommandLineInterpreterFramework.Interpretation;
 using CommandLineInterpreterFramework.Interpretation.Parsing;
@@ -343,33 +342,6 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             interpreter.Run();
 
             Assert.IsTrue(isExceptionHandlingUsed);
-            exit.Verify(x => x.Execute(It.IsAny<IConsole>(), It.IsAny<IEnumerable<string>>()), Times.Once());
-        }
-
-        [Test]
-        [Timeout(2000)]
-        public void Run_ParameterLimitExceptionRaised_ConsoleWriteLine()
-        {
-            var parser = CreateParser();
-            var help = CreateHelpCommand();
-            var exit = CreateExitCommand();
-            var prefix = string.Empty;
-            var commands = new CommandsDictionary();
-            var console = new Mock<IConsole>();
-            var command = new Mock<ICommand>();
-
-            command.Setup(x => x.Name).Returns(ParsedCommandName);
-            command.Setup(x => x.Execute(It.IsAny<IConsole>(), It.IsAny<IEnumerable<string>>())).Throws(new ParameterLimitException());
-            
-            commands.Add(command.Object);
-
-            console.Setup(x => x.ReadLine()).Returns(ParsedCommandName).Callback(() => console.Setup(x => x.ReadLine()).Returns(ExitCommandName));
-
-            var interpreter = new Interpreter(console.Object, null, parser.Object, commands, help.Object, exit.Object, prefix);
-
-            interpreter.Run();
-
-            console.Verify(x => x.WriteLine(It.IsAny<string>()), Times.Once());
             exit.Verify(x => x.Execute(It.IsAny<IConsole>(), It.IsAny<IEnumerable<string>>()), Times.Once());
         }
 

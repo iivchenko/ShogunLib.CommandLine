@@ -1,22 +1,24 @@
-// <copyright company="XATA">
+﻿// <copyright company="XATA">
 //      Copyright (c) 2012, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
-namespace CommandLineInterpreterFramework.Commands.Parameters.ParameterLimitation
+namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.LimitValidation
 {
     /// <summary>
     /// Parameter should be used once or should not be used
     /// </summary>
-    public class OptionalParameter : IParameterLimiter
+    public class OptionalParameterValidator : IArgumentValidator
     {
         /// <summary>
-        /// Initializes a new instance of the OptionalParameter class
+        /// Initializes a new instance of the OptionalParameterValidator class
         /// </summary>
-        public OptionalParameter()
+        public OptionalParameterValidator()
         {
             ErrorMessage = string.Empty;
         }
@@ -29,15 +31,17 @@ namespace CommandLineInterpreterFramework.Commands.Parameters.ParameterLimitatio
         /// <summary>
         /// Performs count validation of the specified parameter. Parameter should be used once or should not be used. If not than ErrorMessage is set
         /// </summary>
-        /// <param name="count">Number of times when parameter was used</param>
+        /// <param name="args">Input arguments</param>
         /// <returns>true - validaion suceeded; false - validation filed</returns>
-        public bool Validate(uint count)
+        public bool Validate(IEnumerable<string> args)
         {
-            if (count != 0 && count != 1)
+            var argsCount = args.Count();
+
+            if (argsCount != 0 && argsCount != 1)
             {
                 ErrorMessage = string.Format(CultureInfo.InvariantCulture,
                                              "Parameter should be used once or should not be used. But used {0} times.",
-                                             count);
+                                             argsCount);
                 return false;
             }
 

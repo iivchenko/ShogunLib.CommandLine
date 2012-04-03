@@ -10,8 +10,8 @@ using System.Globalization;
 using System.Linq;
 using CommandLineInterpreterFramework.Commands;
 using CommandLineInterpreterFramework.Commands.Parameters;
+using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.LimitValidation;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.TypeValidation;
-using CommandLineInterpreterFramework.Commands.Parameters.ParameterLimitation;
 using CommandLineInterpreterFramework.Console;
 using CommandLineInterpreterFramework.Interpretation;
 
@@ -58,7 +58,7 @@ namespace LazyInterpreter
         private static ICommand CreateHelloCommand()
         {
             var parameteInfo = new ParameterInfo("-number:", "Number of times");
-            var parameter = new Parameter(parameteInfo, new MultipleParameter(), new IntTypeValidator());
+            var parameter = new Parameter(parameteInfo, new MultipleParameterValidator(), new IntTypeValidator());
             var parameters = new ParametersDictionary
                                  {
                                      parameter

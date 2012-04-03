@@ -28,9 +28,9 @@ namespace CommandLineInterpreterFramework.Commands
         /// <param name="description">Command description. Shouldn't have white spaces</param>
         /// <param name="parameters">Command parameters. Shouldn't be a null value</param>
         /// <param name="action">Specific action  performed by command. Shouldn't be null</param>
-        public Command(string name, 
-                       string description, 
-                       ParametersDictionary parameters, 
+        public Command(string name,
+                       string description,
+                       ParametersDictionary parameters,
                        Action<IConsole, IEnumerable<IArgument>> action)
         {
             var exceptions = new List<Exception>();

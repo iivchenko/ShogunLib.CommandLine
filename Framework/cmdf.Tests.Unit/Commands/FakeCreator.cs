@@ -10,7 +10,6 @@ using System.Globalization;
 using CommandLineInterpreterFramework.Commands;
 using CommandLineInterpreterFramework.Commands.Parameters;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
-using CommandLineInterpreterFramework.Commands.Parameters.ParameterLimitation;
 using Moq;
 
 namespace CommandLineInterpreterFramework.Tests.Unit.Commands
@@ -75,17 +74,6 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         }
 
         #endregion
-        #region public ParameterLimiter
-        
-        /// <summary>
-        /// Creates fake paramter limiter with specified validation reslult
-        /// </summary>
-        public static IParameterLimiter CreateParameterLimiter(bool validationResult)
-        {
-            return CreateParameterLimiterFakeInternal(validationResult).Object;
-        }
-
-        #endregion
         #region public ArgumentValidator
 
         /// <summary>
@@ -139,14 +127,6 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
             stubParameterInfo.Setup(parameterInfo => parameterInfo.Description).Returns(description);
 
             return stubParameterInfo;
-        }
-
-        private static Mock<IParameterLimiter> CreateParameterLimiterFakeInternal(bool validationResult)
-        {
-            var stubParameterLimiter = new Mock<IParameterLimiter>();
-            stubParameterLimiter.Setup(limiter => limiter.Validate(It.IsAny<uint>())).Returns(validationResult);
-
-            return stubParameterLimiter;
         }
 
         private static Mock<IArgumentValidator> CreateArgumentValidatorFakeInternal(bool validationResult)
