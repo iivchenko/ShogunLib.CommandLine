@@ -67,18 +67,10 @@ namespace LazyInterpreter
             return new Command("Hello", "Write \"Hello world\" specified number of times", parameters, HelloAction);
         }
 
-        private static void HelloAction(IConsole console, IEnumerable<IArgument> arguments)
+        private static void HelloAction(IConsole console, IDictionary<string, IEnumerable<string>> arguments)
         {
-            var times = 0;
-
-            // TODO: Improve usage of the returned argumtes. It will be better to use dictionary in this case and to use indexer for this purpose
-            foreach (var argument in arguments.Where(argument => argument.Name == "-number:"))
-            {
-                if (argument.Values.Any())
-                {
-                    times = int.Parse(argument.Values.First(), CultureInfo.InvariantCulture);
-                }
-            }
+            var values = arguments["-number:"]; 
+            var times = values.Any() ? int.Parse(values.First(), CultureInfo.InvariantCulture) : 0;
 
             for (var i = 0; i < times; i++)
             {
@@ -94,7 +86,7 @@ namespace LazyInterpreter
             return new Command("By", "Just say good by", new ParametersDictionary(), ByAction);
         }
 
-        private static void ByAction(IConsole console, IEnumerable<IArgument> arguments)
+        private static void ByAction(IConsole console, IDictionary<string, IEnumerable<string>> arguments)
         {
             console.WriteLine("This is the sample app for the cmdf\bBy");
         }

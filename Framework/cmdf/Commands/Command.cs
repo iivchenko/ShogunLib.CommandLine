@@ -18,7 +18,7 @@ namespace CommandLineInterpreterFramework.Commands
     /// </summary>
     public class Command : ICommand
     {
-        private readonly Action<IConsole, IEnumerable<IArgument>> _action;
+        private readonly Action<IConsole, IDictionary<string, IEnumerable<string>>> _action;
         private readonly ParametersDictionary _parameters;
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace CommandLineInterpreterFramework.Commands
         public Command(string name,
                        string description,
                        ParametersDictionary parameters,
-                       Action<IConsole, IEnumerable<IArgument>> action)
+                       Action<IConsole, IDictionary<string, IEnumerable<string>>> action)
         {
             var exceptions = new List<Exception>();
 
@@ -114,15 +114,14 @@ namespace CommandLineInterpreterFramework.Commands
         /// </summary>
         /// <param name="args">Input arguments</param>
         /// <returns>Validated set of arguments</returns>
-        protected virtual IEnumerable<IArgument> Validate(IEnumerable<string> args)
+        protected virtual IDictionary<string, IEnumerable<string>> Validate(IEnumerable<string> args)
         {
             if (args == null)
             {
                 throw new ArgumentNullException("args");
             }
 
-            // TODO: Hm... may be better to use dictionary
-            return _parameters.Select(parameter => parameter.Value.Validate(args)).ToList();
+            return _parameters.Select(parameter => parameter.Value.Validate(args)).ToDictionary(argument => argument.Name, argument => argument.Values);
         }
     }
 }

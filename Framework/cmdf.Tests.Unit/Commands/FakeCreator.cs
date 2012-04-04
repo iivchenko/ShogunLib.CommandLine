@@ -25,6 +25,8 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         public const string ParameterName = "/name:";
         public const string ParameterDescription = "Description";
 
+        public const string ArgumentName = "argument";
+
         #region public Command
 
         /// <summary>
@@ -47,11 +49,13 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         }
 
         /// <summary>
-        /// Creates fake with succeeded validation
+        /// Creates fake with succeeded validation and fake argument
         /// </summary>
         public static Mock<IParameter> CreateParameterFake(string name, string description)
         {
-            return CreateParameterFakeInternal(name, description, null);
+            var argument = CreateArgumentFakeInternal(ArgumentName, new Collection<string>());
+
+            return CreateParameterFakeInternal(name, description, argument.Object);
         }
 
         #endregion
@@ -136,6 +140,16 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
             stubArgumentValidator.Setup(validator => validator.Validate(It.IsAny<IEnumerable<string>>())).Returns(validationResult);
 
             return stubArgumentValidator;
+        }
+
+        private static Mock<IArgument> CreateArgumentFakeInternal(string name, IEnumerable<string> values)
+        {
+            var argument = new Mock<IArgument>();
+
+            argument.Setup(x => x.Name).Returns(name);
+            argument.Setup(x => x.Values).Returns(values);
+
+            return argument;
         }
     }
 }
