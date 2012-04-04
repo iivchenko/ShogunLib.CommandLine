@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
 using NUnit.Framework;
 
@@ -13,11 +14,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
 {
     public abstract class BaseValidatorTests
     {
-        public static IList<int> SuccessTestArgs { get; set; }
-
         protected IArgumentValidator Validator { get; set; }
-
-        protected string[][] FialTestArgs { get; set; }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -27,18 +24,19 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
         }
 
         [Test, TestCaseSource("SuccessTestArgs")]
-        public void Validate_Succeeded_ReturnsTrue(int a)
+        public void Validate_Succeeded_ReturnsTrue(ValidationCollection args)
         {
-            //var isValid = Validator.Validate(args);
-            //Assert.IsTrue(isValid);
+            var isValid = Validator.Validate(args);
+
+            Assert.IsTrue(isValid, string.Format(CultureInfo.InvariantCulture, "Input arguments: {0}", args));
         }
 
         [Test, TestCaseSource("SuccessTestArgs")]
-        public void Validate_Succeeded_EmptyErrorMessage(IEnumerable<string> args)
+        public void Validate_Succeeded_EmptyErrorMessage(ValidationCollection args)
         {
             Validator.Validate(args);
 
-            Assert.IsEmpty(Validator.ErrorMessage);
+            Assert.IsEmpty(Validator.ErrorMessage, string.Format(CultureInfo.InvariantCulture, "Input arguments: {0}", args));
         }
 
         [Test, TestCaseSource("FailTestArgs")]
@@ -46,7 +44,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
         {
             var isValid = Validator.Validate(args);
 
-            Assert.IsFalse(isValid);
+            Assert.IsFalse(isValid, string.Format(CultureInfo.InvariantCulture, "Input arguments: {0}", args));
         }
 
         [Test, TestCaseSource("FailTestArgs")]
@@ -54,7 +52,11 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
         {
             Validator.Validate(args);
 
-            Assert.IsNotEmpty(Validator.ErrorMessage);
+            Assert.IsNotEmpty(Validator.ErrorMessage, string.Format(CultureInfo.InvariantCulture, "Input arguments: {0}", args));
         }
+
+        protected abstract IEnumerable<ValidationCollection> SuccessTestArgs();
+
+        protected abstract IEnumerable<ValidationCollection> FailTestArgs();
     }
 }

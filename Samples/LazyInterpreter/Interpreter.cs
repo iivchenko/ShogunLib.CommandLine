@@ -58,7 +58,7 @@ namespace LazyInterpreter
         private static ICommand CreateHelloCommand()
         {
             var parameteInfo = new ParameterInfo("-number:", "Number of times");
-            var parameter = new Parameter(parameteInfo, new MultipleParameterValidator(), new IntTypeValidator());
+            var parameter = new Parameter(parameteInfo, new IntTypeValidator());
             var parameters = new ParametersDictionary
                                  {
                                      parameter

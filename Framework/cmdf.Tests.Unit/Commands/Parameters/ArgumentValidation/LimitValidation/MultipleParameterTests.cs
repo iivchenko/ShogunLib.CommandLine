@@ -10,20 +10,38 @@ using NUnit.Framework;
 
 namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.ArgumentValidation.LimitValidation
 {
-    // TODO: Finish
     [TestFixture]
     public class MultipleParameterTests : BaseValidatorTests
     {
-        [SetUp]
+        [TestFixtureSetUp]
         public void Setup()
         {
             Validator = new MultipleParameterValidator();
-            SuccessTestArgs = new List<int>();
+        }
 
-            FialTestArgs = new[]
+        protected override IEnumerable<ValidationCollection> SuccessTestArgs()
+        {
+            return new[]
+                       {
+                           new ValidationCollection
                                {
-                                   new string[0], 
-                               };
+                                   "hello1",
+                               },
+
+                           new ValidationCollection
+                               {
+                                   "hello1",
+                                   "hello2"
+                               }
+                       };
+        }
+
+        protected override IEnumerable<ValidationCollection> FailTestArgs()
+        {
+            return new[]
+                       {
+                           new ValidationCollection()
+                       };
         }
     }
 }
