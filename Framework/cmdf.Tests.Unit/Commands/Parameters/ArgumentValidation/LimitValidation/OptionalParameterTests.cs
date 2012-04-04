@@ -4,34 +4,56 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
+using System.Collections.Generic;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.LimitValidation;
 using NUnit.Framework;
 
 namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.ArgumentValidation.LimitValidation
 {
-   /* [TestFixture]
-    public class OptionalParameterTests : BaseParameterLimiterTests
+    [TestFixture]
+    public class OptionalParameterTests : BaseValidatorTests
     {
-        [SetUp]
+        [TestFixtureSetUp]
         public void Setup()
         {
-            ParameterLimiter = new OptionalParameterValidator();
+            Validator = new OptionalParameterValidator();
         }
 
-        [TestCase((uint)0)]
-        [TestCase((uint)1)]
-        public void IsValid_Valid_ErrorMessageEmpty(uint count)
+        protected override IEnumerable<ValidationCollection> SuccessTestArgs()
         {
-            IsValid_Valid_ErrorMessageEmpty_Test(count);
+            return new[]
+                       {
+                           new ValidationCollection(),
+                           new ValidationCollection
+                               {
+                                   "hello1",
+                               }
+                       };
         }
 
-        [TestCase((uint)2)]
-        [TestCase((uint)3)]
-        [TestCase((uint)4)]
-        [TestCase((uint)1000)]
-        public void IsValid_Invalid_ErrorMessageNotEmpty(uint count)
+        protected override IEnumerable<ValidationCollection> FailTestArgs()
         {
-            IsValid_Invalid_ErrorMessageNotEmpty_Test(count);
+            return new[]
+                       {
+                           new ValidationCollection
+                               {
+                                   "hello1",
+                                   "hello2"
+                               },
+                           new ValidationCollection
+                               {
+                                   "hello1",
+                                   "hello2",
+                                   "hello3"
+                               },
+                           new ValidationCollection
+                               {
+                                   "hello1",
+                                   "hello2",
+                                   "hello3",
+                                   "hello4"
+                               }
+                       };
         }
-    }*/
+    }
 }

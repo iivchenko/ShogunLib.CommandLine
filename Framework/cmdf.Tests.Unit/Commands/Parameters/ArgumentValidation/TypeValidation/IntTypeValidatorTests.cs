@@ -4,91 +4,52 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
-using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Globalization;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.TypeValidation;
 using NUnit.Framework;
 
 namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.ArgumentValidation.TypeValidation
 {
     [TestFixture]
-    public class IntTypeValidatorTests
+    public class IntTypeValidatorTests : BaseValidatorTests
     {
-        private IntTypeValidator _validator;
-
-        [SetUp]
+        [TestFixtureSetUp]
         public void Setup()
         {
-            _validator = new IntTypeValidator();
+            Validator = new IntTypeValidator();
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void Validate_NullArgumets_Throws()
+        protected override IEnumerable<ValidationCollection> SuccessTestArgs()
         {
-            _validator.Validate(null);
+            return new[]
+                       {
+                           new ValidationCollection
+                               {
+                                   int.MinValue.ToString(CultureInfo.InvariantCulture),
+                                   "-1",
+                                   "0",
+                                   "1",
+                                   "2",
+                                   "3",
+                                   int.MaxValue.ToString(CultureInfo.InvariantCulture)
+                               }
+                       };
         }
 
-        [TestCase("1")]
-        [TestCase("2")]
-        [TestCase("-10")]
-        public void Validate_Succeeded_ReturnsTrue(string value)
+        protected override IEnumerable<ValidationCollection> FailTestArgs()
         {
-            var collection = new Collection<string>
-                                 {
-                                     value
-                                 };
-
-            var result = _validator.Validate(collection);
-
-            Assert.IsTrue(result);
-        }
-
-        [TestCase("1")]
-        [TestCase("2")]
-        [TestCase("-10")]
-        public void Validate_Succeeded_EmptyErrorMessage(string value)
-        {
-            var collection = new Collection<string>
-                                 {
-                                     value
-                                 };
-
-            _validator.Validate(collection);
-
-            Assert.IsEmpty(_validator.ErrorMessage);
-        }
-
-        [TestCase("1.1")]
-        [TestCase("2,1")]
-        [TestCase("a")]
-        [TestCase("-")]
-        public void Validate_Fail_ReturnsFalse(string value)
-        {
-            var collection = new Collection<string>
-                                 {
-                                     value
-                                 };
-
-            var result = _validator.Validate(collection);
-
-            Assert.IsFalse(result);
-        }
-
-        [TestCase("1.1")]
-        [TestCase("2,1")]
-        [TestCase("a")]
-        [TestCase("-")]
-        public void Validate_Fail_NotEmptyErrorMessage(string value)
-        {
-            var collection = new Collection<string>
-                                 {
-                                     value
-                                 };
-
-           _validator.Validate(collection);
-
-            Assert.IsNotEmpty(_validator.ErrorMessage);
+            return new[]
+                       {
+                           new ValidationCollection
+                               {
+                                   "a",
+                                   "1.1",
+                                   "1,1",
+                                   ".",
+                                   "-"
+                               }
+                       };
         }
     }
 }
