@@ -38,10 +38,13 @@
     <CodeAnalysisRuleSet>..\..\..\..\Rules\AppAssure Standard Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Builders\ICommandBuilder.cs" />
-    <Compile Include="Builders\IInterpreterBuilder.cs" />
-    <Compile Include="Builders\InterpreterBuilder.cs" />
-    <Compile Include="Builders\IParameterBuilder.cs" />
+    <Compile Include="Building\CommandBuilder.cs" />
+    <Compile Include="Building\ICommandBuilder.cs" />
+    <Compile Include="Building\IInterpreterBuilder.cs" />
+    <Compile Include="Building\InterpreterBuilder.cs" />
+    <Compile Include="Building\InterpreterBuilderFactory.cs" />
+    <Compile Include="Building\IParameterBuilder.cs" />
+    <Compile Include="Building\ParameterBuilder.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CommandsDictionary.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
@@ -71,7 +74,6 @@
     <Compile Include="Interpretation\DuplicatedCommandException.cs" />
     <Compile Include="Interpretation\IInterpreter.cs" />
     <Compile Include="Interpretation\Interpreter.cs" />
-    <Compile Include="Interpretation\InterpreterFactory.cs" />
     <Compile Include="Interpretation\Parsing\IInputParser.cs" />
     <Compile Include="Interpretation\Parsing\InputParser.cs" />
     <Compile Include="Interpretation\Parsing\InputParserException.cs" />
@@ -83,11 +85,11 @@
     <CodeAnalysisDictionary Include="..\..\solutionitems\CodeAnalysisDictionary.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Commands\Parameters\ArgumentValidation\NumberValidation\" />
     <Folder Include="Commands\Parameters\ArgumentValidation\TextValidation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\..\..\..\ThirdPartyTools\StyleCop\Microsoft.StyleCop.targets" />

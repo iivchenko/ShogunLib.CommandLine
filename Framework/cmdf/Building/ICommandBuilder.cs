@@ -4,9 +4,12 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
+using System;
+using System.Collections.Generic;
 using CommandLineInterpreterFramework.Commands;
+using CommandLineInterpreterFramework.Console;
 
-namespace CommandLineInterpreterFramework.Builders
+namespace CommandLineInterpreterFramework.Building
 {
     /// <summary>
     /// Provides functionality for lazy command initialization
@@ -14,32 +17,28 @@ namespace CommandLineInterpreterFramework.Builders
     public interface ICommandBuilder
     {
         /// <summary>
-        /// Gets or sets name of the command TODO: Finish
+        /// Gets lazy parameter by its name
         /// </summary>
-        string Name { get; set; }
-
-        /// <summary>
-        /// TODO: Finish
-        /// </summary>
-        /// <param name="name"></param>
         IParameterBuilder this[string name] { get; }
 
         /// <summary>
-        /// TODO: Finish
+        /// Sets command description
         /// </summary>
-        /// <param name="description"></param>
         void SetDescription(string description);
 
         /// <summary>
-        /// Adds parameter
+        /// Sets specific action for the command
         /// </summary>
-        /// <param name="name"></param>
+        void SetAction(Action<IConsole, IDictionary<string, IEnumerable<string>>> action);
+
+        /// <summary>
+        /// Add new parameter with specified name
+        /// </summary>
         void Add(string name);
 
         /// <summary>
-        /// TODO: Finish
+        /// Create command with specified data
         /// </summary>
-        /// <returns></returns>
         ICommand Create();
     }
 }

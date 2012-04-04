@@ -7,7 +7,7 @@
 using CommandLineInterpreterFramework.Commands.Parameters;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
 
-namespace CommandLineInterpreterFramework.Builders
+namespace CommandLineInterpreterFramework.Building
 {
     /// <summary>
     /// Provides functionality for lazy parameter initialization
@@ -15,26 +15,18 @@ namespace CommandLineInterpreterFramework.Builders
     public interface IParameterBuilder
     {
         /// <summary>
-        /// Gets or sets name of the parameter TODO: Finish
+        ///  Sets parameter description
         /// </summary>
-        string Name { get; set; }
-
-        /// <summary>
-        /// TODO: Finish
-        /// </summary>
-        /// <param name="description"></param>
         void SetDescription(string description);
 
         /// <summary>
-        /// TODO: Finish
+        /// Adds new validator to the end of validators list
         /// </summary>
-        /// <param name="validator"></param>
         void AddValidator(IArgumentValidator validator);
 
         /// <summary>
-        /// TODO: Finish
+        /// Create parameter with specified data
         /// </summary>
-        /// <returns></returns>
         IParameter Create();
     }
 }

@@ -42,7 +42,6 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\..\..\ThirdPartyTools\NUnit\bin\framework\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CommandsDictionaryTests.cs" />

@@ -4,11 +4,11 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
+using System;
 using CommandLineInterpreterFramework.Console;
 using CommandLineInterpreterFramework.Interpretation;
-using CommandLineInterpreterFramework.Interpretation.Parsing;
 
-namespace CommandLineInterpreterFramework.Builders
+namespace CommandLineInterpreterFramework.Building
 {
     /// <summary>
     /// Provides functionality for lazy interpreter initialization
@@ -16,33 +16,33 @@ namespace CommandLineInterpreterFramework.Builders
     public interface IInterpreterBuilder
     {
         /// <summary>
-        /// TODO: Finish
+        /// Gets lazy command by its name
         /// </summary>
-        /// <param name="name"></param>
         ICommandBuilder this[string name] { get; }
 
         /// <summary>
-        /// Adds command
+        /// Add new command with specified name
         /// </summary>
-        /// <param name="name"></param>
         void Add(string name);
 
         /// <summary>
-        /// TODO: Finish
+        /// Sets console prefix
         /// </summary>
-        /// <param name="name"></param>
         void SetPrefix(string name);
 
         /// <summary>
-        /// TODO: Finish
+        /// Sets specific console or StandardConsole will be used
         /// </summary>
-        /// <param name="console"></param>
         void SetConsole(IConsole console);
 
         /// <summary>
-        /// TODO: Finish
+        /// Sets policy for general exception hanling
         /// </summary>
-        /// <returns></returns>
+        void SetExceptionHandling(Action<IConsole, Exception> exceptionHandling);
+
+        /// <summary>
+        /// Create interpreter with specified data
+        /// </summary>
         IInterpreter Create();
     }
 }
