@@ -49,10 +49,10 @@ namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation
                 {
                     error = string.IsNullOrEmpty(error)
                                 ? string.Format(CultureInfo.InvariantCulture,
-                                                "Value {0} can't be converted to int type.",
+                                                "Value {0} can't be converted to integer type.",
                                                 arg)
                                 : string.Format(CultureInfo.InvariantCulture,
-                                                "{0}\nValue {1} can't be converted to int type.",
+                                                "{0}\nValue {1} can't be converted to integer type.",
                                                 error,
                                                 arg);
                 }
