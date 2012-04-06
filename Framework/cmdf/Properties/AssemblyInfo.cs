@@ -33,11 +33,8 @@ using System.Runtime.InteropServices;
 //      Minor Version 
 //      Build Number
 //      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-[assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.1.*")]
+[assembly: AssemblyFileVersion("0.1.0.0")]
 
 // Global suppreesion list
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Cmdf")]
@@ -47,3 +44,6 @@ using System.Runtime.InteropServices;
 // TODO: Don't forget to create installatioin project
 // TODO: TeamCity 
 // TODO: Next version. Implement factories for string, Argument
+// TODO: Next version. Implement default value principals for tha Parameter
+// TODO: Next version. Implement position parameters
+// TODO: Next version. Implement ability to use whitespace after parameter name before its argument

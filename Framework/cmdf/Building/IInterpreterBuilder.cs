@@ -23,22 +23,26 @@ namespace CommandLineInterpreterFramework.Building
         /// <summary>
         /// Add new command with specified name
         /// </summary>
-        void Add(string name);
+        /// <returns>Itself</returns>
+        IInterpreterBuilder Add(string name);
 
         /// <summary>
         /// Sets console prefix
         /// </summary>
-        void SetPrefix(string name);
+        /// <returns>Itself</returns>
+        IInterpreterBuilder SetPrefix(string name);
 
         /// <summary>
         /// Sets specific console or StandardConsole will be used
         /// </summary>
-        void SetConsole(IConsole console);
+        /// <returns>Itself</returns>
+        IInterpreterBuilder SetConsole(IConsole console);
 
         /// <summary>
         /// Sets policy for general exception hanling
         /// </summary>
-        void SetExceptionHandling(Action<IConsole, Exception> exceptionHandling);
+        /// <returns>Itself</returns>
+        IInterpreterBuilder SetExceptionHandling(Action<IConsole, Exception> exceptionHandling);
 
         /// <summary>
         /// Create interpreter with specified data

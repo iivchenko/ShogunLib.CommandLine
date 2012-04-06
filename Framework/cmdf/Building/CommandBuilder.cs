@@ -45,25 +45,34 @@ namespace CommandLineInterpreterFramework.Building
         /// <summary>
         /// Sets command description
         /// </summary>
-        public void SetDescription(string description)
+        /// <returns>Itself</returns>
+        public ICommandBuilder SetDescription(string description)
         {
             _description = description;
+
+            return this;
         }
 
         /// <summary>
         /// Sets specific action for the command
         /// </summary>
-        public void SetAction(Action<IConsole, IDictionary<string, IEnumerable<string>>> action)
+        /// <returns>Itself</returns>
+        public ICommandBuilder SetAction(Action<IConsole, IDictionary<string, IEnumerable<string>>> action)
         {
             _action = action;
+
+            return this;
         }
 
         /// <summary>
         /// Add new parameter with specified name
         /// </summary>
-        public void Add(string name)
+        /// <returns>Itself</returns>
+        public ICommandBuilder Add(string name)
         {
             _parameters.Add(name, new ParameterBuilder(name));
+
+            return this;
         }
 
         /// <summary>

@@ -1,0 +1,13 @@
+== 0.1 ==
+
+- Interpreter abstraction is added
+- Standart console interpreter is added
+- Command abstraction is added
+- Standart help command is added
+- Standart exit command is added
+- Parameter abstractionis  added
+- Parameter validators are added
+- Console abstraction is added
+- Standart console is added
+- Lazy console is added
+- Lazy builders for interpreter, commad and parameter are added

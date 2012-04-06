@@ -30,46 +30,56 @@ namespace LazyInterpreter
 
         private static IInterpreter CreateInterpreter()
         {
+            const string HelloCommand = "Hello";
+            const string ByeCommand = "Bye";
+            const string ClearCommand = "Clear";
+
+            const string NumberParameter = "-number:";
+            const string NameParameter = "-name:";
+
             var builder = InterpreterBuilderFactory.Create();
 
-            builder.SetPrefix(":-) ");
-            builder.SetExceptionHandling((console, e) => console.WriteLine(e.ToString()));
+            // Setup builder
+            builder.SetPrefix(":-) ")
+                   .SetExceptionHandling((console, e) => console.WriteLine(e.ToString()));
 
             // Add Commands
-            builder.Add("Hello");
-            builder.Add("By");
-            builder.Add("Clear");
+            builder.Add(HelloCommand)
+                   .Add(ByeCommand)
+                   .Add(ClearCommand);
 
-            // Commands Descriptions
-            builder["Hello"].SetDescription("Writes hello to the console specified number of times");
-            builder["By"].SetDescription("Just say good by");
-            builder["Clear"].SetDescription("Clears console output");
+            // Setup commands
+            builder[HelloCommand].SetDescription("Writes hello to the console specified number of times")
+                                 .SetAction((console, arguments) =>
+                                                {
+                                                    var times = arguments[NumberParameter].Any() ? int.Parse(arguments[NumberParameter].First(), CultureInfo.InvariantCulture)
+                                                                                            : 0;
+
+                                                    for (var i = 0; i < times; i++)
+                                                    {
+                                                        console.WriteLine("Hello");
+                                                    }
+                                                });
+
+            builder[ByeCommand].SetDescription("Just say good bye")
+                               .SetAction((console, arguments) => console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Bye-bye: {0}", arguments[NameParameter].Any() ? arguments[NameParameter].First() : string.Empty)));
+
+            builder[ClearCommand].SetDescription("Clears console output")
+                                 .SetAction((console, arguments) => console.Clear());
 
             // Add parameters
-            builder["Hello"].Add("-number:");
-            builder["By"].Add("-name:");
+            builder[HelloCommand].Add(NumberParameter);
+            builder[ByeCommand].Add(NameParameter);
 
             // Setup parameters
-            builder["Hello"]["-number:"].SetDescription("Number of times");
-            builder["Hello"]["-number:"].AddValidator(new OptionalParameterValidator());
-            builder["Hello"]["-number:"].AddValidator(new IntTypeValidator());
+            builder[HelloCommand][NumberParameter].SetDescription("Number of times")
+                                                  .AddValidator(new OptionalParameterValidator())
+                                                  .AddValidator(new IntTypeValidator());
+
+            builder[ByeCommand][NameParameter].SetDescription("Name for whom bye-bye is said")
+                                              .AddValidator(new OptionalParameterValidator());
             
-            builder["By"]["-name:"].SetDescription("Name for whom by-by is said");
-            builder["By"]["-name:"].AddValidator(new OptionalParameterValidator());
-
-            // Setup actions
-            builder["Hello"].SetAction((console, arguments) =>
-                                           {
-                                               var times = arguments["-number:"].Any() ? int.Parse(arguments["-number:"].First(), CultureInfo.InvariantCulture) : 0;
-
-                                               for (var i = 0; i < times; i++)
-                                               {
-                                                   console.WriteLine("Hello");
-                                               }
-                                           });
-            builder["By"].SetAction((console, arguments) => console.WriteLine(string.Format(CultureInfo.InvariantCulture, "By-by: {0}", arguments["-name:"].Any() ? arguments["-name:"].First() : string.Empty)));
-            builder["Clear"].SetAction((console, arguments) => console.Clear());
-
+            // Building interpreter
             return builder.Create();
         }
     }

@@ -32,17 +32,23 @@ namespace CommandLineInterpreterFramework.Building
         /// <summary>
         ///  Sets parameter description
         /// </summary>
-        public void SetDescription(string description)
+        /// <returns>Itself</returns>
+        public IParameterBuilder SetDescription(string description)
         {
             _description = description;
+
+            return this;
         }
 
         /// <summary>
         /// Adds new validator to the end of validators list
         /// </summary>
-        public void AddValidator(IArgumentValidator validator)
+        /// <returns>Itself</returns>
+        public IParameterBuilder AddValidator(IArgumentValidator validator)
         {
             _validators.Add(validator);
+
+            return this;
         }
 
         /// <summary>

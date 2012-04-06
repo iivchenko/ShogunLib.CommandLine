@@ -45,33 +45,44 @@ namespace CommandLineInterpreterFramework.Building
         /// <summary>
         /// Add new command with specified name
         /// </summary>
-        public void Add(string name)
+        /// <returns>Itself</returns>
+        public IInterpreterBuilder Add(string name)
         {
             _commands.Add(name, new CommandBuilder(name));
+
+            return this;
         }
 
         /// <summary>
         /// Sets console prefix
         /// </summary>
-        public void SetPrefix(string name)
+        /// <returns>Itself</returns>
+        public IInterpreterBuilder SetPrefix(string name)
         {
             _prefix = name;
+
+            return this;
         }
 
         /// <summary>
         /// Sets specific console or StandardConsole will be used
         /// </summary>
-        public void SetConsole(IConsole console)
+        /// <returns>Itself</returns>
+        public IInterpreterBuilder SetConsole(IConsole console)
         {
             _console = console;
+
+            return this;
         }
 
         /// <summary>
         /// Sets policy for general exception hanling
         /// </summary>
-        public void SetExceptionHandling(Action<IConsole, Exception> exceptionHandling)
+        public IInterpreterBuilder SetExceptionHandling(Action<IConsole, Exception> exceptionHandling)
         {
             _exceptionHandling = exceptionHandling;
+
+            return this;
         }
 
         /// <summary>

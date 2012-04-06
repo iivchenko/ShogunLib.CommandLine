@@ -17,12 +17,14 @@ namespace CommandLineInterpreterFramework.Building
         /// <summary>
         ///  Sets parameter description
         /// </summary>
-        void SetDescription(string description);
+        /// <returns>Itself</returns>
+        IParameterBuilder SetDescription(string description);
 
         /// <summary>
         /// Adds new validator to the end of validators list
         /// </summary>
-        void AddValidator(IArgumentValidator validator);
+        /// <returns>Itself</returns>
+        IParameterBuilder AddValidator(IArgumentValidator validator);
 
         /// <summary>
         /// Create parameter with specified data

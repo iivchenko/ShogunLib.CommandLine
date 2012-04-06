@@ -24,17 +24,20 @@ namespace CommandLineInterpreterFramework.Building
         /// <summary>
         /// Sets command description
         /// </summary>
-        void SetDescription(string description);
+        /// <returns>Itself</returns>
+        ICommandBuilder SetDescription(string description);
 
         /// <summary>
         /// Sets specific action for the command
         /// </summary>
-        void SetAction(Action<IConsole, IDictionary<string, IEnumerable<string>>> action);
+        /// <returns>Itself</returns>
+        ICommandBuilder SetAction(Action<IConsole, IDictionary<string, IEnumerable<string>>> action);
 
         /// <summary>
         /// Add new parameter with specified name
         /// </summary>
-        void Add(string name);
+        /// <returns>Itself</returns>
+        ICommandBuilder Add(string name);
 
         /// <summary>
         /// Create command with specified data
