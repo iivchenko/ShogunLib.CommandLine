@@ -40,8 +40,7 @@ using System.Runtime.InteropServices;
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Cmdf")]
 
 // TODO: Implement Unit testing
-// TODO: Don't forget to create sample app
-// TODO: Don't forget to create installatioin project
+// TODO: Don't forget to create sample apps: lazy, components, redevelop
 // TODO: TeamCity 
 // TODO: Next version. Implement factories for string, Argument
 // TODO: Next version. Implement default value principals for tha Parameter

@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{24E85A03-500C-47AE-8E94-AA290EB6A271}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installation", "Installation", "{0B9434E6-4020-4685-8C94-EE4AC2B63189}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cmdf", "Framework\cmdf\cmdf.csproj", "{871D5AD5-E1F0-4385-90FE-27522CFA40F2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cmdf.Tests.Unit", "Framework\cmdf.Tests.Unit\cmdf.Tests.Unit.csproj", "{3711B274-B776-434D-9CDF-77FC409980E5}"

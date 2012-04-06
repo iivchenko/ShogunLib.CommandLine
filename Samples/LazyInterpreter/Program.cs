@@ -49,7 +49,7 @@ namespace LazyInterpreter
                    .Add(ClearCommand);
 
             // Setup commands
-            builder[HelloCommand].SetDescription("Writes hello to the console specified number of times")
+            builder[HelloCommand].SetDescription("Writes 'hello' to the console specified number of times")
                                  .SetAction((console, arguments) =>
                                                 {
                                                     var times = arguments[NumberParameter].Any() ? int.Parse(arguments[NumberParameter].First(), CultureInfo.InvariantCulture)
@@ -61,7 +61,7 @@ namespace LazyInterpreter
                                                     }
                                                 });
 
-            builder[ByeCommand].SetDescription("Just say good bye")
+            builder[ByeCommand].SetDescription("Just says goodbye")
                                .SetAction((console, arguments) => console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Bye-bye: {0}", arguments[NameParameter].Any() ? arguments[NameParameter].First() : string.Empty)));
 
             builder[ClearCommand].SetDescription("Clears console output")
