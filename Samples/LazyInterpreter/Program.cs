@@ -13,14 +13,8 @@ using CommandLineInterpreterFramework.Interpretation;
 
 namespace LazyInterpreter
 {
-    /// <summary>
-    /// Entry point
-    /// </summary>
     public static class Program
     {
-        /// <summary>
-        /// Entry point
-        /// </summary>
         public static void Main()
         {
             var interpreter = CreateInterpreter();

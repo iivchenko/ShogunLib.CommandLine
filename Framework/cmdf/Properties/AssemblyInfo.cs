@@ -33,16 +33,15 @@ using System.Runtime.InteropServices;
 //      Minor Version 
 //      Build Number
 //      Revision
-[assembly: AssemblyVersion("0.1.*")]
+[assembly: AssemblyVersion("0.1.1.*")]
 [assembly: AssemblyFileVersion("0.1.0.0")]
 
 // Global suppreesion list
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Cmdf")]
 
-// TODO: Implement Unit testing
-// TODO: Don't forget to create sample apps: lazy, components, redevelop
-// TODO: TeamCity 
-// TODO: Next version. Implement factories for string, Argument
-// TODO: Next version. Implement default value principals for tha Parameter
-// TODO: Next version. Implement position parameters
-// TODO: Next version. Implement ability to use whitespace after parameter name before its argument
+// TODO: TeamCity
+// TODO: 0.2.0.0 Make help and exit commands be in a single list with other commands (Now if some command wants to terminate interpreter cycle it shoul throw TerminateInterpreterCycleException)
+// TODO: 0.2.0.0 Implement default value principals for tha Parameter. Modify lazy builder
+// TODO: 0.2.0.0 Implement position parameters. Modify lazy builder
+// TODO: 0.2.0.0 Implement ability to use whitespace after parameter name before its argument. Modify lazy builder
+// TODO: 0.3.0.0 Implement factories for string, Argument. Modify lazy builder

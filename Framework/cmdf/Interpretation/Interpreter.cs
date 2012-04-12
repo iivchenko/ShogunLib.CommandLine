@@ -22,7 +22,7 @@ namespace CommandLineInterpreterFramework.Interpretation
         private readonly IConsole _console;
         private readonly Action<IConsole, Exception> _exceptionHandling;
         private readonly IInputParser _inputParser;
-        private readonly CommandsDictionary _commands;
+        private readonly IDictionary<string, ICommand> _commands;
         private readonly ICommand _helpCommand;
         private readonly ICommand _exitCommand;
         private readonly string _prefix;
@@ -33,7 +33,7 @@ namespace CommandLineInterpreterFramework.Interpretation
         /// <param name="console">IO device (console user interface). Can't be null</param>
         /// <param name="exceptionHandling">General exception handling policy for interpreter and its commands</param>
         /// <param name="inputParser">Parser for the command input. Can't be null</param>
-        /// <param name="commands">Available console commands. Can't be null</param>
+        /// <param name="commands">Available console commands. Can't be null. Command names (Dictionary keys) should be in uppercase</param>
         /// <param name="helpCommand">General and command help. Can't be null</param>
         /// <param name="exitCommand">Interpreter cycle will be terminated after this command finished execution. Can't be null</param>
         /// <param name="prefix">Prefix that will be shown at the begining of the console string. Can't be null </param>
@@ -41,7 +41,7 @@ namespace CommandLineInterpreterFramework.Interpretation
             IConsole console,
             Action<IConsole, Exception> exceptionHandling,
             IInputParser inputParser,
-            CommandsDictionary commands,
+            IDictionary<string, ICommand> commands,
             ICommand helpCommand, 
             ICommand exitCommand,
             string prefix)

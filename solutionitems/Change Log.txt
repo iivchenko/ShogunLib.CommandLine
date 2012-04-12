@@ -1,4 +1,4 @@
-== 0.1 ==
+== 0.1.0 ==
 
 - Interpreter abstraction is added
 - Standart console interpreter is added
@@ -11,3 +11,8 @@
 - Standart console is added
 - Lazy console is added
 - Lazy builders for interpreter, commad and parameter are added
+
+== 0.1.1 ==
+- Samble apps are added
+- Interpreter dependencies changed form CommandsDictionary to IDictionary
+- Command dependencies changed form ParametersDictionary to IDictionary

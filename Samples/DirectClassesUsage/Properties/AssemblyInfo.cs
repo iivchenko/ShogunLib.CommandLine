@@ -10,11 +10,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LazyInterpreter")]
+[assembly: AssemblyTitle("DirectClassesUsage")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("XATA")]
-[assembly: AssemblyProduct("LazyInterpreter")]
+[assembly: AssemblyProduct("DirectClassesUsage")]
 [assembly: AssemblyCopyright("Copyright © Shogun 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("981cfc38-9c03-4ad6-8194-4435f5aec184")]
+[assembly: Guid("e249c474-1904-4b5a-9dd6-8fa5bbdf343c")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -34,4 +34,4 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 [assembly: AssemblyVersion("0.1.1.*")]
-[assembly: AssemblyFileVersion("0.1.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

@@ -19,18 +19,18 @@ namespace CommandLineInterpreterFramework.Commands
     public class Command : ICommand
     {
         private readonly Action<IConsole, IDictionary<string, IEnumerable<string>>> _action;
-        private readonly ParametersDictionary _parameters;
+        private readonly IDictionary<string, IParameter> _parameters;
 
         /// <summary>
         /// Initializes a new instance of the Command class
         /// </summary>
         /// <param name="name">Command name. Shouldn't have white spaces</param>
         /// <param name="description">Command description. Shouldn't have white spaces</param>
-        /// <param name="parameters">Command parameters. Shouldn't be a null value</param>
+        /// <param name="parameters">Command parameters. Shouldn't be a null value. Parameters names (Dictionary keys) should be in uppercase</param>
         /// <param name="action">Specific action  performed by command. Shouldn't be null</param>
         public Command(string name,
                        string description,
-                       ParametersDictionary parameters,
+                       IDictionary<string, IParameter> parameters,
                        Action<IConsole, IDictionary<string, IEnumerable<string>>> action)
         {
             var exceptions = new List<Exception>();
