@@ -13,6 +13,6 @@
 - Lazy builders for interpreter, commad and parameter are added
 
 == 0.1.1 ==
-- Samble apps are added
+- Sample apps are added
 - Interpreter dependencies changed form CommandsDictionary to IDictionary
 - Command dependencies changed form ParametersDictionary to IDictionary
