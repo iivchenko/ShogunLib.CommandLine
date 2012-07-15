@@ -7,7 +7,6 @@
 using System;
 using System.Collections.Generic;
 using CommandLineInterpreterFramework.Commands;
-using CommandLineInterpreterFramework.Console;
 using CommandLineInterpreterFramework.Interpretation;
 using CommandLineInterpreterFramework.Interpretation.Parsing;
 
@@ -19,10 +18,8 @@ namespace CommandLineInterpreterFramework.Building
     public class InterpreterBuilder : IInterpreterBuilder
     {
         private readonly IDictionary<string, ICommandBuilder> _commands;
-
-        private string _prefix;
-        private IConsole _console;
-        private Action<IConsole, Exception> _exceptionHandling;
+        private string _help;
+        private EventHandler<HelpCommandEventArgs> _helpAction;
 
         /// <summary>
         /// Initializes a new instance of the InterpreterBuilder class
@@ -30,8 +27,7 @@ namespace CommandLineInterpreterFramework.Building
         public InterpreterBuilder()
         {
             _commands = new Dictionary<string, ICommandBuilder>();
-            _prefix = string.Empty;
-            _console = new StandardConsole();
+            _help = "Help";
         }
         
         /// <summary>
@@ -54,33 +50,13 @@ namespace CommandLineInterpreterFramework.Building
         }
 
         /// <summary>
-        /// Sets console prefix
+        /// Set help command name and action.
         /// </summary>
         /// <returns>Itself</returns>
-        public IInterpreterBuilder SetPrefix(string name)
+        public IInterpreterBuilder SetHelp(string name, EventHandler<HelpCommandEventArgs> helpAction)
         {
-            _prefix = name;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets specific console or StandardConsole will be used
-        /// </summary>
-        /// <returns>Itself</returns>
-        public IInterpreterBuilder SetConsole(IConsole console)
-        {
-            _console = console;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets policy for general exception hanling
-        /// </summary>
-        public IInterpreterBuilder SetExceptionHandling(Action<IConsole, Exception> exceptionHandling)
-        {
-            _exceptionHandling = exceptionHandling;
+            _help = name;
+            _helpAction = helpAction;
 
             return this;
         }
@@ -99,13 +75,13 @@ namespace CommandLineInterpreterFramework.Building
                 commandsDictionary.Add(command);
             }
 
-            return new Interpreter(_console, 
-                                   _exceptionHandling, 
-                                   new InputParser(), 
-                                   commandsDictionary,
-                                   new HelpCommand(commandsDictionary.Values), 
-                                   new ExitCommand(), 
-                                   _prefix);
+            var interpreter = new Interpreter(new InputParser(),
+                                              commandsDictionary,
+                                              _help);
+
+            interpreter.Help += _helpAction;
+
+            return interpreter;
         }
     }
 }

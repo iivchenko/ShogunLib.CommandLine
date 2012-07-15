@@ -37,6 +37,14 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
             return CreateCommandFakeInternal(name, CommandDescription, 1, ParameterName, ParameterDescription).Object;
         }
 
+        /// <summary>
+        /// Creates fake command with one parameter and default description
+        /// </summary>
+        public static Mock<ICommand> CreateCommandFake(string name)
+        {
+            return CreateCommandFakeInternal(name, CommandDescription, 1, ParameterName, ParameterDescription);
+        }
+
         #endregion
         #region public Parameter
 

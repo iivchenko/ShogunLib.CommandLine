@@ -4,8 +4,10 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
+using System;
 using System.Globalization;
 using System.Linq;
+using CommandLineInterpreterFramework;
 using CommandLineInterpreterFramework.Building;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.LimitValidation;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.TypeValidation;
@@ -15,11 +17,26 @@ namespace LazyInterpreter
 {
     public static class Program
     {
+        private static bool isContinue = true;
+
         public static void Main()
         {
             var interpreter = CreateInterpreter();
 
-            interpreter.Run();
+            while (isContinue)
+            {
+                try
+                {
+                    Console.Write(":-) ");
+                    interpreter.Execute(Console.ReadLine());
+                }
+                catch (CommandLineInterpreterFrameworkException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            Console.ReadKey();
         }
 
         private static IInterpreter CreateInterpreter()
@@ -27,6 +44,7 @@ namespace LazyInterpreter
             const string HelloCommand = "Hello";
             const string ByeCommand = "Bye";
             const string ClearCommand = "Clear";
+            const string ExitCommand = "Exit";
 
             const string NumberParameter = "-number:";
             const string NameParameter = "-name:";
@@ -34,44 +52,82 @@ namespace LazyInterpreter
             var builder = InterpreterBuilderFactory.Create();
 
             // Setup builder
-            builder.SetPrefix(":-) ")
-                   .SetExceptionHandling((console, e) => console.WriteLine(e.ToString()));
+            builder
+                .SetHelp("Help",
+                         (sender, args) =>
+                             {
+                                 if (args.Commands.Count == 1)
+                                 {
+                                     var command = args.Commands.First();
+
+                                     Console.WriteLine("{0}\t\t\t-{1}", command.Name, command.Description);
+
+                                     foreach (var parameter in command.Parameters)
+                                     {
+                                         Console.WriteLine("{0}\t\t\t-{1}", parameter.Name, parameter.Description);
+                                     }
+                                 }
+                                 else
+                                 {
+                                     foreach (var command in args.Commands)
+                                     {
+                                         Console.WriteLine("{0}\t\t\t-{1}", command.Name, command.Description);
+                                     }
+                                 }
+                             });
 
             // Add Commands
-            builder.Add(HelloCommand)
-                   .Add(ByeCommand)
-                   .Add(ClearCommand);
+            builder
+                .Add(HelloCommand)
+                .Add(ByeCommand)
+                .Add(ClearCommand)
+                .Add(ExitCommand);
 
             // Setup commands
-            builder[HelloCommand].SetDescription("Writes 'hello' to the console specified number of times")
-                                 .SetAction((console, arguments) =>
-                                                {
-                                                    var times = arguments[NumberParameter].Any() ? int.Parse(arguments[NumberParameter].First(), CultureInfo.InvariantCulture)
-                                                                                            : 0;
+            builder[HelloCommand]
+                .SetDescription("Writes 'hello' to the console specified number of times")
+                .SetAction(arguments =>
+                               {
+                                   var times = arguments[NumberParameter].Any()
+                                                   ? int.Parse(arguments[NumberParameter].First(),
+                                                               CultureInfo.InvariantCulture)
+                                                   : 0;
 
-                                                    for (var i = 0; i < times; i++)
-                                                    {
-                                                        console.WriteLine("Hello");
-                                                    }
-                                                });
+                                   for (var i = 0; i < times; i++)
+                                   {
+                                       Console.WriteLine("Hello");
+                                   }
+                               });
 
-            builder[ByeCommand].SetDescription("Just says goodbye")
-                               .SetAction((console, arguments) => console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Bye-bye: {0}", arguments[NameParameter].Any() ? arguments[NameParameter].First() : string.Empty)));
+            builder[ByeCommand]
+                .SetDescription("Just says goodbye")
+                .SetAction(arguments => Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Bye-bye: {0}", arguments[NameParameter].Any() ? arguments[NameParameter].First() : string.Empty)));
 
-            builder[ClearCommand].SetDescription("Clears console output")
-                                 .SetAction((console, arguments) => console.Clear());
+            builder[ClearCommand]
+                .SetDescription("Clears console output")
+                .SetAction(arguments => Console.Clear());
+
+            builder[ExitCommand]
+                .SetDescription("Terminate app")
+                .SetAction(arguments =>
+                               {
+                                   isContinue = false;
+                                   Console.WriteLine("Press any key to exit...");
+                               });
 
             // Add parameters
             builder[HelloCommand].Add(NumberParameter);
             builder[ByeCommand].Add(NameParameter);
 
             // Setup parameters
-            builder[HelloCommand][NumberParameter].SetDescription("Number of times")
-                                                  .AddValidator(new OptionalParameterValidator())
-                                                  .AddValidator(new IntTypeValidator());
+            builder[HelloCommand][NumberParameter]
+                .SetDescription("Number of times")
+                .AddValidator(new OptionalParameterValidator())
+                .AddValidator(new IntTypeValidator());
 
-            builder[ByeCommand][NameParameter].SetDescription("Name for whom bye-bye is said")
-                                              .AddValidator(new OptionalParameterValidator());
+            builder[ByeCommand][NameParameter]
+                .SetDescription("Name for whom bye-bye is said")
+                .AddValidator(new OptionalParameterValidator());
             
             // Building interpreter
             return builder.Create();

@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using CommandLineInterpreterFramework.Commands;
 using CommandLineInterpreterFramework.Commands.Parameters;
-using CommandLineInterpreterFramework.Console;
 
 namespace CommandLineInterpreterFramework.Building
 {
@@ -21,7 +20,7 @@ namespace CommandLineInterpreterFramework.Building
         private readonly IDictionary<string, IParameterBuilder> _parameters;
 
         private string _description;
-        private Action<IConsole, IDictionary<string, IEnumerable<string>>> _action;
+        private Action<IDictionary<string, IEnumerable<string>>> _action;
         
         /// <summary>
         /// Initializes a new instance of the CommandBuilder class
@@ -57,7 +56,7 @@ namespace CommandLineInterpreterFramework.Building
         /// Sets specific action for the command
         /// </summary>
         /// <returns>Itself</returns>
-        public ICommandBuilder SetAction(Action<IConsole, IDictionary<string, IEnumerable<string>>> action)
+        public ICommandBuilder SetAction(Action<IDictionary<string, IEnumerable<string>>> action)
         {
             _action = action;
 

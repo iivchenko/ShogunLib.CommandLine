@@ -7,7 +7,6 @@
 using System;
 using System.Collections.Generic;
 using CommandLineInterpreterFramework.Commands;
-using CommandLineInterpreterFramework.Console;
 
 namespace CommandLineInterpreterFramework.Building
 {
@@ -31,7 +30,7 @@ namespace CommandLineInterpreterFramework.Building
         /// Sets specific action for the command
         /// </summary>
         /// <returns>Itself</returns>
-        ICommandBuilder SetAction(Action<IConsole, IDictionary<string, IEnumerable<string>>> action);
+        ICommandBuilder SetAction(Action<IDictionary<string, IEnumerable<string>>> action);
 
         /// <summary>
         /// Add new parameter with specified name

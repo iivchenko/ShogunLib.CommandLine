@@ -10,7 +10,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using CommandLineInterpreterFramework.Commands;
 using CommandLineInterpreterFramework.Commands.Parameters;
-using CommandLineInterpreterFramework.Console;
 using Moq;
 using NUnit.Framework;
 
@@ -113,27 +112,16 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Execute_NullConsole_Throws()
-        {
-            var command = new Command(FakeCreator.CommandName, FakeCreator.CommandDescription, new ParametersDictionary(), delegate { });
-
-            command.Execute(null, new Collection<string>());
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Execute_NullArguments_Throws()
         {
-            var stubConsole = new Mock<IConsole>();
             var command = new Command(FakeCreator.CommandName, FakeCreator.CommandDescription, new ParametersDictionary(), delegate { });
 
-            command.Execute(stubConsole.Object, null);
+            command.Execute(null);
         }
 
         [Test]
         public void Execute_Validation_ParameterValidationIsUsed()
         {
-            var stubConsole = new Mock<IConsole>();
             var mockParameter = FakeCreator.CreateParameterFake(FakeCreator.ParameterName, FakeCreator.ParameterDescription);
             var parameters = new ParametersDictionary
                                  {
@@ -142,7 +130,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
 
             var command = new Command(FakeCreator.CommandName, FakeCreator.CommandDescription, parameters, delegate { });
 
-            command.Execute(stubConsole.Object, new Collection<string>());
+            command.Execute(new Collection<string>());
 
             mockParameter.Verify(parameter => parameter.Validate(It.IsAny<IEnumerable<string>>()), Times.Once());
         }
@@ -150,24 +138,15 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         [Test]
         public void Execute_AllConditionsAreMet_ActionIsExecuted()
         {
-            var stubConsole = new Mock<IConsole>();
             var isActionExecuted = false;
-            var command = new Command(FakeCreator.CommandName, FakeCreator.CommandDescription, new ParametersDictionary(), (console, actionArgument) => isActionExecuted = true);
+            var command = new Command(FakeCreator.CommandName, 
+                                      FakeCreator.CommandDescription, 
+                                      new ParametersDictionary(), 
+                                      actionArgument => isActionExecuted = true);
 
-            command.Execute(stubConsole.Object, new Collection<string>());
+            command.Execute(new Collection<string>());
 
             Assert.IsTrue(isActionExecuted, "Command should execute Action delegate");
-        }
-
-        [Test]
-        public void Execute_AllConditionsAreMet_ConsoleIsUsed()
-        {
-            var mockConsole = new Mock<IConsole>();
-            var command = new Command(FakeCreator.CommandName, FakeCreator.CommandDescription, new ParametersDictionary(), (console, actionArgument) => console.Clear());
-
-            command.Execute(mockConsole.Object, new Collection<string>());
-
-            mockConsole.Verify(console => console.Clear(), Times.Once());
         }
 
         private class ParameterInfoComparer : EqualityComparer<IParameterInfo>

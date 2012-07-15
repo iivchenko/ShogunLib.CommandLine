@@ -4,11 +4,11 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CommandLineInterpreterFramework.Commands;
 using CommandLineInterpreterFramework.Commands.Parameters;
-using CommandLineInterpreterFramework.Console;
 
 namespace OwnClassesImplementation
 {
@@ -36,16 +36,16 @@ namespace OwnClassesImplementation
             get { return _parameters.Select(parameter => parameter.Info); }
         }
 
-        public void Execute(IConsole console, IEnumerable<string> args)
+        public void Execute(IEnumerable<string> args)
         {
-            console.WriteLine("Command execution started");
+            Console.WriteLine("Command execution started");
 
             foreach (var arg in args)
             {
-                console.WriteLine(arg);
+                Console.WriteLine(arg);
             }
 
-            console.WriteLine("Command execution finished");
+            Console.WriteLine("Command execution finished");
         }
     }
 }

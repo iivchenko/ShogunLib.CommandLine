@@ -13,7 +13,7 @@ namespace CommandLineInterpreterFramework.Interpretation.Parsing
     /// The exception that is thrown when console input can't be parsed
     /// </summary>
     [Serializable]
-    public class InputParserException : Exception
+    public class InputParserException : CommandLineInterpreterFrameworkException
     {
         /// <summary>
         /// Initializes a new instance of the InputParserException class

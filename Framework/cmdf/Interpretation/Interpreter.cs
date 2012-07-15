@@ -7,9 +7,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using CommandLineInterpreterFramework.Commands;
-using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
-using CommandLineInterpreterFramework.Console;
 using CommandLineInterpreterFramework.Interpretation.Parsing;
 
 namespace CommandLineInterpreterFramework.Interpretation
@@ -19,39 +18,19 @@ namespace CommandLineInterpreterFramework.Interpretation
     /// </summary>
     public class Interpreter : IInterpreter
     {
-        private readonly IConsole _console;
-        private readonly Action<IConsole, Exception> _exceptionHandling;
         private readonly IInputParser _inputParser;
         private readonly IDictionary<string, ICommand> _commands;
-        private readonly ICommand _helpCommand;
-        private readonly ICommand _exitCommand;
-        private readonly string _prefix;
+        private readonly string _help;
 
         /// <summary>
         /// Initializes a new instance of the Interpreter class
         /// </summary>
-        /// <param name="console">IO device (console user interface). Can't be null</param>
-        /// <param name="exceptionHandling">General exception handling policy for interpreter and its commands</param>
-        /// <param name="inputParser">Parser for the command input. Can't be null</param>
-        /// <param name="commands">Available console commands. Can't be null. Command names (Dictionary keys) should be in uppercase</param>
-        /// <param name="helpCommand">General and command help. Can't be null</param>
-        /// <param name="exitCommand">Interpreter cycle will be terminated after this command finished execution. Can't be null</param>
-        /// <param name="prefix">Prefix that will be shown at the begining of the console string. Can't be null </param>
-        public Interpreter(
-            IConsole console,
-            Action<IConsole, Exception> exceptionHandling,
-            IInputParser inputParser,
-            IDictionary<string, ICommand> commands,
-            ICommand helpCommand, 
-            ICommand exitCommand,
-            string prefix)
+        /// <param name="inputParser">Parser for the command input. Can't be null.</param>
+        /// <param name="commands">Available console commands. Can't be null. Command names (Dictionary keys) should be in uppercase.</param>
+        /// <param name="helpCommandName">Name for the help command that will be used in console.</param>
+        public Interpreter(IInputParser inputParser, IDictionary<string, ICommand> commands, string helpCommandName)
         {
             var exceptions = new List<Exception>();
-
-            if (console == null)
-            {
-                exceptions.Add(new ArgumentNullException("console"));
-            }
 
             if (inputParser == null)
             {
@@ -63,106 +42,86 @@ namespace CommandLineInterpreterFramework.Interpretation
                 exceptions.Add(new ArgumentNullException("commands"));
             }
 
-            if (helpCommand == null)
+            if (string.IsNullOrWhiteSpace(helpCommandName))
             {
-                exceptions.Add(new ArgumentNullException("helpCommand"));
+                exceptions.Add(new ArgumentException("Should not be null, empty or whitespaces", "helpCommandName"));
             }
-
-            if (exitCommand == null)
-            {
-                exceptions.Add(new ArgumentNullException("exitCommand"));
-            }
-
-            if (prefix == null)
-            {
-                exceptions.Add(new ArgumentNullException("prefix"));
-            }
-
+            
             if (exceptions.Count > 0)
             {
                 throw new AggregateException("Parameter initialization fail", exceptions);
             }
-
-            if (commands.ContainsKey(exitCommand.Name.ToUpperInvariant()))
+            
+            if (commands.ContainsKey(helpCommandName.ToUpperInvariant()))
             {
-                throw new DuplicatedCommandException(string.Format(CultureInfo.InvariantCulture, "Commands parameter contains exit command {0}", exitCommand.Name));
+                throw new DuplicatedCommandException(string.Format(CultureInfo.InvariantCulture, "Commands parameter contains help command {0}", helpCommandName));
             }
-
-            if (commands.ContainsKey(helpCommand.Name.ToUpperInvariant()))
-            {
-                throw new DuplicatedCommandException(string.Format(CultureInfo.InvariantCulture, "Commands parameter contains help command {0}", helpCommand.Name));
-            }
-
-            if (exitCommand.Name == helpCommand.Name)
-            {
-                throw new DuplicatedCommandException(string.Format(CultureInfo.InvariantCulture, "Exit command name equals to help command name"));
-            }
-
-            _console = console;
-            _exceptionHandling = exceptionHandling;
+            
             _inputParser = inputParser;
             _commands = commands;
-            _helpCommand = helpCommand;
-            _exitCommand = exitCommand;
-            _prefix = prefix;
+            _help = helpCommandName;
         }
 
         /// <summary>
-        /// Starts command line interpreter cycle
+        /// Raised when Help command is executed.
         /// </summary>
-        public void Run()
+        public event EventHandler<HelpCommandEventArgs> Help;
+
+        /// <summary>
+        /// Executes console command.
+        /// </summary>
+        /// <param name="input">Command to be executed.</param>
+        public void Execute(string input)
         {
-            while (true)
+            var parsedCommand = _inputParser.Parse(input);
+
+            if (parsedCommand == null)
             {
-                try
-                {
-                    _console.Write(_prefix);
+                return;
+            }
 
-                    var input = _console.ReadLine();
-                    var parsedCommand = _inputParser.Parse(input);
+            if (_help.ToUpperInvariant() == parsedCommand.Name.ToUpperInvariant())
+            {
+                ExecuteHelp(parsedCommand.Args);
+                return;
+            }
 
-                    if (parsedCommand == null)
-                    {
-                        continue;
-                    }
+            if (_commands.ContainsKey(parsedCommand.Name.ToUpperInvariant()))
+            {
+                _commands[parsedCommand.Name.ToUpperInvariant()].Execute(parsedCommand.Args);
+                return;
+            }
+            
+            throw new UndefinedCommandException(string.Format(CultureInfo.InvariantCulture, "Undefined command '{0}'", parsedCommand.Name));
+        }
 
-                    if (_exitCommand.Name.ToUpperInvariant() == parsedCommand.Name.ToUpperInvariant())
-                    {
-                        _exitCommand.Execute(_console, parsedCommand.Args);
-                        break;
-                    }
+        private void ExecuteHelp(IEnumerable<string> args)
+        {
+            List<CommandDescriptor> commands;
+            if (!args.Any())
+            {
+                commands = _commands.Values
+                    .Select(command => new CommandDescriptor(command.Name, command.Description, command.Parameters))
+                    .ToList();
+            }
+            else
+            {
+                commands = _commands.Values
+                    .Where(command => args.Select(arg => arg.ToUpperInvariant()).Contains(command.Name.ToUpperInvariant()))
+                    .Select(command => new CommandDescriptor(command.Name, command.Description, command.Parameters))
+                    .ToList();
+            }
 
-                    if (_helpCommand.Name.ToUpperInvariant() == parsedCommand.Name.ToUpperInvariant())
-                    {
-                        _helpCommand.Execute(_console, parsedCommand.Args);
-                        continue;
-                    }
+            OnHelp(new HelpCommandEventArgs(commands));
+        }
 
-                    if (_commands.ContainsKey(parsedCommand.Name.ToUpperInvariant()))
-                    {
-                        _commands[parsedCommand.Name.ToUpperInvariant()].Execute(_console, parsedCommand.Args);
-                        continue;
-                    }
+        private void OnHelp(HelpCommandEventArgs args)
+        {
+            var temp = Help;
 
-                    _console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Undefined command {0}", parsedCommand.Name));
-                }
-                catch (InputParserException e)
-                {
-                    _console.WriteLine(e.Message);
-                }
-                catch (ArgumentValidationException e)
-                {
-                    _console.WriteLine(e.Message);
-                }
-                catch (Exception e)
-                {
-                    if (_exceptionHandling == null)
-                    {
-                        throw;
-                    }
-
-                    _exceptionHandling(_console, e);
-                }
+            if (temp != null)
+            {
+                temp(this, args);
             }
         }
     }

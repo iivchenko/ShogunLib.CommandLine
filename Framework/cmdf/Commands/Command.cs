@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CommandLineInterpreterFramework.Commands.Parameters;
-using CommandLineInterpreterFramework.Console;
 
 namespace CommandLineInterpreterFramework.Commands
 {
@@ -18,7 +17,7 @@ namespace CommandLineInterpreterFramework.Commands
     /// </summary>
     public class Command : ICommand
     {
-        private readonly Action<IConsole, IDictionary<string, IEnumerable<string>>> _action;
+        private readonly Action<IDictionary<string, IEnumerable<string>>> _action;
         private readonly IDictionary<string, IParameter> _parameters;
 
         /// <summary>
@@ -31,7 +30,7 @@ namespace CommandLineInterpreterFramework.Commands
         public Command(string name,
                        string description,
                        IDictionary<string, IParameter> parameters,
-                       Action<IConsole, IDictionary<string, IEnumerable<string>>> action)
+                       Action<IDictionary<string, IEnumerable<string>>> action)
         {
             var exceptions = new List<Exception>();
 
@@ -97,16 +96,10 @@ namespace CommandLineInterpreterFramework.Commands
         /// <summary>
         /// Performs validation and specific action. Firstly call Validate method
         /// </summary>
-        /// <param name="console">IO device(console user interface)</param>
         /// <param name="args">Command input arguments</param>
-        public virtual void Execute(IConsole console, IEnumerable<string> args)
+        public virtual void Execute(IEnumerable<string> args)
         {
-            if (console == null)
-            {
-                throw new ArgumentNullException("console");
-            }
-
-            _action(console, Validate(args));
+            _action(Validate(args));
         }
 
         /// <summary>

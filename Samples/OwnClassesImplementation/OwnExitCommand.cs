@@ -4,16 +4,23 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using CommandLineInterpreterFramework.Commands;
 using CommandLineInterpreterFramework.Commands.Parameters;
-using CommandLineInterpreterFramework.Console;
 
 namespace OwnClassesImplementation
 {
     public class OwnExitCommand : ICommand
     {
+        private readonly ExitMonitor _exitMonitor;
+
+        public OwnExitCommand(ExitMonitor exitMonitor)
+        {
+            _exitMonitor = exitMonitor;
+        }
+
         public string Name
         {
             get { return "OwnExitCommand"; }
@@ -29,12 +36,14 @@ namespace OwnClassesImplementation
             get { return new List<IParameterInfo>(); }
         }
 
-        public void Execute(IConsole console, IEnumerable<string> args)
+        public void Execute(IEnumerable<string> args)
         {
-            console.WriteLine("Exiting");
+            Console.WriteLine("Exiting");
             Thread.Sleep(5000);
-            console.WriteLine("Exited");
+            Console.WriteLine("Exited");
             Thread.Sleep(5000);
+
+            _exitMonitor.IsContinue = false;
         }
     }
 }

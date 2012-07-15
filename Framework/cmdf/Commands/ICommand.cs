@@ -6,7 +6,6 @@
 
 using System.Collections.Generic;
 using CommandLineInterpreterFramework.Commands.Parameters;
-using CommandLineInterpreterFramework.Console;
 
 namespace CommandLineInterpreterFramework.Commands
 {
@@ -16,25 +15,24 @@ namespace CommandLineInterpreterFramework.Commands
     public interface ICommand
     {
         /// <summary>
-        /// Gets the name of the command
+        /// Gets the name of the command.
         /// </summary>
         string Name { get; }
         
         /// <summary>
-        /// Gets command description
+        /// Gets command description.
         /// </summary>
         string Description { get; }
         
         /// <summary>
-        /// Gets parameters names and descriptions
+        /// Gets parameters names and descriptions.
         /// </summary>
         IEnumerable<IParameterInfo> Parameters { get; }
 
         /// <summary>
         /// Performs specific action
         /// </summary>
-        /// <param name="console">IO device(console user interface)</param>
         /// <param name="args">Command input arguments</param> 
-        void Execute(IConsole console, IEnumerable<string> args);
+        void Execute(IEnumerable<string> args);
     }
 }

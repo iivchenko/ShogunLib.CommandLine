@@ -40,7 +40,6 @@ using System.Runtime.InteropServices;
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Cmdf")]
 
 // TODO: TeamCity
-// TODO: 0.2.0.0 Make help and exit commands be in a single list with other commands (Now if some command wants to terminate interpreter cycle it shoul throw TerminateInterpreterCycleException)
 // TODO: 0.2.0.0 Implement default value principals for tha Parameter. Modify lazy builder
 // TODO: 0.2.0.0 Implement position parameters. Modify lazy builder
 // TODO: 0.2.0.0 Implement ability to use whitespace after parameter name before its argument. Modify lazy builder

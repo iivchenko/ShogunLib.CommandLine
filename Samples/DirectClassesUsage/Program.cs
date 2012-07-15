@@ -4,15 +4,16 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using CommandLineInterpreterFramework;
 using CommandLineInterpreterFramework.Commands;
 using CommandLineInterpreterFramework.Commands.Parameters;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.LimitValidation;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.TypeValidation;
-using CommandLineInterpreterFramework.Console;
 using CommandLineInterpreterFramework.Interpretation;
 using CommandLineInterpreterFramework.Interpretation.Parsing;
 
@@ -23,26 +24,65 @@ namespace DirectClassesUsage
         private const string HelloCommand = "Hello";
         private const string ByeCommand = "Bye";
         private const string ClearCommand = "Clear";
+        private const string HelpCommand = "Help";
+        private const string ExitCommand = "Exit";
 
         private const string NumberParameter = "-number:";
         private const string NameParameter = "-name:";
 
+        private static bool isContinue = true;
+
         public static void Main()
         {
-            CreateInterpreter().Run();
+            var interpreter = CreateInterpreter();
+
+            while (isContinue)
+            {
+                try
+                {
+                    Console.Write(":-) ");
+                    interpreter.Execute(Console.ReadLine());
+                }
+                catch (CommandLineInterpreterFrameworkException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            Console.ReadKey();
         }
 
         private static IInterpreter CreateInterpreter()
         {
             var commands = CreateCommands();
 
-            return new Interpreter(new StandardConsole(),
-                                   (console, e) => console.WriteLine(e.ToString()),
-                                   new InputParser(), 
-                                   commands,
-                                   new HelpCommand(commands.Values), 
-                                   new ExitCommand(),
-                                   ":-) ");
+            var interpreter = new Interpreter(new InputParser(),
+                                              commands,
+                                              HelpCommand);
+
+            interpreter.Help += (sender, args) =>
+                                    {
+                                        if (args.Commands.Count == 1)
+                                        {
+                                            var command = args.Commands.First();
+
+                                            Console.WriteLine("{0}\t\t\t-{1}", command.Name, command.Description);
+
+                                            foreach (var parameter in command.Parameters)
+                                            {
+                                                Console.WriteLine("{0}\t\t\t-{1}", parameter.Name, parameter.Description);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            foreach (var command in args.Commands)
+                                            {
+                                                Console.WriteLine("{0}\t\t\t-{1}", command.Name, command.Description);
+                                            }
+                                        }
+                                    };
+
+            return interpreter;
         }
 
         private static CommandsDictionary CreateCommands()
@@ -51,7 +91,8 @@ namespace DirectClassesUsage
                        {
                            CreateHelloCommand(),
                            CreateByeCommand(),
-                           CreateClearCommand()
+                           CreateClearCommand(),
+                           CreateExitCommand()
                        };
         }
 
@@ -79,6 +120,14 @@ namespace DirectClassesUsage
                                ClearCommandAction);
         }
 
+        private static ICommand CreateExitCommand()
+        {
+            return new Command(ExitCommand,
+                               "Terminates app",
+                               CreateExitCommandParameters(),
+                               ExitCommandAction);
+        }
+
         private static ParametersDictionary CreateHelloCommandParameters()
         {
             return new ParametersDictionary
@@ -102,6 +151,13 @@ namespace DirectClassesUsage
                        };
         }
 
+        private static ParametersDictionary CreateExitCommandParameters()
+        {
+            return new ParametersDictionary
+            {
+            };
+        }
+
         private static IParameter CrateNumberParameter()
         {
             var info = new ParameterInfo(NumberParameter, "Number of times");
@@ -120,25 +176,31 @@ namespace DirectClassesUsage
             return new Parameter(info, new OptionalParameterValidator());
         }
 
-        private static void HelloCommandAction(IConsole console, IDictionary<string, IEnumerable<string>> arguments)
+        private static void HelloCommandAction(IDictionary<string, IEnumerable<string>> arguments)
         {
             var times = arguments[NumberParameter].Any() ? int.Parse(arguments[NumberParameter].First(), CultureInfo.InvariantCulture)
                                                                             : 0;
 
             for (var i = 0; i < times; i++)
             {
-                console.WriteLine("Hello");
+                Console.WriteLine("Hello");
             }
         }
         
-        private static void ByeCommandAction(IConsole console, IDictionary<string, IEnumerable<string>> arguments)
+        private static void ByeCommandAction(IDictionary<string, IEnumerable<string>> arguments)
         {
-            console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Bye-bye: {0}", arguments[NameParameter].Any() ? arguments[NameParameter].First() : string.Empty));
+            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Bye-bye: {0}", arguments[NameParameter].Any() ? arguments[NameParameter].First() : string.Empty));
         }
 
-        private static void ClearCommandAction(IConsole console, IDictionary<string, IEnumerable<string>> arguments)
+        private static void ClearCommandAction(IDictionary<string, IEnumerable<string>> arguments)
         {
-            console.Clear();
+            Console.Clear();
+        }
+
+        private static void ExitCommandAction(IDictionary<string, IEnumerable<string>> arguments)
+        {
+            isContinue = false;
+            Console.WriteLine("Press any key to exit...");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation
     /// The exception that is thrown when the validation of the argument is fail
     /// </summary>
     [Serializable]
-    public class ArgumentValidationException : Exception
+    public class ArgumentValidationException : CommandLineInterpreterFrameworkException
     {
         /// <summary>
         /// Initializes a new instance of the ArgumentValidationException class

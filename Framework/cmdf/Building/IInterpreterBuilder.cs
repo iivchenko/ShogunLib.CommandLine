@@ -5,7 +5,7 @@
 // <email>iivchenko@live.com</email>
 
 using System;
-using CommandLineInterpreterFramework.Console;
+using CommandLineInterpreterFramework.Commands;
 using CommandLineInterpreterFramework.Interpretation;
 
 namespace CommandLineInterpreterFramework.Building
@@ -27,23 +27,11 @@ namespace CommandLineInterpreterFramework.Building
         IInterpreterBuilder Add(string name);
 
         /// <summary>
-        /// Sets console prefix
+        /// Set help command name and action.
         /// </summary>
         /// <returns>Itself</returns>
-        IInterpreterBuilder SetPrefix(string name);
-
-        /// <summary>
-        /// Sets specific console or StandardConsole will be used
-        /// </summary>
-        /// <returns>Itself</returns>
-        IInterpreterBuilder SetConsole(IConsole console);
-
-        /// <summary>
-        /// Sets policy for general exception hanling
-        /// </summary>
-        /// <returns>Itself</returns>
-        IInterpreterBuilder SetExceptionHandling(Action<IConsole, Exception> exceptionHandling);
-
+        IInterpreterBuilder SetHelp(string name, EventHandler<HelpCommandEventArgs> helpAction);
+        
         /// <summary>
         /// Create interpreter with specified data
         /// </summary>

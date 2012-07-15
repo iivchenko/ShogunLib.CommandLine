@@ -4,13 +4,13 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using CommandLineInterpreterFramework.Commands;
 using CommandLineInterpreterFramework.Commands.Parameters;
 using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.LimitValidation;
-using CommandLineInterpreterFramework.Console;
 
 namespace ExeAsCommand
 {
@@ -21,7 +21,7 @@ namespace ExeAsCommand
         
         public static void Main(string[] args)
         {
-            CreateCommand().Execute(new StandardConsole(), args);
+            CreateCommand().Execute(args);
         }
 
         private static ICommand CreateCommand()
@@ -40,9 +40,9 @@ namespace ExeAsCommand
                        };
         }
 
-        private static void CommandAction(IConsole console, IDictionary<string, IEnumerable<string>> arguments)
+        private static void CommandAction(IDictionary<string, IEnumerable<string>> arguments)
         {
-            console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Hello {0} man.", arguments[CommandParameter].Any() ? arguments[CommandParameter].First() : string.Empty));
+            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "Hello {0} man.", arguments[CommandParameter].Any() ? arguments[CommandParameter].First() : string.Empty));
         }
     }
 }

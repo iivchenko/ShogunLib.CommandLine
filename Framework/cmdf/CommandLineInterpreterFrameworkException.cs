@@ -7,46 +7,46 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace CommandLineInterpreterFramework.Interpretation
+namespace CommandLineInterpreterFramework
 {
     /// <summary>
-    /// The exception that is thrown when try to add console command with the same name
+    /// This is base exception for all framework exceptioins
     /// </summary>
     [Serializable]
-    public class DuplicatedCommandException : CommandLineInterpreterFrameworkException
+    public class CommandLineInterpreterFrameworkException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the DuplicatedCommandException class
+        /// Initializes a new instance of the CommandLineInterpreterFrameworkException class
         /// </summary>
-        public DuplicatedCommandException()
+        public CommandLineInterpreterFrameworkException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the DuplicatedCommandException class with a specified error message
+        /// Initializes a new instance of the CommandLineInterpreterFrameworkException class with a specified error message
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception</param>
-        public DuplicatedCommandException(string message)
+        public CommandLineInterpreterFrameworkException(string message)
             : base(message)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the DuplicatedCommandException class with a specified error message and a reference to the inner exception that is the cause of this exception
+        /// Initializes a new instance of the CommandLineInterpreterFrameworkException class with a specified error message and a reference to the inner exception that is the cause of this exception
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception</param>
         /// <param name="innerException">The exception that is the cause of the current exception. If the innerException parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception</param>
-        public DuplicatedCommandException(string message, Exception innerException)
+        public CommandLineInterpreterFrameworkException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the DuplicatedCommandException class with serialized data
+        /// Initializes a new instance of the CommandLineInterpreterFrameworkException class with serialized data
         /// </summary>
         /// <param name="info">The object that holds the serialized object data</param>
         /// <param name="context">The contextual information about the source or destination</param>
-        protected DuplicatedCommandException(SerializationInfo info, StreamingContext context)
+        protected CommandLineInterpreterFrameworkException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
