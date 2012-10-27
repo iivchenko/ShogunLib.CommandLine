@@ -91,7 +91,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         }
 
         [Test]
-        public void Parameters_CorrectParametersAreUsed_ReturnsCorrectParamentersInfo()
+        public void Parameters_CorrectParametersAreUsed_ReturnsCorrectParametersInfo()
         {
             var expectedParameters = new[]
                                          {

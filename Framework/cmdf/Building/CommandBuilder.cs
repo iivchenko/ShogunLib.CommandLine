@@ -12,7 +12,7 @@ using CommandLineInterpreterFramework.Commands.Parameters;
 namespace CommandLineInterpreterFramework.Building
 {
     /// <summary>
-    /// Lazy command initialization
+    /// Lazy command initialization.
     /// </summary>
     public class CommandBuilder : ICommandBuilder
     {
@@ -23,9 +23,9 @@ namespace CommandLineInterpreterFramework.Building
         private Action<IDictionary<string, IEnumerable<string>>> _action;
         
         /// <summary>
-        /// Initializes a new instance of the CommandBuilder class
+        /// Initializes a new instance of the CommandBuilder class.
         /// </summary>
-        /// <param name="name">Future command name</param>
+        /// <param name="name">Future command name.</param>
         public CommandBuilder(string name)
         {
             _name = name;
@@ -34,7 +34,7 @@ namespace CommandLineInterpreterFramework.Building
         }
 
         /// <summary>
-        /// Gets lazy parameter by its name
+        /// Gets lazy parameter by its name.
         /// </summary>
         public IParameterBuilder this[string name]
         {
@@ -42,9 +42,9 @@ namespace CommandLineInterpreterFramework.Building
         }
 
         /// <summary>
-        /// Sets command description
+        /// Sets command description.
         /// </summary>
-        /// <returns>Itself</returns>
+        /// <returns>Pointer to this.</returns>
         public ICommandBuilder SetDescription(string description)
         {
             _description = description;
@@ -53,9 +53,9 @@ namespace CommandLineInterpreterFramework.Building
         }
 
         /// <summary>
-        /// Sets specific action for the command
+        /// Sets specific action for the command.
         /// </summary>
-        /// <returns>Itself</returns>
+        /// <returns>Pointer to this.</returns>
         public ICommandBuilder SetAction(Action<IDictionary<string, IEnumerable<string>>> action)
         {
             _action = action;
@@ -64,9 +64,9 @@ namespace CommandLineInterpreterFramework.Building
         }
 
         /// <summary>
-        /// Add new parameter with specified name
+        /// Add new parameter with specified name.
         /// </summary>
-        /// <returns>Itself</returns>
+        /// <returns>Pointer to this.</returns>
         public ICommandBuilder Add(string name)
         {
             _parameters.Add(name, new ParameterBuilder(name));
@@ -75,7 +75,7 @@ namespace CommandLineInterpreterFramework.Building
         }
 
         /// <summary>
-        /// Create command with specified data
+        /// Create command with specified data.
         /// </summary>
         public ICommand Create()
         {

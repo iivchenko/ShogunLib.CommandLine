@@ -13,7 +13,7 @@ using CommandLineInterpreterFramework.Interpretation.Parsing;
 namespace CommandLineInterpreterFramework.Building
 {
     /// <summary>
-    /// Lazy interpreter initialization
+    /// Lazy interpreter initialization.
     /// </summary>
     public class InterpreterBuilder : IInterpreterBuilder
     {
@@ -22,7 +22,7 @@ namespace CommandLineInterpreterFramework.Building
         private EventHandler<HelpCommandEventArgs> _helpAction;
 
         /// <summary>
-        /// Initializes a new instance of the InterpreterBuilder class
+        /// Initializes a new instance of the InterpreterBuilder class.
         /// </summary>
         public InterpreterBuilder()
         {
@@ -31,7 +31,7 @@ namespace CommandLineInterpreterFramework.Building
         }
         
         /// <summary>
-        /// Gets lazy command by its name
+        /// Gets lazy command by its name.
         /// </summary>
         public ICommandBuilder this[string name]
         {
@@ -39,9 +39,9 @@ namespace CommandLineInterpreterFramework.Building
         }
 
         /// <summary>
-        /// Add new command with specified name
+        /// Add new command with specified name.
         /// </summary>
-        /// <returns>Itself</returns>
+        /// <returns>Pointer to this.</returns>
         public IInterpreterBuilder Add(string name)
         {
             _commands.Add(name, new CommandBuilder(name));
@@ -52,7 +52,7 @@ namespace CommandLineInterpreterFramework.Building
         /// <summary>
         /// Set help command name and action.
         /// </summary>
-        /// <returns>Itself</returns>
+        /// <returns>Pointer to this.</returns>
         public IInterpreterBuilder SetHelp(string name, EventHandler<HelpCommandEventArgs> helpAction)
         {
             _help = name;
@@ -62,7 +62,7 @@ namespace CommandLineInterpreterFramework.Building
         }
 
         /// <summary>
-        /// Create interpreter with specified data
+        /// Create interpreter with specified data.
         /// </summary>
         public IInterpreter Create()
         {

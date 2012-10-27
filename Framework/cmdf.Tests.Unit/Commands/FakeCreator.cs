@@ -15,7 +15,7 @@ using Moq;
 namespace CommandLineInterpreterFramework.Tests.Unit.Commands
 {
     /// <summary>
-    /// This helper class should return MOCKed and STUBed objects
+    /// This helper class should return MOCKed and STUBed objects.
     /// </summary>
     internal static class FakeCreator
     {
@@ -30,7 +30,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         #region public Command
 
         /// <summary>
-        /// Creates fake command with one parameter and default description
+        /// Creates fake command with one parameter and default description.
         /// </summary>
         public static ICommand CreateCommand(string name)
         {
@@ -38,7 +38,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         }
 
         /// <summary>
-        /// Creates fake command with one parameter and default description
+        /// Creates fake command with one parameter and default description.
         /// </summary>
         public static Mock<ICommand> CreateCommandFake(string name)
         {
@@ -49,7 +49,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         #region public Parameter
 
         /// <summary>
-        /// Creates fake parameter with succeeded validation
+        /// Creates fake parameter with succeeded validation.
         /// </summary>
         public static IParameter CreateParameter(string name, string description)
         {
@@ -57,7 +57,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         }
 
         /// <summary>
-        /// Creates fake with succeeded validation and fake argument
+        /// Creates fake with succeeded validation and fake argument.
         /// </summary>
         public static Mock<IParameter> CreateParameterFake(string name, string description)
         {
@@ -70,7 +70,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         #region public ParameterInfo
 
         /// <summary>
-        /// Crates fake parameter information with default name and description
+        /// Crates fake parameter information with default name and description.
         /// </summary>
         public static IParameterInfo CreateParameterInfo()
         {
@@ -78,7 +78,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         }
 
         /// <summary>
-        /// Creates fake parameter information
+        /// Creates fake parameter information.
         /// </summary>
         public static IParameterInfo CreateParameterInfo(string name, string description)
         {
@@ -89,7 +89,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands
         #region public ArgumentValidator
 
         /// <summary>
-        /// Creates fake argument validator with specified validation reslult
+        /// Creates fake argument validator with specified validation result.
         /// </summary>
         public static IArgumentValidator CreateArgumentValidator(bool validationResult)
         {

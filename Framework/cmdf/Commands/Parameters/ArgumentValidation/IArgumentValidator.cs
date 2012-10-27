@@ -9,20 +9,20 @@ using System.Collections.Generic;
 namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation
 {
     /// <summary>
-    /// Provides functionality for console command arguments validation
+    /// Provides functionality for console command arguments validation.
     /// </summary>
     public interface IArgumentValidator
     {
         /// <summary>
-        /// Gets the error validation message if validation is failed
+        /// Gets the error validation message if validation is failed.
         /// </summary>
         string ErrorMessage { get; }
 
         /// <summary>
-        /// Validate console command arguments
+        /// Validate console command arguments.
         /// </summary>
-        /// <param name="args">Input arguments</param>
-        /// <returns>true - validation succeeded; false - fail</returns>
+        /// <param name="args">Input arguments.</param>
+        /// <returns>true - validation succeeded; false - fail.</returns>
         bool Validate(IEnumerable<string> args);
     }
 }

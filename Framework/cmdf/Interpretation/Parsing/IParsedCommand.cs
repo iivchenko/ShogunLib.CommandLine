@@ -9,17 +9,17 @@ using System.Collections.Generic;
 namespace CommandLineInterpreterFramework.Interpretation.Parsing
 {
     /// <summary>
-    /// Represents parsed string as a command
+    /// Represents parsed string as a command.
     /// </summary>
     public interface IParsedCommand
     {
         /// <summary>
-        /// Gets command name
+        /// Gets command name.
         /// </summary>
         string Name { get; }
 
         /// <summary>
-        /// Gets command parameters with arguments
+        /// Gets command parameters with arguments.
         /// </summary>
         IEnumerable<string> Args { get; }
     }

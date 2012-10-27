@@ -14,7 +14,7 @@ using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.Lim
 
 namespace ExeAsCommand
 {
-    public class Program
+    public static class Program
     {
         private const string CommandName = "HelloWorld";
         private const string CommandParameter = "-helloMan:";

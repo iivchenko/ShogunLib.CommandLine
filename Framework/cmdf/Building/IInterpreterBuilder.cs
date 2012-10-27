@@ -11,29 +11,29 @@ using CommandLineInterpreterFramework.Interpretation;
 namespace CommandLineInterpreterFramework.Building
 {
     /// <summary>
-    /// Provides functionality for lazy interpreter initialization
+    /// Provides functionality for lazy interpreter initialization.
     /// </summary>
     public interface IInterpreterBuilder
     {
         /// <summary>
-        /// Gets lazy command by its name
+        /// Gets lazy command by its name.
         /// </summary>
         ICommandBuilder this[string name] { get; }
 
         /// <summary>
-        /// Add new command with specified name
+        /// Add new command with specified name.
         /// </summary>
-        /// <returns>Itself</returns>
+        /// <returns>Pointer to this.</returns>
         IInterpreterBuilder Add(string name);
 
         /// <summary>
         /// Set help command name and action.
         /// </summary>
-        /// <returns>Itself</returns>
+        /// <returns>Pointer to this.</returns>
         IInterpreterBuilder SetHelp(string name, EventHandler<HelpCommandEventArgs> helpAction);
         
         /// <summary>
-        /// Create interpreter with specified data
+        /// Create interpreter with specified data.
         /// </summary>
         IInterpreter Create();
     }

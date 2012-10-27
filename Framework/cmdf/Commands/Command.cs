@@ -13,7 +13,7 @@ using CommandLineInterpreterFramework.Commands.Parameters;
 namespace CommandLineInterpreterFramework.Commands
 {
     /// <summary>
-    /// Lazy realization for the console command
+    /// Lazy realization for the console command.
     /// </summary>
     public class Command : ICommand
     {
@@ -21,12 +21,12 @@ namespace CommandLineInterpreterFramework.Commands
         private readonly IDictionary<string, IParameter> _parameters;
 
         /// <summary>
-        /// Initializes a new instance of the Command class
+        /// Initializes a new instance of the Command class.
         /// </summary>
-        /// <param name="name">Command name. Shouldn't have white spaces</param>
-        /// <param name="description">Command description. Shouldn't have white spaces</param>
-        /// <param name="parameters">Command parameters. Shouldn't be a null value. Parameters names (Dictionary keys) should be in uppercase</param>
-        /// <param name="action">Specific action  performed by command. Shouldn't be null</param>
+        /// <param name="name">Command name. Shouldn't have white spaces.</param>
+        /// <param name="description">Command description. Shouldn't have white spaces.</param>
+        /// <param name="parameters">Command parameters. Shouldn't be a null value. Parameters names (Dictionary keys) should be in uppercase.</param>
+        /// <param name="action">Specific action  performed by command. Shouldn't be null.</param>
         public Command(string name,
                        string description,
                        IDictionary<string, IParameter> parameters,
@@ -72,12 +72,12 @@ namespace CommandLineInterpreterFramework.Commands
         public string Name { get; private set; }
 
         /// <summary>
-        /// Gets command description
+        /// Gets command description.
         /// </summary>
         public string Description { get; private set; }
 
         /// <summary>
-        /// Gets description of the command parameters
+        /// Gets description of the command parameters.
         /// </summary>
         public IEnumerable<IParameterInfo> Parameters
         {
@@ -94,19 +94,19 @@ namespace CommandLineInterpreterFramework.Commands
         }
 
         /// <summary>
-        /// Performs validation and specific action. Firstly call Validate method
+        /// Performs validation and specific action. Firstly call Validate method.
         /// </summary>
-        /// <param name="args">Command input arguments</param>
+        /// <param name="args">Command input arguments.</param>
         public virtual void Execute(IEnumerable<string> args)
         {
             _action(Validate(args));
         }
 
         /// <summary>
-        /// Performs validation for the input argements. Called by Execute method
+        /// Performs validation for the input arguments. Called by Execute method.
         /// </summary>
-        /// <param name="args">Input arguments</param>
-        /// <returns>Validated set of arguments</returns>
+        /// <param name="args">Input arguments.</param>
+        /// <returns>Validated set of arguments.</returns>
         protected virtual IDictionary<string, IEnumerable<string>> Validate(IEnumerable<string> args)
         {
             if (args == null)

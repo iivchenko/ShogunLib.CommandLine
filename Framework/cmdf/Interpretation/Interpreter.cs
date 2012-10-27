@@ -14,7 +14,7 @@ using CommandLineInterpreterFramework.Interpretation.Parsing;
 namespace CommandLineInterpreterFramework.Interpretation
 {
     /// <summary>
-    /// Standard mechanism of the command line interpreter cycle
+    /// Standard mechanism of the command line interpreter cycle.
     /// </summary>
     public class Interpreter : IInterpreter
     {
@@ -23,7 +23,7 @@ namespace CommandLineInterpreterFramework.Interpretation
         private readonly string _help;
 
         /// <summary>
-        /// Initializes a new instance of the Interpreter class
+        /// Initializes a new instance of the Interpreter class.
         /// </summary>
         /// <param name="inputParser">Parser for the command input. Can't be null.</param>
         /// <param name="commands">Available console commands. Can't be null. Command names (Dictionary keys) should be in uppercase.</param>

@@ -14,7 +14,7 @@ using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
 namespace CommandLineInterpreterFramework.Commands.Parameters
 {
     /// <summary>
-    /// Lazy realization of the the console command parameter
+    /// Lazy realization of the the console command parameter.
     /// </summary>
     public class Parameter : IParameter
     {
@@ -22,10 +22,10 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
         private readonly IArgumentValidator _argumentValidator;
 
         /// <summary>
-        /// Initializes a new instance of the Parameter class
+        /// Initializes a new instance of the Parameter class.
         /// </summary>
-        /// <param name="parameterInfo">Contains paramter name and description</param>
-        /// <param name="argumentValidator">Argument validator</param>
+        /// <param name="parameterInfo">Contains parameter name and description.</param>
+        /// <param name="argumentValidator">Argument validator.</param>
         public Parameter(IParameterInfo parameterInfo, IArgumentValidator argumentValidator)
         {
             var exceptions = new List<Exception>();
@@ -50,7 +50,7 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
         }
 
         /// <summary>
-        /// Gets parameter information
+        /// Gets parameter information.
         /// </summary>
         public IParameterInfo Info
         {
@@ -58,11 +58,11 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
         }
 
         /// <summary>
-        /// Performs validation on the input arguments
+        /// Performs validation on the input arguments.
         /// </summary>
-        /// <param name="args">Input arguments</param>
+        /// <param name="args">Input arguments.</param>
         /// <exception cref="ArgumentValidationException"/>
-        /// <returns>Validated argument</returns>
+        /// <returns>Validated argument.</returns>
         public virtual IArgument Validate(IEnumerable<string> args)
         {
             if (args == null)
@@ -87,12 +87,12 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
             // arguments whith parameter prefix
             var parameters = args.Where(arg => arg.StartsWith(_parameterInfo.Name, StringComparison.OrdinalIgnoreCase)).ToList();
 
-            // arguments whithout parameter prefix
+            // arguments whithout parameter prefix.
             var arguments = new List<string>();
 
             foreach (var parameter in parameters)
             {
-                // argument without parameter prefix
+                // argument without parameter prefix.
                 var argument = parameter.Substring(_parameterInfo.Name.Length, parameter.Length - _parameterInfo.Name.Length);
 
                 arguments.Add(argument);

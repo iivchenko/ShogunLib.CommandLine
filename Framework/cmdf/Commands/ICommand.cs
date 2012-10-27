@@ -10,7 +10,7 @@ using CommandLineInterpreterFramework.Commands.Parameters;
 namespace CommandLineInterpreterFramework.Commands
 {
     /// <summary>
-    /// Provides functionality to work with the command
+    /// Provides functionality to work with the command.
     /// </summary>
     public interface ICommand
     {
@@ -30,9 +30,9 @@ namespace CommandLineInterpreterFramework.Commands
         IEnumerable<IParameterInfo> Parameters { get; }
 
         /// <summary>
-        /// Performs specific action
+        /// Performs specific action.
         /// </summary>
-        /// <param name="args">Command input arguments</param> 
+        /// <param name="args">Command input arguments.</param> 
         void Execute(IEnumerable<string> args);
     }
 }

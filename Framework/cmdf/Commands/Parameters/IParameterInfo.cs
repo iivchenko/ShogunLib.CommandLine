@@ -7,17 +7,17 @@
 namespace CommandLineInterpreterFramework.Commands.Parameters
 {
     /// <summary>
-    /// Contains parameters data: Name and Description
+    /// Contains parameters data: Name and Description.
     /// </summary>
     public interface IParameterInfo
     {
         /// <summary>
-        /// Gets parameters name
+        /// Gets parameters name.
         /// </summary>
         string Name { get; }
 
         /// <summary>
-        /// Gets parameters description
+        /// Gets parameters description.
         /// </summary>
         string Description { get; }
     }

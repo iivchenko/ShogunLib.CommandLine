@@ -9,23 +9,23 @@ namespace CommandLineInterpreterFramework.Common.Strings
     // TODO: Feature of the next version
 
     /// <summary>
-    /// Simple wrapper for the System.String type. Do nothing with input string just wrapes it
+    /// Simple wrapper for the System.String type. Do nothing with input string.
     /// </summary>
     public class StringWrapper : IString
     {
         private readonly string _string;
 
         /// <summary>
-        /// Initializes a new instance of the StringWrapper class
+        /// Initializes a new instance of the StringWrapper class.
         /// </summary>
-        /// <param name="value">Wrapped string</param>
+        /// <param name="value">Wrapped string.</param>
         public StringWrapper(string value)
         {
             _string = value;
         }
 
         /// <summary>
-        /// Return string representation of the StringWrapper object. The same as ToString method
+        /// Return string representation of the StringWrapper object. The same as ToString method.
         /// </summary>
         public string AsString()
         {
@@ -33,7 +33,7 @@ namespace CommandLineInterpreterFramework.Common.Strings
         }
 
         /// <summary>
-        /// Return string representation of the StringWrapper object
+        /// Return string representation of the StringWrapper object.
         /// </summary>
         public override string ToString()
         {

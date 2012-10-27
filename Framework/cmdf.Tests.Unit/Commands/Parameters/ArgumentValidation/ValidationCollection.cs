@@ -10,7 +10,7 @@ using System.Linq;
 namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.ArgumentValidation
 {
     /// <summary>
-    /// Used in argument validation tests
+    /// Used in argument validation tests.
     /// </summary>
     public class ValidationCollection : Collection<string>
     {

@@ -7,12 +7,12 @@
 namespace CommandLineInterpreterFramework.Building
 {
     /// <summary>
-    /// Provides functionality for lazy interpreter initialization
+    /// Provides functionality for lazy interpreter initialization.
     /// </summary>
     public static class InterpreterBuilderFactory
     {
         /// <summary>
-        /// Creates Interpreter builer
+        /// Creates Interpreter builder.
         /// </summary>
         public static IInterpreterBuilder Create()
         {

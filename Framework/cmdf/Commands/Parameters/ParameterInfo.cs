@@ -10,15 +10,15 @@ using System.Collections.Generic;
 namespace CommandLineInterpreterFramework.Commands.Parameters
 {
     /// <summary>
-    /// Contains parameters data: Name and Description
+    /// Contains parameters data: Name and Description.
     /// </summary>
     public class ParameterInfo : IParameterInfo
     {
         /// <summary>
-        /// Initializes a new instance of the ParameterInfo class
+        /// Initializes a new instance of the ParameterInfo class.
         /// </summary>
-        /// <param name="name">Parameter name</param>
-        /// <param name="description">Parameter description</param>
+        /// <param name="name">Parameter name.</param>
+        /// <param name="description">Parameter description.</param>
         public ParameterInfo(string name, string description)
         {
             var exceptions = new List<Exception>();
@@ -43,12 +43,12 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
         }
 
         /// <summary>
-        /// Gets parameters name
+        /// Gets parameters name.
         /// </summary>
         public string Name { get; private set; }
 
         /// <summary>
-        /// Gets parameters description
+        /// Gets parameters description.
         /// </summary>
         public string Description { get; private set; }
     }

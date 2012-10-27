@@ -9,15 +9,15 @@ using System.Collections.Generic;
 namespace CommandLineInterpreterFramework.Commands.Parameters
 {
     /// <summary>
-    /// Lazy realization of the console command argument
+    /// Lazy realization of the console command argument.
     /// </summary>
     public class Argument : IArgument
     {
         /// <summary>
-        /// Initializes a new instance of the Argument class
+        /// Initializes a new instance of the Argument class.
         /// </summary>
-        /// <param name="name">Argument name</param>
-        /// <param name="values">Argument values</param>
+        /// <param name="name">Argument name.</param>
+        /// <param name="values">Argument values.</param>
         public Argument(string name, IEnumerable<string> values)
         {
             Name = name;
@@ -25,12 +25,12 @@ namespace CommandLineInterpreterFramework.Commands.Parameters
         }
 
         /// <summary>
-        /// Gets argument name
+        /// Gets argument name.
         /// </summary>
         public string Name { get; private set; }
 
         /// <summary>
-        /// Gets argument values
+        /// Gets argument values.
         /// </summary>
         public IEnumerable<string> Values { get; private set; }
     }

@@ -10,7 +10,7 @@ using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
 namespace CommandLineInterpreterFramework.Building
 {
     /// <summary>
-    /// Lazy parameter initialization
+    /// Lazy parameter initialization.
     /// </summary>>
     public class ParameterBuilder : IParameterBuilder
     {
@@ -19,9 +19,9 @@ namespace CommandLineInterpreterFramework.Building
         private string _description;
 
         /// <summary>
-        /// Initializes a new instance of the ParameterBuilder class
+        /// Initializes a new instance of the ParameterBuilder class.
         /// </summary>
-        /// <param name="name">Future parameter name</param>
+        /// <param name="name">Future parameter name.</param>
         public ParameterBuilder(string name)
         {
             _name = name;
@@ -30,9 +30,9 @@ namespace CommandLineInterpreterFramework.Building
         }
 
         /// <summary>
-        ///  Sets parameter description
+        ///  Sets parameter description.
         /// </summary>
-        /// <returns>Itself</returns>
+        /// <returns>Pointer to this.</returns>
         public IParameterBuilder SetDescription(string description)
         {
             _description = description;
@@ -41,9 +41,9 @@ namespace CommandLineInterpreterFramework.Building
         }
 
         /// <summary>
-        /// Adds new validator to the end of validators list
+        /// Adds new validator to the end of validators list.
         /// </summary>
-        /// <returns>Itself</returns>
+        /// <returns>Pointer to this.</returns>
         public IParameterBuilder AddValidator(IArgumentValidator validator)
         {
             _validators.Add(validator);
@@ -52,7 +52,7 @@ namespace CommandLineInterpreterFramework.Building
         }
 
         /// <summary>
-        /// Create parameter with specified data
+        /// Create parameter with specified data.
         /// </summary>
         public IParameter Create()
         {

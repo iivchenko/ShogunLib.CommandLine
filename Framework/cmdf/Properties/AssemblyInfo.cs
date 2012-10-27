@@ -4,6 +4,7 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
+using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -35,9 +36,6 @@ using System.Runtime.InteropServices;
 //      Revision
 [assembly: AssemblyVersion("0.1.1.*")]
 [assembly: AssemblyFileVersion("0.1.0.0")]
-
-// Global suppreesion list
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Cmdf")]
 
 // TODO: TeamCity
 // TODO: 0.2.0.0 Implement default value principals for tha Parameter. Modify lazy builder

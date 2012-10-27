@@ -65,7 +65,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters
         }
 
         [Test]
-        public void Validate_AllConditionsAreMet_RetunrnsArgument()
+        public void Validate_AllConditionsAreMet_ReturnsArgument()
         {
             var args = new[]
                            {

@@ -10,24 +10,24 @@ using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation;
 namespace CommandLineInterpreterFramework.Building
 {
     /// <summary>
-    /// Provides functionality for lazy parameter initialization
+    /// Provides functionality for lazy parameter initialization.
     /// </summary>
     public interface IParameterBuilder
     {
         /// <summary>
-        ///  Sets parameter description
+        ///  Sets parameter description.
         /// </summary>
-        /// <returns>Itself</returns>
+        /// <returns>Pointer to this.</returns>
         IParameterBuilder SetDescription(string description);
 
         /// <summary>
-        /// Adds new validator to the end of validators list
+        /// Adds new validator to the end of validators list.
         /// </summary>
-        /// <returns>Itself</returns>
+        /// <returns>Pointer to this.</returns>
         IParameterBuilder AddValidator(IArgumentValidator validator);
 
         /// <summary>
-        /// Create parameter with specified data
+        /// Create parameter with specified data.
         /// </summary>
         IParameter Create();
     }

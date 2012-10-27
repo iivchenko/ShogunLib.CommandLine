@@ -11,12 +11,12 @@ using System.Globalization;
 namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.TypeValidation
 {
     /// <summary>
-    /// Validate if specified arguments can be converted to the Int type
+    /// Validate if specified arguments can be converted to the Int type.
     /// </summary>
     public class IntTypeValidator : IArgumentValidator
     {
         /// <summary>
-        /// Initializes a new instance of the IntTypeValidator class
+        /// Initializes a new instance of the IntTypeValidator class.
         /// </summary>
         public IntTypeValidator()
         {
@@ -24,15 +24,15 @@ namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation
         }
 
         /// <summary>
-        /// Gets the error validation message if validation is failed
+        /// Gets the error validation message if validation is failed.
         /// </summary>
         public string ErrorMessage { get; private set; }
 
         /// <summary>
-        /// Validate console command arguments
+        /// Validate console command arguments.
         /// </summary>
-        /// <param name="args">Input arguments</param>
-        /// <returns>true - validation succeeded; false - fail</returns>
+        /// <param name="args">Input arguments.</param>
+        /// <returns>true - validation succeeded; false - fail.</returns>
         public bool Validate(IEnumerable<string> args)
         {
             if (args == null)

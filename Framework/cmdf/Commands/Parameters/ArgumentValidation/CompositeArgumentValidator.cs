@@ -10,14 +10,14 @@ using System.Globalization;
 namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation
 {
     /// <summary>
-    /// This is compositor for different argument validators
+    /// This is compositor for different argument validators.
     /// </summary>
     public class CompositeArgumentValidator : IArgumentValidator
     {
         private readonly IList<IArgumentValidator> _validators;
 
         /// <summary>
-        /// Initializes a new instance of the CompositeArgumentValidator class
+        /// Initializes a new instance of the CompositeArgumentValidator class.
         /// </summary>
         public CompositeArgumentValidator()
         {
@@ -26,24 +26,24 @@ namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation
         }
 
         /// <summary>
-        /// Gets the error validation message if validation is failed
+        /// Gets the error validation message if validation is failed.
         /// </summary>
         public string ErrorMessage { get; private set; }
 
         /// <summary>
-        /// Adds specific validator to the validators list
+        /// Adds specific validator to the validators list.
         /// </summary>
-        /// <param name="argumentValidator">Specific argument validator</param>
+        /// <param name="argumentValidator">Specific argument validator.</param>
         public void Add(IArgumentValidator argumentValidator)
         {
             _validators.Add(argumentValidator);
         }
 
         /// <summary>
-        /// Validate console command arguments
+        /// Validate console command arguments.
         /// </summary>
-        /// <param name="args">Input arguments</param>
-        /// <returns>true - validation succeeded; false - fail</returns>
+        /// <param name="args">Input arguments.</param>
+        /// <returns>true - validation succeeded; false - fail.</returns>
         public bool Validate(IEnumerable<string> args)
         {
             var error = ErrorMessage = string.Empty;

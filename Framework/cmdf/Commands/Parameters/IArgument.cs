@@ -9,17 +9,17 @@ using System.Collections.Generic;
 namespace CommandLineInterpreterFramework.Commands.Parameters
 {
     /// <summary>
-    /// Represents specific argument for the console command
+    /// Represents specific argument for the console command.
     /// </summary>
     public interface IArgument
     {
         /// <summary>
-        /// Gets argument name
+        /// Gets argument name.
         /// </summary>
         string Name { get; }
 
         /// <summary>
-        /// Gets argment values
+        /// Gets argument values.
         /// </summary>
         IEnumerable<string> Values { get; }
     }

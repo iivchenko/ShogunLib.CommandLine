@@ -18,7 +18,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Validate_NullArgumets_Throws()
+        public void Validate_NullArguments_Throws()
         {
             Validator.Validate(null);
         }

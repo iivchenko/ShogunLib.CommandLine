@@ -11,16 +11,16 @@ using System.Text.RegularExpressions;
 namespace CommandLineInterpreterFramework.Interpretation.Parsing
 {
     /// <summary>
-    /// Standard mechanism to parse console input
+    /// Standard mechanism to parse console input.
     /// </summary>
     public class InputParser : IInputParser
     {
         /// <summary>
-        /// Parses console input. If input is null, empty string or whitespacese function will return null
+        /// Parses console input. If input is null, empty string or whitespaces function will return null.
         /// </summary>
-        /// <param name="input">Console input</param>
+        /// <param name="input">Console input.</param>
         /// <exception cref="InputParserException"/>
-        /// <returns>Parsed result</returns>
+        /// <returns>Parsed result.</returns>
         public IParsedCommand Parse(string input)
         {
             if (string.IsNullOrWhiteSpace(input))

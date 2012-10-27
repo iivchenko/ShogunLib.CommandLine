@@ -15,6 +15,7 @@ To apply this to a project:
   <Words>
     <Recognized>
       <Word>param</Word>
+      <Word>cmdf</Word>
     </Recognized>
   </Words>
 </Dictionary>

@@ -4,6 +4,7 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
+using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 

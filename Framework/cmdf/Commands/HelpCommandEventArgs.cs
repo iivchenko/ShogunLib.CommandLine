@@ -18,7 +18,7 @@ namespace CommandLineInterpreterFramework.Commands
         /// <summary>
         /// Initializes a new instance of the HelpCommandEventArgs class.
         /// </summary>
-        /// <param name="commands">Commands descriptions</param>
+        /// <param name="commands">Commands descriptions.</param>
         public HelpCommandEventArgs(IList<CommandDescriptor> commands)
         {
             Commands = new ReadOnlyCollection<CommandDescriptor>(commands);

@@ -11,12 +11,12 @@ using System.Linq;
 namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.LimitValidation
 {
     /// <summary>
-    /// Parameter should be used once or more
+    /// Parameter should be used once or more.
     /// </summary>
     public class MultipleParameterValidator : IArgumentValidator
     {
         /// <summary>
-        /// Initializes a new instance of the MultipleParameterValidator class
+        /// Initializes a new instance of the MultipleParameterValidator class.
         /// </summary>
         public MultipleParameterValidator()
         {
@@ -24,15 +24,15 @@ namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation
         }
 
         /// <summary>
-        /// Gets the validation failed message
+        /// Gets the validation failed message.
         /// </summary>
         public string ErrorMessage { get; private set; }
 
         /// <summary>
-        /// Performs count validation of the specified parameter. Parameter should be used once or more. If not than ErrorMessage is set
+        /// Performs count validation of the specified parameter. Parameter should be used once or more. If not than ErrorMessage is set.
         /// </summary>
-        /// <param name="args">Input arguments</param>
-        /// <returns>true - validaion suceeded; false - validation filed</returns>
+        /// <param name="args">Input arguments.</param>
+        /// <returns>true - validation succeeded; false - validation filed.</returns>
         public bool Validate(IEnumerable<string> args)
         {
             var argsCount = args.Count();

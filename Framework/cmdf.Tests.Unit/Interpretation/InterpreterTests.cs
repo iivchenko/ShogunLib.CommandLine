@@ -79,7 +79,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var mockCommand = FakeCreator.CreateCommandFake(FakeCreator.CommandName);
             var commands = new CommandsDictionary
                                {
-                                   {FakeCreator.CommandName, mockCommand.Object}
+                                   { FakeCreator.CommandName, mockCommand.Object }
                                };
             var interpreter = new Interpreter(parser.Object, commands, HelpCommandName);
             interpreter.Help += (sender, e) => isRaised = true;
@@ -98,7 +98,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var mockCommand = FakeCreator.CreateCommandFake(FakeCreator.CommandName);
             var commands = new CommandsDictionary
                                {
-                                   {FakeCreator.CommandName, mockCommand.Object}
+                                   { FakeCreator.CommandName, mockCommand.Object }
                                };
             var interpreter = new Interpreter(parser.Object, commands, HelpCommandName);
             interpreter.Help += (sender, e) => isRaised = true;
@@ -145,7 +145,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Interpretation
             var mockCommand2 = FakeCreator.CreateCommandFake(Command2);
 
             var parser = new Mock<IInputParser>();
-            parser.Setup(x => x.Parse(It.IsAny<string>())).Returns(new ParsedCommand(HelpCommandName, new[] {Command1}));
+            parser.Setup(x => x.Parse(It.IsAny<string>())).Returns(new ParsedCommand(HelpCommandName, new[] { Command1 }));
 
             var actualCommands = new List<CommandDescriptor>();
             var commands = new CommandsDictionary

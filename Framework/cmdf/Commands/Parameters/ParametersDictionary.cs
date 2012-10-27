@@ -11,32 +11,32 @@ using System.Runtime.Serialization;
 namespace CommandLineInterpreterFramework.Commands.Parameters
 {
     /// <summary>
-    /// Parameters container for the specific command
+    /// Parameters container for the specific command.
     /// </summary>
     [Serializable]
     public class ParametersDictionary : Dictionary<string, IParameter>
     {
         /// <summary>
-        /// Initializes a new instance of the ParametersDictionary class
+        /// Initializes a new instance of the ParametersDictionary class.
         /// </summary>
         public ParametersDictionary()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the ParametersDictionary class with serialized data
+        /// Initializes a new instance of the ParametersDictionary class with serialized data.
         /// </summary>
-        /// <param name="info">A System.Runtime.Serialization.SerializationInfo object containing the information required to serialize the dictionary</param>
-        /// <param name="context">A System.Runtime.Serialization.StreamingContext structure containing the source and destination of the serialized stream associated with the Dictionary</param>
+        /// <param name="info">A System.Runtime.Serialization.SerializationInfo object containing the information required to serialize the dictionary.</param>
+        /// <param name="context">A System.Runtime.Serialization.StreamingContext structure containing the source and destination of the serialized stream associated with the Dictionary.</param>
         protected ParametersDictionary(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
 
         /// <summary>
-        /// Add and convert console parameter
+        /// Add and convert console parameter.
         /// </summary>
-        /// <param name="parameter">Validated console command parameter</param>
+        /// <param name="parameter">Validated console command parameter.</param>
         public void Add(IParameter parameter)
         {
             if (parameter == null)
