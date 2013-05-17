@@ -25,7 +25,7 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\..\..\..\Rules\Shogun.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Debug\Cmdf.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Cmdf.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\..\..\..\Rules\Shogun.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\Cmdf.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Building\CommandBuilder.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Commands\Parameters\ArgumentValidation\LimitValidation\OptionalParameterValidator.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\LimitValidation\SingleParameterValidator.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\TypeValidation\IntTypeValidator.cs" />
+    <Compile Include="Commands\Parameters\ArgumentValidation\TypeValidation\UIntTypeValidator.cs" />
     <Compile Include="Commands\Parameters\IArgument.cs" />
     <Compile Include="Commands\Parameters\IParameter.cs" />
     <Compile Include="Commands\Parameters\IParameterInfo.cs" />

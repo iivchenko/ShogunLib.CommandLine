@@ -53,6 +53,7 @@
     <Compile Include="Commands\Parameters\ArgumentValidation\LimitValidation\OptionalParameterTests.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\LimitValidation\SingleParameterTests.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\TypeValidation\IntTypeValidatorTests.cs" />
+    <Compile Include="Commands\Parameters\ArgumentValidation\TypeValidation\UIntTypeValidatorTests.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\ValidationCollection.cs" />
     <Compile Include="Commands\Parameters\ParameterInfoTests.cs" />
     <Compile Include="Commands\Parameters\ParametersDictionaryTests.cs" />

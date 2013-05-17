@@ -13,7 +13,7 @@ namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation
     /// <summary>
     /// Validate if specified arguments can be converted to the Int type.
     /// </summary>
-    public class IntTypeValidator : IArgumentValidator
+    public sealed class IntTypeValidator : IArgumentValidator
     {
         /// <summary>
         /// Initializes a new instance of the IntTypeValidator class.

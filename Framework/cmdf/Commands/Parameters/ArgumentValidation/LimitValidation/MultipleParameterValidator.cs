@@ -13,7 +13,7 @@ namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation
     /// <summary>
     /// Parameter should be used once or more.
     /// </summary>
-    public class MultipleParameterValidator : IArgumentValidator
+    public sealed class MultipleParameterValidator : IArgumentValidator
     {
         /// <summary>
         /// Initializes a new instance of the MultipleParameterValidator class.

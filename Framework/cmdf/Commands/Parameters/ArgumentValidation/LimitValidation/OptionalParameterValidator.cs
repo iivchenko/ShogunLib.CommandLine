@@ -13,7 +13,7 @@ namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation
     /// <summary>
     /// Parameter should be used once or should not be used.
     /// </summary>
-    public class OptionalParameterValidator : IArgumentValidator
+    public sealed class OptionalParameterValidator : IArgumentValidator
     {
         /// <summary>
         /// Initializes a new instance of the OptionalParameterValidator class.

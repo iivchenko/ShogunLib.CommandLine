@@ -4,24 +4,22 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation
+namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.TypeValidation
 {
     /// <summary>
-    /// This is compositor for different argument validators.
+    /// Validate if specified arguments can be converted to the UInt type.
     /// </summary>
-    public sealed class CompositeArgumentValidator : IArgumentValidator
+    public sealed class UIntTypeValidator : IArgumentValidator
     {
-        private readonly IList<IArgumentValidator> _validators;
-
-        /// <summary>
-        /// Initializes a new instance of the CompositeArgumentValidator class.
+         /// <summary>
+        /// Initializes a new instance of the UIntTypeValidator class.
         /// </summary>
-        public CompositeArgumentValidator()
+        public UIntTypeValidator()
         {
-            _validators = new List<IArgumentValidator>();
             ErrorMessage = string.Empty;
         }
 
@@ -31,30 +29,32 @@ namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation
         public string ErrorMessage { get; private set; }
 
         /// <summary>
-        /// Adds specific validator to the validators list.
-        /// </summary>
-        /// <param name="argumentValidator">Specific argument validator.</param>
-        public void Add(IArgumentValidator argumentValidator)
-        {
-            _validators.Add(argumentValidator);
-        }
-
-        /// <summary>
         /// Validate console command arguments.
         /// </summary>
         /// <param name="args">Input arguments.</param>
         /// <returns>true - validation succeeded; false - fail.</returns>
         public bool Validate(IEnumerable<string> args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
+
             var error = ErrorMessage = string.Empty;
 
-            foreach (var validator in _validators)
+            foreach (var arg in args)
             {
-                if (!validator.Validate(args))
+                uint result;
+                if (!uint.TryParse(arg, out result))
                 {
                     error = string.IsNullOrEmpty(error)
-                                ? string.Format(CultureInfo.InvariantCulture, "{0}", validator.ErrorMessage)
-                                : string.Format(CultureInfo.InvariantCulture, "{0}\n{1}", error, validator.ErrorMessage);
+                                ? string.Format(CultureInfo.InvariantCulture,
+                                                "Value {0} can't be converted to unsigned integer type.",
+                                                arg)
+                                : string.Format(CultureInfo.InvariantCulture,
+                                                "{0}\nValue {1} can't be converted to unsigned integer type.",
+                                                error,
+                                                arg);
                 }
             }
 
