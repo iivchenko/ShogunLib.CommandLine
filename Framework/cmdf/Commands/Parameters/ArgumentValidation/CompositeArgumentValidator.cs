@@ -4,6 +4,7 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -46,6 +47,11 @@ namespace CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation
         /// <returns>true - validation succeeded; false - fail.</returns>
         public bool Validate(IEnumerable<string> args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
+
             var error = ErrorMessage = string.Empty;
 
             foreach (var validator in _validators)

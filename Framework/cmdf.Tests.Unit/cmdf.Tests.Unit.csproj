@@ -49,9 +49,12 @@
     <Compile Include="Commands\FakeCreator.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\BaseValidatorTests.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\CompositeArgumentValidatorTests.cs" />
+    <Compile Include="Commands\Parameters\ArgumentValidation\FileSystemValidation\DriveExistsTests.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\LimitValidation\MultipleParameterTests.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\LimitValidation\OptionalParameterTests.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\LimitValidation\SingleParameterTests.cs" />
+    <Compile Include="Commands\Parameters\ArgumentValidation\TextValidation\CaseSensitiveMatchStringTests.cs" />
+    <Compile Include="Commands\Parameters\ArgumentValidation\TextValidation\CaseNotSensitiveMatchStringTests.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\TypeValidation\IntTypeValidatorTests.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\TypeValidation\UIntTypeValidatorTests.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\ValidationCollection.cs" />

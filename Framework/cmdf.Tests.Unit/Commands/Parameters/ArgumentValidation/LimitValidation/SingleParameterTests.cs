@@ -13,12 +13,6 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
     [TestFixture]
     public class SingleParameterTests : BaseValidatorTests
     {
-        [TestFixtureSetUp]
-        public void Setup()
-        {
-            Validator = new SingleParameterValidator();
-        }
-
         protected override IEnumerable<ValidationCollection> SuccessTestArgs()
         {
             return new[]
@@ -54,6 +48,11 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
                                    "hello4"
                                }
                        };
+        }
+
+        protected override void SetupInternal()
+        {
+            Validator = new SingleParameterValidator();
         }
     }
 }

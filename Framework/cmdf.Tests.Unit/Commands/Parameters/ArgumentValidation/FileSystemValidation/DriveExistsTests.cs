@@ -5,14 +5,13 @@
 // <email>iivchenko@live.com</email>
 
 using System.Collections.Generic;
-using System.Globalization;
-using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.TypeValidation;
+using CommandLineInterpreterFramework.Commands.Parameters.ArgumentValidation.FileSystemValidation;
 using NUnit.Framework;
 
-namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.ArgumentValidation.TypeValidation
+namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.ArgumentValidation.FileSystemValidation
 {
     [TestFixture]
-    public class IntTypeValidatorTests : BaseValidatorTests
+    public sealed class DriveExistsTests : BaseValidatorTests
     {
         protected override IEnumerable<ValidationCollection> SuccessTestArgs()
         {
@@ -20,13 +19,8 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
                        {
                            new ValidationCollection
                                {
-                                   int.MinValue.ToString(CultureInfo.InvariantCulture),
-                                   "-1",
-                                   "0",
-                                   "1",
-                                   "2",
-                                   "3",
-                                   int.MaxValue.ToString(CultureInfo.InvariantCulture)
+                                   "C:\\",
+                                   "C:\\Hello\\"
                                }
                        };
         }
@@ -37,18 +31,15 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
                        {
                            new ValidationCollection
                                {
-                                   "a",
-                                   "1.1",
-                                   "1,1",
-                                   ".",
-                                   "-"
+                                   "2:\\",
+                                   "2:\\Hello\\"
                                }
                        };
         }
 
         protected override void SetupInternal()
         {
-            Validator = new IntTypeValidator();
+            Validator = new DriveExistsValidator();
         }
     }
 }

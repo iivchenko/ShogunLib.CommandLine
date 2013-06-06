@@ -29,7 +29,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
 
             _validator.Add(validator);
 
-            var result = _validator.Validate(null);
+            var result = _validator.Validate(new List<string>());
 
             Assert.IsTrue(result);
         }
@@ -41,7 +41,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
 
             _validator.Add(validator);
 
-            _validator.Validate(null);
+            _validator.Validate(new List<string>());
 
             Assert.IsEmpty(_validator.ErrorMessage);
         }
@@ -52,7 +52,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
             var validator = CreateValidator(false);
             _validator.Add(validator);
 
-            var result = _validator.Validate(null);
+            var result = _validator.Validate(new List<string>());
 
             Assert.IsFalse(result);
         }
@@ -64,7 +64,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
 
             _validator.Add(validator);
 
-            _validator.Validate(null);
+            _validator.Validate(new List<string>());
 
             Assert.IsNotEmpty(_validator.ErrorMessage);
         }

@@ -16,6 +16,12 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
     {
         protected IArgumentValidator Validator { get; set; }
 
+        [SetUp]
+        public virtual void Setup()
+        {
+            SetupInternal();
+        }
+
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Validate_NullArguments_Throws()
@@ -58,5 +64,7 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
         protected abstract IEnumerable<ValidationCollection> SuccessTestArgs();
 
         protected abstract IEnumerable<ValidationCollection> FailTestArgs();
+
+        protected abstract void SetupInternal();
     }
 }

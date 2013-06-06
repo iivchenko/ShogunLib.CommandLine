@@ -55,10 +55,13 @@
     <Compile Include="Commands\Parameters\Argument.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\ArgumentValidationException.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\CompositeArgumentValidator.cs" />
+    <Compile Include="Commands\Parameters\ArgumentValidation\FileSystemValidation\DriveExistsValidator.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\IArgumentValidator.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\LimitValidation\MultipleParameterValidator.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\LimitValidation\OptionalParameterValidator.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\LimitValidation\SingleParameterValidator.cs" />
+    <Compile Include="Commands\Parameters\ArgumentValidation\TextValidation\CaseNotSensitiveMatchStringValidator.cs" />
+    <Compile Include="Commands\Parameters\ArgumentValidation\TextValidation\CaseSensitiveMatchStringValidator.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\TypeValidation\IntTypeValidator.cs" />
     <Compile Include="Commands\Parameters\ArgumentValidation\TypeValidation\UIntTypeValidator.cs" />
     <Compile Include="Commands\Parameters\IArgument.cs" />
@@ -87,7 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\Parameters\ArgumentValidation\NumberValidation\" />
-    <Folder Include="Commands\Parameters\ArgumentValidation\TextValidation\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

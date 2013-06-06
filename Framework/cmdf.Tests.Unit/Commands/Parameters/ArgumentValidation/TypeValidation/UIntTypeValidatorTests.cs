@@ -13,12 +13,6 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
     [TestFixture]
     public class UIntTypeValidatorTests : BaseValidatorTests
     {
-        [TestFixtureSetUp]
-        public void Setup()
-        {
-            Validator = new UIntTypeValidator();
-        }
-
         protected override IEnumerable<ValidationCollection> SuccessTestArgs()
         {
             return new[]
@@ -49,6 +43,11 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
                                    "-1"
                                }
                        };
+        }
+
+        protected override void SetupInternal()
+        {
+            Validator = new UIntTypeValidator();
         }
     }
 }

@@ -13,12 +13,6 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
     [TestFixture]
     public class MultipleParameterTests : BaseValidatorTests
     {
-        [TestFixtureSetUp]
-        public void Setup()
-        {
-            Validator = new MultipleParameterValidator();
-        }
-
         protected override IEnumerable<ValidationCollection> SuccessTestArgs()
         {
             return new[]
@@ -42,6 +36,11 @@ namespace CommandLineInterpreterFramework.Tests.Unit.Commands.Parameters.Argumen
                        {
                            new ValidationCollection()
                        };
+        }
+
+        protected override void SetupInternal()
+        {
+            Validator = new MultipleParameterValidator();
         }
     }
 }
