@@ -23,7 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>..\..\..\..\Rules\Shogun.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\sdks\Shogun.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>bin\Debug\Cmdf.XML</DocumentationFile>
   </PropertyGroup>
@@ -35,7 +35,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>..\..\..\..\Rules\Shogun.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\sdks\Shogun.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Release\Cmdf.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
@@ -95,7 +95,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\..\..\..\ThirdPartyTools\StyleCop\StyleCop.targets" />
+  <Import Project="..\..\sdks\StyleCop\StyleCop.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
