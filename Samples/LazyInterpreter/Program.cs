@@ -34,6 +34,8 @@ namespace LazyInterpreter
                 {
                     Console.WriteLine(e.Message);
                 }
+
+                // TODO: Implement general catch Exception
             }
 
             Console.ReadKey();
