@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShogunLib.CommandLine", "ShogunLib.CommandLine\ShogunLib.CommandLine.csproj", "{871D5AD5-E1F0-4385-90FE-27522CFA40F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShogunLib.CommandLine.Tests", "ShogunLib.CommandLine.Tests\ShogunLib.CommandLine.Tests.csproj", "{3711B274-B776-434D-9CDF-77FC409980E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShogunLib.CommandLine.Items", "ShogunLib.CommandLine.Items", "{2BACBFAC-AF82-460D-99F2-2FCDDCB3FA39}"
+	ProjectSection(SolutionItems) = preProject
+		ShogunLib.CommandLine.Items\CA.ruleset = ShogunLib.CommandLine.Items\CA.ruleset
+		ShogunLib.CommandLine.Items\CA.Tests.ruleset = ShogunLib.CommandLine.Items\CA.Tests.ruleset
+		ShogunLib.CommandLine.Items\CodeAnalysisDictionary.xml = ShogunLib.CommandLine.Items\CodeAnalysisDictionary.xml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{871D5AD5-E1F0-4385-90FE-27522CFA40F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{871D5AD5-E1F0-4385-90FE-27522CFA40F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{871D5AD5-E1F0-4385-90FE-27522CFA40F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{871D5AD5-E1F0-4385-90FE-27522CFA40F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3711B274-B776-434D-9CDF-77FC409980E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3711B274-B776-434D-9CDF-77FC409980E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3711B274-B776-434D-9CDF-77FC409980E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3711B274-B776-434D-9CDF-77FC409980E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
