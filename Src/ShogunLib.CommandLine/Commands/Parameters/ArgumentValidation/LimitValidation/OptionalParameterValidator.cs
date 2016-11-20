@@ -36,10 +36,7 @@ namespace ShogunLib.CommandLine.Commands.Parameters.ArgumentValidation.LimitVali
         /// <returns>true - validation succeeded; false - validation filed.</returns>
         public bool Validate(IEnumerable<string> args)
         {
-            if (args == null)
-            {
-                throw new ArgumentNullException("args");
-            }
+            args.ValidateNull(nameof(args));
 
             var argsCount = args.Count();
 

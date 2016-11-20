@@ -30,7 +30,7 @@ namespace ShogunLib.CommandLine.Tests.Commands
         [Test]
         public void Add_CommandNullName_Throws()
         {
-            Assert.Throws<ArgumentException>(() => _commandsDictionary.Add(FakeCreator.CreateCommand(null)));
+            Assert.Throws<ArgumentNullException>(() => _commandsDictionary.Add(FakeCreator.CreateCommand(null)));
         }
 
         [Test]

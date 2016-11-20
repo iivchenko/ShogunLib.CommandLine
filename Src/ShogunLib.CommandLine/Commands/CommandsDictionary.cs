@@ -39,16 +39,9 @@ namespace ShogunLib.CommandLine.Commands
         /// <param name="command">Validated console command command.</param>
         public void Add(ICommand command)
         {
-            if (command == null)
-            {
-                throw new ArgumentNullException("command");
-            }
-
-            if (string.IsNullOrWhiteSpace(command.Name))
-            {
-                throw new ArgumentException("Command name should not be a null, empty or whitespaces value", "command");
-            }
-
+            command.ValidateNull(nameof(command));
+            command.Name.ValidateStringEmpty(nameof(command.Name));
+          
             Add(command.Name.ToUpperInvariant(), command);
         }
     }

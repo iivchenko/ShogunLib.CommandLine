@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using ShogunLib.CommandLine.Commands.Parameters;
+using ShogunLib.LINQ;
 
 namespace ShogunLib.CommandLine.Commands
 {
@@ -32,32 +33,10 @@ namespace ShogunLib.CommandLine.Commands
                        IDictionary<string, IParameter> parameters,
                        Action<IDictionary<string, IEnumerable<string>>> action)
         {
-            var exceptions = new List<Exception>();
-
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                exceptions.Add(new ArgumentException("Should not be null, empty or whitespaces", "name"));
-            }
-            
-            if (string.IsNullOrWhiteSpace(description))
-            {
-                exceptions.Add(new ArgumentException("Should not be null, empty or whitespaces", "description"));
-            }
-            
-            if (parameters == null)
-            {
-                exceptions.Add(new ArgumentNullException("parameters"));
-            }
-            
-            if (action == null)
-            {
-                exceptions.Add(new ArgumentNullException("action"));
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new AggregateException("Command initialization fail", exceptions);
-            }
+            name.ValidateStringEmpty(nameof(name));
+            description.ValidateStringEmpty(nameof(description));
+            parameters.ValidateNull(nameof(parameters));
+            action.ValidateNull(nameof(action));
 
             Name = name;
             Description = description;
@@ -84,10 +63,8 @@ namespace ShogunLib.CommandLine.Commands
             get
             {
                 var parameterInfos = new Collection<IParameterInfo>();
-                foreach (var parameter in _parameters)
-                {
-                    parameterInfos.Add(parameter.Value.Info);
-                }
+
+                _parameters.ForEach(x => parameterInfos.Add(x.Value.Info));
 
                 return parameterInfos;
             } 
@@ -109,10 +86,7 @@ namespace ShogunLib.CommandLine.Commands
         /// <returns>Validated set of arguments.</returns>
         protected virtual IDictionary<string, IEnumerable<string>> Validate(IEnumerable<string> args)
         {
-            if (args == null)
-            {
-                throw new ArgumentNullException("args");
-            }
+            args.ValidateNull(nameof(args));
 
             return _parameters.Select(parameter => parameter.Value.Validate(args)).ToDictionary(argument => argument.Name, argument => argument.Values);
         }

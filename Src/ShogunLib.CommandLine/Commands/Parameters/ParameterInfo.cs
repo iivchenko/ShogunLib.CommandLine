@@ -21,22 +21,8 @@ namespace ShogunLib.CommandLine.Commands.Parameters
         /// <param name="description">Parameter description.</param>
         public ParameterInfo(string name, string description)
         {
-            var exceptions = new List<Exception>();
-
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                exceptions.Add(new ArgumentException("Should not be null, empty or whitespaces", "name"));
-            }
-
-            if (string.IsNullOrWhiteSpace(description))
-            {
-                exceptions.Add(new ArgumentException("Should not be null, empty or whitespaces", "description"));
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new AggregateException("Parameter initialization fail", exceptions);
-            }
+            name.ValidateStringEmpty(nameof(name));
+            description.ValidateStringEmpty(nameof(description));
 
             Name = name;
             Description = description;

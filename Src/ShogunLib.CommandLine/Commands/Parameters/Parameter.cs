@@ -28,22 +28,8 @@ namespace ShogunLib.CommandLine.Commands.Parameters
         /// <param name="argumentValidator">Argument validator.</param>
         public Parameter(IParameterInfo parameterInfo, IArgumentValidator argumentValidator)
         {
-            var exceptions = new List<Exception>();
-
-            if (parameterInfo == null)
-            {
-                exceptions.Add(new ArgumentNullException("parameterInfo"));
-            }
-
-            if (argumentValidator == null)
-            {
-                exceptions.Add(new ArgumentNullException("argumentValidator"));
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new AggregateException("Parameter initialization fail", exceptions);
-            }
+            parameterInfo.ValidateNull(nameof(parameterInfo));
+            argumentValidator.ValidateNull(nameof(argumentValidator));
 
             _parameterInfo = parameterInfo;
             _argumentValidator = argumentValidator;
@@ -65,11 +51,8 @@ namespace ShogunLib.CommandLine.Commands.Parameters
         /// <returns>Validated argument.</returns>
         public virtual IArgument Validate(IEnumerable<string> args)
         {
-            if (args == null)
-            {
-                throw new ArgumentNullException("args");
-            }
-
+            args.ValidateNull(nameof(args));
+            
             var parameterArguments = GetParametersArguments(args);
 
             if (!_argumentValidator.Validate(parameterArguments))
@@ -88,15 +71,7 @@ namespace ShogunLib.CommandLine.Commands.Parameters
             var parameters = args.Where(arg => arg.StartsWith(_parameterInfo.Name, StringComparison.OrdinalIgnoreCase)).ToList();
 
             // arguments whithout parameter prefix.
-            var arguments = new List<string>();
-
-            foreach (var parameter in parameters)
-            {
-                // argument without parameter prefix.
-                var argument = parameter.Substring(_parameterInfo.Name.Length, parameter.Length - _parameterInfo.Name.Length);
-
-                arguments.Add(argument);
-            }
+            var arguments = parameters.Select(parameter => parameter.Substring(_parameterInfo.Name.Length, parameter.Length - _parameterInfo.Name.Length)).ToList();
 
             return new Collection<string>(arguments);
         }

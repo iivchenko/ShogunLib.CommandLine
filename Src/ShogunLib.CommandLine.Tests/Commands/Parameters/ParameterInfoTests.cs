@@ -17,42 +17,42 @@ namespace ShogunLib.CommandLine.Tests.Commands.Parameters
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Parameters.ParameterInfo", Justification = "Unit test needs it")]
         public void Constructor_NullName_Throws()
         {
-            Assert.Throws<AggregateException>(() => new ParameterInfo(null, FakeCreator.ParameterDescription));
+            Assert.Throws<ArgumentNullException>(() => new ParameterInfo(null, FakeCreator.ParameterDescription));
         }
 
         [Test]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Parameters.ParameterInfo", Justification = "Unit test needs it")]
         public void Constructor_EmptyName_Throws()
         {
-            Assert.Throws<AggregateException>(() => new ParameterInfo(string.Empty, FakeCreator.ParameterDescription));
+            Assert.Throws<ArgumentException>(() => new ParameterInfo(string.Empty, FakeCreator.ParameterDescription));
         }
 
         [Test]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Parameters.ParameterInfo", Justification = "Unit test needs it")]
         public void Constructor_WhiteSpacesName_Throws()
         {
-            Assert.Throws<AggregateException>(() => new ParameterInfo("   ", FakeCreator.ParameterDescription));
+            Assert.Throws<ArgumentException>(() => new ParameterInfo("   ", FakeCreator.ParameterDescription));
         }
 
         [Test]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Parameters.ParameterInfo", Justification = "Unit test needs it")]
         public void Constructor_NullDescription_Throws()
         {
-            Assert.Throws<AggregateException>(() => new ParameterInfo(FakeCreator.ParameterName, null));
+            Assert.Throws<ArgumentNullException>(() => new ParameterInfo(FakeCreator.ParameterName, null));
         }
         
         [Test]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Parameters.ParameterInfo", Justification = "Unit test needs it")]
         public void Constructor_EmptyDescription_Throws()
         {
-            Assert.Throws<AggregateException>(() => new ParameterInfo(FakeCreator.ParameterName, string.Empty));
+            Assert.Throws<ArgumentException>(() => new ParameterInfo(FakeCreator.ParameterName, string.Empty));
         }
 
         [Test]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Parameters.ParameterInfo", Justification = "Unit test needs it")]
         public void Constructor_WhiteSpacesDescription_Throws()
         {
-            Assert.Throws<AggregateException>(() => new ParameterInfo(FakeCreator.ParameterName, "   "));
+            Assert.Throws<ArgumentException>(() => new ParameterInfo(FakeCreator.ParameterName, "   "));
         }
 
         [Test]

@@ -21,7 +21,7 @@ namespace ShogunLib.CommandLine.Tests.Commands.Parameters
         {
             var validator = FakeCreator.CreateArgumentValidator(true);
 
-            Assert.Throws<AggregateException>(() => new Parameter(null, validator));
+            Assert.Throws<ArgumentNullException>(() => new Parameter(null, validator));
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace ShogunLib.CommandLine.Tests.Commands.Parameters
         {
             var info = FakeCreator.CreateParameterInfo();
 
-            Assert.Throws<AggregateException>(() => new Parameter(info, null));
+            Assert.Throws<ArgumentNullException>(() => new Parameter(info, null));
         }
 
         [Test]

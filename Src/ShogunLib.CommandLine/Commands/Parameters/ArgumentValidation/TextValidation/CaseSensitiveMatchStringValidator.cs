@@ -40,10 +40,7 @@ namespace ShogunLib.CommandLine.Commands.Parameters.ArgumentValidation.TextValid
         /// <returns>true - validation succeeded; false - fail.</returns>
         public bool Validate(IEnumerable<string> args)
         {
-            if (args == null)
-            {
-                throw new ArgumentNullException("args");
-            }
+            args.ValidateNull(nameof(args));
 
             var notMatches = args.Where(arg => !_templates.Contains(arg)).ToList();
 

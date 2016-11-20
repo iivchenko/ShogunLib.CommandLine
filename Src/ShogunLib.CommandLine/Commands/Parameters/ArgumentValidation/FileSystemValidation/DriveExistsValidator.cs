@@ -37,10 +37,7 @@ namespace ShogunLib.CommandLine.Commands.Parameters.ArgumentValidation.FileSyste
         /// <returns>true - validation succeeded; false - validation filed.</returns>
         public bool Validate(IEnumerable<string> args)
         {
-            if (args == null)
-            {
-                throw new ArgumentNullException("args");
-            }
+            args.ValidateNull(nameof(args));
 
             var systemDrives = DriveInfo.GetDrives();
             var fakeDrives = new List<string>();

@@ -6,8 +6,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ShogunLib.CommandLine.Commands;
 using ShogunLib.CommandLine.Commands.Parameters;
+using ShogunLib.LINQ;
 
 namespace ShogunLib.CommandLine.Building
 {
@@ -28,6 +30,8 @@ namespace ShogunLib.CommandLine.Building
         /// <param name="name">Future command name.</param>
         public CommandBuilder(string name)
         {
+            name.ValidateStringEmpty(nameof(name));
+
             _name = name;
             _description = string.Empty;
             _parameters = new Dictionary<string, IParameterBuilder>();
@@ -69,6 +73,8 @@ namespace ShogunLib.CommandLine.Building
         /// <returns>Pointer to this.</returns>
         public ICommandBuilder Add(string name)
         {
+            name.ValidateStringEmpty(nameof(name));
+
             _parameters.Add(name, new ParameterBuilder(name));
 
             return this;
@@ -81,13 +87,10 @@ namespace ShogunLib.CommandLine.Building
         {
             var parameterDictionary = new ParametersDictionary();
 
-            foreach (var parameterBuilder in _parameters)
-            {
-                var parameter = parameterBuilder.Value.Create();
+            _parameters
+                .Select(x => x.Value.Create())
+                .ForEach(x => parameterDictionary.Add(x));
 
-                parameterDictionary.Add(parameter);
-            }
-            
             return new Command(_name, _description, parameterDictionary, _action);
         }
     }

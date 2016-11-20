@@ -6,9 +6,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ShogunLib.CommandLine.Commands;
 using ShogunLib.CommandLine.Interpretation;
 using ShogunLib.CommandLine.Interpretation.Parsing;
+using ShogunLib.LINQ;
 
 namespace ShogunLib.CommandLine.Building
 {
@@ -44,6 +46,8 @@ namespace ShogunLib.CommandLine.Building
         /// <returns>Pointer to this.</returns>
         public IInterpreterBuilder Add(string name)
         {
+            name.ValidateStringEmpty(nameof(name));
+
             _commands.Add(name, new CommandBuilder(name));
 
             return this;
@@ -55,6 +59,9 @@ namespace ShogunLib.CommandLine.Building
         /// <returns>Pointer to this.</returns>
         public IInterpreterBuilder SetHelp(string name, EventHandler<HelpCommandEventArgs> helpAction)
         {
+            name.ValidateStringEmpty(nameof(name));
+            helpAction.ValidateNull(nameof(helpAction));
+
             _help = name;
             _helpAction = helpAction;
 
@@ -68,12 +75,9 @@ namespace ShogunLib.CommandLine.Building
         {
             var commandsDictionary = new CommandsDictionary();
 
-            foreach (var commandBuilder in _commands)
-            {
-                var command = commandBuilder.Value.Create();
-
-                commandsDictionary.Add(command);
-            }
+            _commands
+                .Select(x => x.Value.Create())
+                .ForEach(x => commandsDictionary.Add(x));
 
             var interpreter = new Interpreter(new InputParser(),
                                               commandsDictionary,

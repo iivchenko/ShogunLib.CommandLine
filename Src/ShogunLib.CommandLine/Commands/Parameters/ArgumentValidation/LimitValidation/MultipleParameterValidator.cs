@@ -4,7 +4,6 @@
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
 
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -36,10 +35,7 @@ namespace ShogunLib.CommandLine.Commands.Parameters.ArgumentValidation.LimitVali
         /// <returns>true - validation succeeded; false - validation filed.</returns>
         public bool Validate(IEnumerable<string> args)
         {
-            if (args == null)
-            {
-                throw new ArgumentNullException("args");
-            }
+            args.ValidateNull(nameof(args));
 
             var argsCount = args.Count();
 

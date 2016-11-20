@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.Serialization;
 
 namespace ShogunLib.CommandLine.Commands.Parameters
@@ -39,15 +40,8 @@ namespace ShogunLib.CommandLine.Commands.Parameters
         /// <param name="parameter">Validated console command parameter.</param>
         public void Add(IParameter parameter)
         {
-            if (parameter == null)
-            {
-                throw new ArgumentNullException("parameter");
-            }
-
-            if (string.IsNullOrWhiteSpace(parameter.Info.Name))
-            {
-                throw new ArgumentException("Parameter name should not be a null, empty or whitespaces value", "parameter");
-            }
+            parameter.ValidateNull(nameof(parameter));
+            parameter.Info.Name.ValidateStringEmpty(nameof(parameter.Info.Name));
 
             Add(parameter.Info.Name, parameter);
         }

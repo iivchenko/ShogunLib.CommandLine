@@ -24,6 +24,8 @@ namespace ShogunLib.CommandLine.Building
         /// <param name="name">Future parameter name.</param>
         public ParameterBuilder(string name)
         {
+            name.ValidateStringEmpty(nameof(name));
+
             _name = name;
             _description = string.Empty;
             _validators = new CompositeArgumentValidator();
@@ -46,6 +48,8 @@ namespace ShogunLib.CommandLine.Building
         /// <returns>Pointer to this.</returns>
         public IParameterBuilder AddValidator(IArgumentValidator validator)
         {
+            validator.ValidateNull(nameof(validator));
+
             _validators.Add(validator);
 
             return this;

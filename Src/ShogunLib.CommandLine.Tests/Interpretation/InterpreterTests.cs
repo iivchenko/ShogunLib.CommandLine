@@ -29,7 +29,7 @@ namespace ShogunLib.CommandLine.Tests.Interpretation
         {
             var commands = new CommandsDictionary();
 
-            Assert.Throws<AggregateException>(() => new Interpreter(null, commands, HelpCommandName));
+            Assert.Throws<ArgumentNullException>(() => new Interpreter(null, commands, HelpCommandName));
         }
 
         [Test]
@@ -37,10 +37,18 @@ namespace ShogunLib.CommandLine.Tests.Interpretation
         public void Constructor_NullCommands_Throws()
         {
             var parser = CreateParser();
-            Assert.Throws<AggregateException>(() => new Interpreter(parser.Object, null, HelpCommandName));
+            Assert.Throws<ArgumentNullException>(() => new Interpreter(parser.Object, null, HelpCommandName));
         }
        
-        [TestCase(null)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Interpretation.Interpreter", Justification = "Unit test need it")]
+        public void Constructor_NullHelpCommandName_Throws()
+        {
+            var parser = CreateParser();
+            var commands = new CommandsDictionary();
+
+            Assert.Throws<ArgumentNullException>(() => new Interpreter(parser.Object, commands, null));
+        }
+
         [TestCase("   ")]
         [TestCase("")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Interpretation.Interpreter", Justification = "Unit test need it")]
@@ -49,7 +57,7 @@ namespace ShogunLib.CommandLine.Tests.Interpretation
             var parser = CreateParser();
             var commands = new CommandsDictionary();
 
-            Assert.Throws<AggregateException>(() => new Interpreter(parser.Object, commands, helpCommand));
+            Assert.Throws<ArgumentException>(() => new Interpreter(parser.Object, commands, helpCommand));
         }
 
         [Test]

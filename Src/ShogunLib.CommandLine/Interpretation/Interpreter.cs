@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Linq;
 using ShogunLib.CommandLine.Commands;
 using ShogunLib.CommandLine.Interpretation.Parsing;
+using ShogunLib.Events;
 
 namespace ShogunLib.CommandLine.Interpretation
 {
@@ -30,28 +31,10 @@ namespace ShogunLib.CommandLine.Interpretation
         /// <param name="helpCommandName">Name for the help command that will be used in console.</param>
         public Interpreter(IInputParser inputParser, IDictionary<string, ICommand> commands, string helpCommandName)
         {
-            var exceptions = new List<Exception>();
+            inputParser.ValidateNull(nameof(inputParser));
+            commands.ValidateNull(nameof(commands));
+            helpCommandName.ValidateStringEmpty(nameof(helpCommandName));
 
-            if (inputParser == null)
-            {
-                exceptions.Add(new ArgumentNullException("inputParser"));
-            }
-
-            if (commands == null)
-            {
-                exceptions.Add(new ArgumentNullException("commands"));
-            }
-
-            if (string.IsNullOrWhiteSpace(helpCommandName))
-            {
-                exceptions.Add(new ArgumentException("Should not be null, empty or whitespaces", "helpCommandName"));
-            }
-            
-            if (exceptions.Count > 0)
-            {
-                throw new AggregateException("Parameter initialization fail", exceptions);
-            }
-            
             if (commands.ContainsKey(helpCommandName.ToUpperInvariant()))
             {
                 throw new DuplicatedCommandException(string.Format(CultureInfo.InvariantCulture, "Commands parameter contains help command {0}", helpCommandName));
@@ -100,29 +83,21 @@ namespace ShogunLib.CommandLine.Interpretation
             List<CommandDescriptor> commands;
             if (!args.Any())
             {
-                commands = _commands.Values
-                    .Select(command => new CommandDescriptor(command.Name, command.Description, command.Parameters))
-                    .ToList();
+                commands =
+                    _commands.Values
+                        .Select(command => new CommandDescriptor(command.Name, command.Description, command.Parameters))
+                        .ToList();
             }
             else
             {
-                commands = _commands.Values
-                    .Where(command => args.Select(arg => arg.ToUpperInvariant()).Contains(command.Name.ToUpperInvariant()))
-                    .Select(command => new CommandDescriptor(command.Name, command.Description, command.Parameters))
-                    .ToList();
+                commands =
+                    _commands.Values
+                        .Where(command => args.Select(arg => arg.ToUpperInvariant()).Contains(command.Name.ToUpperInvariant()))
+                        .Select(command => new CommandDescriptor(command.Name, command.Description, command.Parameters))
+                        .ToList();
             }
 
-            OnHelp(new HelpCommandEventArgs(commands));
-        }
-
-        private void OnHelp(HelpCommandEventArgs args)
-        {
-            var temp = Help;
-
-            if (temp != null)
-            {
-                temp(this, args);
-            }
+            Help.Raise<HelpCommandEventArgs>(this, new HelpCommandEventArgs(commands));
         }
     }
 }

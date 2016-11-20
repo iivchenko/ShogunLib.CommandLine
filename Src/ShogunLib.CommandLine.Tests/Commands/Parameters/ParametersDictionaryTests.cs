@@ -32,7 +32,7 @@ namespace ShogunLib.CommandLine.Tests.Commands.Parameters
         {
             var parameter = FakeCreator.CreateParameter(null, FakeCreator.ParameterDescription);
 
-            Assert.Throws<ArgumentException>(() => _parametersDictionary.Add(parameter));
+            Assert.Throws<ArgumentNullException>(() => _parametersDictionary.Add(parameter));
         }
 
         [Test]
