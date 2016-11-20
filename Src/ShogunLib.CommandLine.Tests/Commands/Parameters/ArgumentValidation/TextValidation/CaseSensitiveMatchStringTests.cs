@@ -12,7 +12,7 @@ namespace ShogunLib.CommandLine.Tests.Commands.Parameters.ArgumentValidation.Tex
     [TestFixture]
     public sealed class CaseSensitiveMatchStringTests : BaseValidatorTests
     {
-        protected override IEnumerable<ValidationCollection> SuccessTestArgs()
+        public static IEnumerable<ValidationCollection> SuccessTestArgs()
         {
             return new[]
                        {
@@ -34,7 +34,7 @@ namespace ShogunLib.CommandLine.Tests.Commands.Parameters.ArgumentValidation.Tex
                        };
         }
 
-        protected override IEnumerable<ValidationCollection> FailTestArgs()
+        public static IEnumerable<ValidationCollection> FailTestArgs()
         {
             return new[]
                        {

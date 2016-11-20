@@ -17,38 +17,34 @@ namespace ShogunLib.CommandLine.Tests.Commands.Parameters
     {
         [Test]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Parameters.Parameter", Justification = "Unit test need it")]
-        [ExpectedException(typeof(AggregateException))]
         public void Constructor_NullParameterInfo_Throws()
         {
             var validator = FakeCreator.CreateArgumentValidator(true);
-            
-            new Parameter(null, validator);
+
+            Assert.Throws<AggregateException>(() => new Parameter(null, validator));
         }
 
         [Test]
-        [ExpectedException(typeof(AggregateException))]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Parameters.Parameter", Justification = "Unit test needs it")]
         public void Constructor_NullArgumentValidatorLimiter_Throws()
         {
             var info = FakeCreator.CreateParameterInfo();
 
-            new Parameter(info, null);
+            Assert.Throws<AggregateException>(() => new Parameter(info, null));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Validate_NullArguments_Throws()
         {
             var info = FakeCreator.CreateParameterInfo();
             var validator = FakeCreator.CreateArgumentValidator(true);
 
             var parameter = new Parameter(info, validator);
-            
-            parameter.Validate(null);
+
+            Assert.Throws<ArgumentNullException>(() => parameter.Validate(null));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentValidationException))]
         public void Validate_ErrorArgument_Throws()
         {
             var args = new[]
@@ -61,7 +57,7 @@ namespace ShogunLib.CommandLine.Tests.Commands.Parameters
 
             var parameter = new Parameter(info, validator);
 
-            parameter.Validate(args);
+            Assert.Throws<ArgumentValidationException>(() => parameter.Validate(args));
         }
 
         [Test]

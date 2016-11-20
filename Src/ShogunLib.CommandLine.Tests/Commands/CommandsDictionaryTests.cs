@@ -22,31 +22,27 @@ namespace ShogunLib.CommandLine.Tests.Commands
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Add_NullCommand_Throws()
         {
-            _commandsDictionary.Add(null);
+            Assert.Throws<ArgumentNullException>(() => _commandsDictionary.Add(null));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void Add_CommandNullName_Throws()
         {
-            _commandsDictionary.Add(FakeCreator.CreateCommand(null));
+            Assert.Throws<ArgumentException>(() => _commandsDictionary.Add(FakeCreator.CreateCommand(null)));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void Add_CommandEmptyName_Throws()
         {
-            _commandsDictionary.Add(FakeCreator.CreateCommand(string.Empty));
+            Assert.Throws<ArgumentException>(() => _commandsDictionary.Add(FakeCreator.CreateCommand(string.Empty)));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void Add_CommandWhiteSpacesName_Throws()
         {
-            _commandsDictionary.Add(FakeCreator.CreateCommand("   "));
+            Assert.Throws<ArgumentException>(() => _commandsDictionary.Add(FakeCreator.CreateCommand("   ")));
         }
     }
 }

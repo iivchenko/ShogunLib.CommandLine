@@ -19,67 +19,59 @@ namespace ShogunLib.CommandLine.Tests.Commands
     public class CommandTests
     {
         [Test]
-        [ExpectedException(typeof(AggregateException))]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Command", Justification = "Unit test needs it")]
         public void Constructor_NullName_Throws()
         {
-            new Command(null, FakeCreator.CommandDescription, new ParametersDictionary(), delegate { });
+            Assert.Throws<AggregateException>(() => new Command(null, FakeCreator.CommandDescription, new ParametersDictionary(), delegate { }));
         }
 
         [Test]
-        [ExpectedException(typeof(AggregateException))]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Command", Justification = "Unit test needs it")]
         public void Constructor_EmptyName_Throws()
         {
-            new Command(string.Empty, FakeCreator.CommandDescription, new ParametersDictionary(), delegate { });
+            Assert.Throws<AggregateException>(() => new Command(string.Empty, FakeCreator.CommandDescription, new ParametersDictionary(), delegate { }));
         }
 
         [Test]
-        [ExpectedException(typeof(AggregateException))]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Command", Justification = "Unit test needs it")]
         public void Constructor_WhiteSpacesName_Throws()
         {
-            new Command("   ", FakeCreator.CommandDescription, new ParametersDictionary(), delegate { });
+            Assert.Throws<AggregateException>(() => new Command("   ", FakeCreator.CommandDescription, new ParametersDictionary(), delegate { }));
         }
 
         [Test]
-        [ExpectedException(typeof(AggregateException))]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Command", Justification = "Unit test needs it")]
         public void Constructor_NullDescription_Throws()
         {
-            new Command(FakeCreator.CommandName, null, new ParametersDictionary(), delegate { });
+            Assert.Throws<AggregateException>(() => new Command(FakeCreator.CommandName, null, new ParametersDictionary(), delegate { }));
         }
 
         [Test]
-        [ExpectedException(typeof(AggregateException))]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Command", Justification = "Unit test needs it")]
         public void Constructor_EmptyDescription_Throws()
         {
-            new Command(FakeCreator.CommandName, string.Empty, new ParametersDictionary(), delegate { });
+            Assert.Throws<AggregateException>(() => new Command(FakeCreator.CommandName, string.Empty, new ParametersDictionary(), delegate { }));
         }
 
         [Test]
-        [ExpectedException(typeof(AggregateException))]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Command", Justification = "Unit test needs it")]
         public void Constructor_WhiteSpacesDescription_Throws()
         {
-            new Command(FakeCreator.CommandName, "   ", new ParametersDictionary(), delegate { });
+            Assert.Throws<AggregateException>(() => new Command(FakeCreator.CommandName, "   ", new ParametersDictionary(), delegate { }));
         }
 
         [Test]
-        [ExpectedException(typeof(AggregateException))]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Command", Justification = "Unit test needs it")]
         public void Constructor_NullParameters_Throws()
         {
-            new Command(FakeCreator.CommandName, FakeCreator.CommandDescription, null, delegate { });
+            Assert.Throws<AggregateException>(() => new Command(FakeCreator.CommandName, FakeCreator.CommandDescription, null, delegate { }));
         }
 
         [Test]
-        [ExpectedException(typeof(AggregateException))]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Commands.Command", Justification = "Unit test needs it")]
         public void Constructor_NullAction_Throws()
         {
-            new Command(FakeCreator.CommandName, FakeCreator.CommandDescription, new ParametersDictionary(), null);
+            Assert.Throws<AggregateException>(() => new Command(FakeCreator.CommandName, FakeCreator.CommandDescription, new ParametersDictionary(), null));
         }
 
         [Test]
@@ -111,12 +103,11 @@ namespace ShogunLib.CommandLine.Tests.Commands
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Execute_NullArguments_Throws()
         {
             var command = new Command(FakeCreator.CommandName, FakeCreator.CommandDescription, new ParametersDictionary(), delegate { });
 
-            command.Execute(null);
+            Assert.Throws<ArgumentNullException>(() => command.Execute(null));
         }
 
         [Test]

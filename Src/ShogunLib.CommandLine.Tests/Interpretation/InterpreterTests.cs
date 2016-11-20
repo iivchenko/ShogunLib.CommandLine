@@ -24,39 +24,35 @@ namespace ShogunLib.CommandLine.Tests.Interpretation
         private const string HelpCommandName = "Help";
 
         [Test]
-        [ExpectedException(typeof(AggregateException))]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Interpretation.Interpreter", Justification = "Unit test need it")]
         public void Constructor_NullInputParser_Throws()
         {
             var commands = new CommandsDictionary();
 
-            new Interpreter(null, commands, HelpCommandName);
+            Assert.Throws<AggregateException>(() => new Interpreter(null, commands, HelpCommandName));
         }
 
         [Test]
-        [ExpectedException(typeof(AggregateException))]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Interpretation.Interpreter", Justification = "Unit test need it")]
         public void Constructor_NullCommands_Throws()
         {
             var parser = CreateParser();
-            new Interpreter(parser.Object, null, HelpCommandName);
+            Assert.Throws<AggregateException>(() => new Interpreter(parser.Object, null, HelpCommandName));
         }
        
         [TestCase(null)]
         [TestCase("   ")]
         [TestCase("")]
-        [ExpectedException(typeof(AggregateException))]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Interpretation.Interpreter", Justification = "Unit test need it")]
         public void Constructor_EmptyHelpCommandName_Throws(string helpCommand)
         {
             var parser = CreateParser();
             var commands = new CommandsDictionary();
 
-            new Interpreter(parser.Object, commands, helpCommand);
+            Assert.Throws<AggregateException>(() => new Interpreter(parser.Object, commands, helpCommand));
         }
 
         [Test]
-        [ExpectedException(typeof(DuplicatedCommandException))]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "ShogunLib.CommandLine.Interpretation.Interpreter", Justification = "Unit test need it")]
         public void Constructor_HelpCommandDuplicatedInCommandsList_Throws()
         {
@@ -66,7 +62,7 @@ namespace ShogunLib.CommandLine.Tests.Interpretation
                                   FakeCreator.CreateCommand(HelpCommandName)
                                };
 
-            new Interpreter(parser.Object, commands, HelpCommandName);
+            Assert.Throws<DuplicatedCommandException>(() => new Interpreter(parser.Object, commands, HelpCommandName));
         }
 
         [TestCase(null)]
@@ -185,13 +181,12 @@ namespace ShogunLib.CommandLine.Tests.Interpretation
         }
 
         [Test]
-        [ExpectedException(typeof(UndefinedCommandException))]
         public void Execute_ParsedCommandIsUnknown_Throws()
         {
             var parser = CreateParser();
             var interpreter = new Interpreter(parser.Object, new CommandsDictionary(), HelpCommandName);
-            
-            interpreter.Execute(FakeCreator.CommandName);
+
+            Assert.Throws<UndefinedCommandException>(() => interpreter.Execute(FakeCreator.CommandName));
         }
 
         private static Mock<IInputParser> CreateParser()

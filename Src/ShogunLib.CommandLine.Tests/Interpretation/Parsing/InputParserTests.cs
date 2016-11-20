@@ -43,10 +43,9 @@ namespace ShogunLib.CommandLine.Tests.Interpretation.Parsing
         [TestCase("CommandName \"incorrect number of double quotes")]
         [TestCase("CommandName \"incorrect number of double quotes \"\"")]
         [TestCase("CommandName \"incorrect number of double quotes \" \" \\\"")]
-        [ExpectedException(typeof(InputParserException))]
         public void Parse_InvalidInput_Throws(string input)
         {
-            _inputParser.Parse(input);
+            Assert.Throws<InputParserException>(() => _inputParser.Parse(input));
         }
         
         [Test]

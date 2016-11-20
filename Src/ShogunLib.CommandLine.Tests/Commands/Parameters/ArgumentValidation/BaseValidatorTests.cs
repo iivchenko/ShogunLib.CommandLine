@@ -23,10 +23,9 @@ namespace ShogunLib.CommandLine.Tests.Commands.Parameters.ArgumentValidation
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Validate_NullArguments_Throws()
         {
-            Validator.Validate(null);
+            Assert.Throws<ArgumentNullException>(() => Validator.Validate(null));
         }
 
         [Test, TestCaseSource("SuccessTestArgs")]
@@ -60,10 +59,6 @@ namespace ShogunLib.CommandLine.Tests.Commands.Parameters.ArgumentValidation
 
             Assert.IsNotEmpty(Validator.ErrorMessage, string.Format(CultureInfo.InvariantCulture, "Input arguments: {0}", args));
         }
-
-        protected abstract IEnumerable<ValidationCollection> SuccessTestArgs();
-
-        protected abstract IEnumerable<ValidationCollection> FailTestArgs();
 
         protected abstract void SetupInternal();
     }
