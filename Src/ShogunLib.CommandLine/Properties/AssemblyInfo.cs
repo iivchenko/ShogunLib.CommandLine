@@ -11,9 +11,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ShogunLib.CommandLine")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Micro command line framework. Develop fast, enjoy results =)")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("XATA")]
+[assembly: AssemblyCompany("Shogun (Ivan Ivchenko)")]
 [assembly: AssemblyProduct("ShogunLib.CommandLine")]
 [assembly: AssemblyCopyright("Copyright © Shogun 2016")]
 [assembly: AssemblyTrademark("")]

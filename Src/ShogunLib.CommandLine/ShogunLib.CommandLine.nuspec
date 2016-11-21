@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://raw.githubusercontent.com/iivchenko/ShogunLib.CommandLine/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/iivchenko/ShogunLib.CommandLine</projectUrl>
+    <iconUrl>https://github.com/iivchenko/ShogunLib/blob/master/Src/ShogunLib.CommandLine/Package/PackageIco.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+		v0.1
+		[Add] Standart interpreter
+		[Add] Command abstraction
+		[Add] Standart help command
+		[Add] Standart exit command
+		[Add] Parameter validators
+		[Add] Lazy builders for interpreter, commad and parameter
+		[Add] Samples
+	</releaseNotes>
+    <copyright>Copyright (c) 2016 by Shogun</copyright>
+    <tags>
+		CommandLine CMD Command Line Console
+	</tags>
+  </metadata>
+</package>
