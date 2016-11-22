@@ -15,6 +15,9 @@ using ShogunLib.CommandLine.Interpretation;
 
 namespace LazyInterpreter
 {
+    /// <summary>
+    /// Sample demonstrates how to create console app using ShogunLib.CommandLine fluent API
+    /// </summary>
     public static class Program
     {
         private static bool isContinue = true;

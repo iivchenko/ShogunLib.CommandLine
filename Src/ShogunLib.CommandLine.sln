@@ -14,15 +14,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShogunLib.CommandLine.Items
 		ShogunLib.CommandLine.Items\CodeAnalysisDictionary.xml = ShogunLib.CommandLine.Items\CodeAnalysisDictionary.xml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShogunLib.CommandLine.Samples", "ShogunLib.CommandLine.Samples", "{F2F7DA06-064B-47BC-B315-770CC4A2E840}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShogunLib.CommandLine.OldSamples", "ShogunLib.CommandLine.OldSamples", "{F2F7DA06-064B-47BC-B315-770CC4A2E840}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectClassesUsage", "ShogunLib.CommandLine.Samples\DirectClassesUsage\DirectClassesUsage.csproj", "{085BAF68-7F67-44EF-9917-6D8406A240E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectClassesUsage", "ShogunLib.CommandLine.OldSamples\DirectClassesUsage\DirectClassesUsage.csproj", "{085BAF68-7F67-44EF-9917-6D8406A240E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExeAsCommand", "ShogunLib.CommandLine.Samples\ExeAsCommand\ExeAsCommand.csproj", "{A996307C-9A03-4939-807A-ED6F17F467EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExeAsCommand", "ShogunLib.CommandLine.OldSamples\ExeAsCommand\ExeAsCommand.csproj", "{A996307C-9A03-4939-807A-ED6F17F467EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyInterpreter", "ShogunLib.CommandLine.Samples\LazyInterpreter\LazyInterpreter.csproj", "{5E328C45-5761-46CE-8737-AACB2E9BE289}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyInterpreter", "ShogunLib.CommandLine.OldSamples\LazyInterpreter\LazyInterpreter.csproj", "{5E328C45-5761-46CE-8737-AACB2E9BE289}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OwnClassesImplementation", "ShogunLib.CommandLine.Samples\OwnClassesImplementation\OwnClassesImplementation.csproj", "{0E23EC38-7D5B-43DC-B300-56460157A7F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OwnClassesImplementation", "ShogunLib.CommandLine.OldSamples\OwnClassesImplementation\OwnClassesImplementation.csproj", "{0E23EC38-7D5B-43DC-B300-56460157A7F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

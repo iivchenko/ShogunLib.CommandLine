@@ -13,6 +13,9 @@ using ShogunLib.CommandLine.Commands.Parameters;
 
 namespace OwnClassesImplementation
 {
+    /// <summary>
+    /// Sample demonstrates how to create console app using own implementations based on ShogunLib.CommandLine abstractions
+    /// </summary>
     public static class Program
     {
         public static void Main()

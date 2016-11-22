@@ -19,6 +19,9 @@ using ShogunLib.CommandLine.Interpretation.Parsing;
 
 namespace DirectClassesUsage
 {
+    /// <summary>
+    /// Sample demonstrates how to create console app using ShogunLib.CommandLine core classes
+    /// </summary>
     public static class Program
     {
         private const string HelloCommand = "Hello";

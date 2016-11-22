@@ -14,6 +14,9 @@ using ShogunLib.CommandLine.Commands.Parameters.ArgumentValidation.LimitValidati
 
 namespace ExeAsCommand
 {
+    /// <summary>
+    /// Sample demonstrates how to create console app with input parameters using ShogunLib.CommandLine core classes
+    /// </summary>
     public static class Program
     {
         private const string CommandName = "HelloWorld";
