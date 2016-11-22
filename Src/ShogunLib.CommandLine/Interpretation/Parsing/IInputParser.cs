@@ -16,7 +16,7 @@ namespace ShogunLib.CommandLine.Interpretation.Parsing
         /// </summary>
         /// <param name="input">Console input.</param>
         /// <returns>Parsed result.</returns>
-        /// <exception cref="InputParserException"/>
+        /// <exception cref="InputParserException">Input string contains incorrect format.</exception>
         IParsedCommand Parse(string input);
     }
 }

@@ -19,7 +19,7 @@ namespace ShogunLib.CommandLine.Interpretation.Parsing
         /// Parses console input. If input is null, empty string or whitespaces function will return null.
         /// </summary>
         /// <param name="input">Console input.</param>
-        /// <exception cref="InputParserException"/>
+        /// <exception cref="InputParserException">Input string contains incorrect format.</exception>
         /// <returns>Parsed result.</returns>
         public IParsedCommand Parse(string input)
         {

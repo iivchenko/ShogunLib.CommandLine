@@ -23,7 +23,7 @@ namespace ShogunLib.CommandLine.Commands.Parameters
         /// Performs validation on the input arguments.
         /// </summary>
         /// <param name="args">Input arguments.</param>
-        /// <exception cref="ArgumentValidationException"/>
+        /// <exception cref="ArgumentValidationException">Input arguments are incorrect.</exception>
         /// <returns>Validated argument.</returns>
         IArgument Validate(IEnumerable<string> args);
     }
