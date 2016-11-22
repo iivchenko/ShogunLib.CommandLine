@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyInterpreter", "ShogunLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OwnClassesImplementation", "ShogunLib.CommandLine.OldSamples\OwnClassesImplementation\OwnClassesImplementation.csproj", "{0E23EC38-7D5B-43DC-B300-56460157A7F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShogunLib.CommandLine.Samples", "ShogunLib.CommandLine.Samples\ShogunLib.CommandLine.Samples.csproj", "{B2BB27D4-C8B6-4C28-B74C-D4B3D1D51E80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,14 @@ Global
 		{0E23EC38-7D5B-43DC-B300-56460157A7F6}.Release|Any CPU.ActiveCfg = Release|x86
 		{0E23EC38-7D5B-43DC-B300-56460157A7F6}.Release|x86.ActiveCfg = Release|x86
 		{0E23EC38-7D5B-43DC-B300-56460157A7F6}.Release|x86.Build.0 = Release|x86
+		{B2BB27D4-C8B6-4C28-B74C-D4B3D1D51E80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2BB27D4-C8B6-4C28-B74C-D4B3D1D51E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2BB27D4-C8B6-4C28-B74C-D4B3D1D51E80}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B2BB27D4-C8B6-4C28-B74C-D4B3D1D51E80}.Debug|x86.Build.0 = Debug|Any CPU
+		{B2BB27D4-C8B6-4C28-B74C-D4B3D1D51E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2BB27D4-C8B6-4C28-B74C-D4B3D1D51E80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2BB27D4-C8B6-4C28-B74C-D4B3D1D51E80}.Release|x86.ActiveCfg = Release|Any CPU
+		{B2BB27D4-C8B6-4C28-B74C-D4B3D1D51E80}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
