@@ -2,7 +2,13 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/ckxbe1g7a3jg6yoc?svg=true)](https://ci.appveyor.com/project/iivchenko/shogunlib-commandline)
 
-Micro command line framework. Develop fast, enjoy results! 
+Micro command line framework. Develop fast, enjoy results!
+
+**Samples:**
+  * [Fluent API](https://github.com/iivchenko/ShogunLib.CommandLine/tree/develop/Src/ShogunLib.CommandLine.OldSamples/LazyInterpreter)
+  * [Using core classes](https://github.com/iivchenko/ShogunLib.CommandLine/tree/develop/Src/ShogunLib.CommandLine.OldSamples/DirectClassesUsage)
+  * [Full Implementation](https://github.com/iivchenko/ShogunLib.CommandLine/tree/develop/Src/ShogunLib.CommandLine.OldSamples/OwnClassesImplementation)
+  * [Exe with input params](https://github.com/iivchenko/ShogunLib.CommandLine/tree/develop/Src/ShogunLib.CommandLine.OldSamples/ExeAsCommand)  
 
 ![Sample Image](Docs/SampleImage.png)
 
