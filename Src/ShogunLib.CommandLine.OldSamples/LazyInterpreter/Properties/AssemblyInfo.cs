@@ -1,5 +1,5 @@
 ﻿// <copyright company="XATA">
-//      Copyright (c) 2012, All Right Reserved
+//      Copyright (c) 2017, All Right Reserved
 // </copyright>
 // <author>Ivan Ivchenko</author>
 // <email>iivchenko@live.com</email>
@@ -33,5 +33,5 @@ using System.Runtime.InteropServices;
 //      Minor Version 
 //      Build Number
 //      Revision
-[assembly: AssemblyVersion("0.1.1.*")]
-[assembly: AssemblyFileVersion("0.1.0.0")]
+[assembly: AssemblyVersion("0.1")]
+[assembly: AssemblyFileVersion("0.1")]
