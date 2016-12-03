@@ -1,6 +1,6 @@
 # ShogunLib.CommandLine
 
-[![Build status](https://ci.appveyor.com/api/projects/status/ckxbe1g7a3jg6yoc?svg=true)](https://ci.appveyor.com/project/iivchenko/shogunlib-commandline)
+[![Build status](https://ci.appveyor.com/api/projects/status/ckxbe1g7a3jg6yoc?svg=true)](https://ci.appveyor.com/project/iivchenko/shogunlib-commandline) [![NuGet downloads](https://img.shields.io/nuget/vpre/ShogunLib.CommandLine.svg)](https://www.nuget.org/packages/ShogunLib.CommandLine)
 
 Micro command line framework. Develop fast, enjoy results!
 
@@ -88,7 +88,7 @@ return builder.Create();
 ```
 
 ## Releases ##
-<BLANK>
+[![Release v0.1](https://img.shields.io/badge/v%200.1-Download-brightgreen.svg)](https://github.com/iivchenko/ShogunLib.CommandLine/releases/download/v0.1/ShogunLib.CommandLine.zip) [![Release Notes v0.1](https://img.shields.io/badge/Release%20notes-Navigate-brightgreen.svg)](https://github.com/iivchenko/ShogunLib.CommandLine/releases/tag/v0.1)
 
 ## License ##
 
